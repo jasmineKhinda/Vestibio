@@ -13,4 +13,9 @@ bin/
 gen/
 
 # Local configuration file (sdk path, etc)
-local.properties
+/local.properties
+.gradle
+.idea/
+app/build/
+.DS_Store
+/captures
