@@ -6,11 +6,11 @@ package pntanasis.android.metronome;
 public final class MidiNotes {
 
     public static double frequency( byte midi ) {
-        return Math.pow( 2, (midi-69)/12 )* 440;
+        return Math.pow( 2, (midi-69)/12f )*440;
     }
 
-    public static double midi( double f ) {
-        return 12*Math.log( f/440 )+69;
+    public static byte midi( double f ) {
+        return (byte) ((12 * Math.log(f / 440)) + 69);
     }
 
     // midi notes from a piano
