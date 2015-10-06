@@ -13,10 +13,11 @@ public class Metronome {
 	private double beatSound;
 	private double sound;
 	private final int tick = 1000; // samples of tick
-	
+	private int fs = 8000;
+
 	private boolean play = true;
 	
-	private AudioGenerator audioGenerator = new AudioGenerator(8000);
+	private AudioGenerator audioGenerator = new AudioGenerator( fs );
 	private Handler mHandler;
 	private double[] soundTickArray;
 	private double[] soundTockArray;
@@ -30,14 +31,14 @@ public class Metronome {
 	}
 	
 	public void calcSilence() {
-		silence = (int) (((60/bpm)*8000)-tick);		
+		silence = (int) (((60/bpm)*fs)-tick);
 		soundTickArray = new double[this.tick];	
 		soundTockArray = new double[this.tick];
 		silenceSoundArray = new double[this.silence];
 		msg = new Message();
 		msg.obj = ""+currentBeat;
-		double[] tick = audioGenerator.getSineWave(this.tick, 8000, beatSound);
-		double[] tock = audioGenerator.getSineWave(this.tick, 8000, sound);
+		double[] tick = audioGenerator.getSineWave(this.tick, fs, beatSound);
+		double[] tock = audioGenerator.getSineWave(this.tick, fs, sound);
 		for(int i=0;i<this.tick;i++) {
 			soundTickArray[i] = tick[i];
 			soundTockArray[i] = tock[i];
