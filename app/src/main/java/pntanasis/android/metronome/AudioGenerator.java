@@ -54,6 +54,13 @@ public class AudioGenerator {
     	byte[] generatedSnd = get16BitPcm(samples);
     	audioTrack.write(generatedSnd, 0, generatedSnd.length);
     }
+    public void writeSilence( int samples ) {
+        byte[] temp = new byte[ 2 * samples ];
+        for( int kk=0; kk<temp.length; kk++ ) {
+            temp[ kk ] = 0;
+        }
+        audioTrack.write( temp, 0, temp.length );
+    }
     
     public void destroyAudioTrack() {
     	audioTrack.stop();
