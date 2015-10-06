@@ -277,8 +277,10 @@ public class MetronomeActivity extends Activity {
 			metronome.setBeat(beats);
 			metronome.setNoteValue(noteValue);
 			metronome.setBpm(bpm);
-			metronome.setBeatSound(beatSound);
-			metronome.setSound(sound);
+			//metronome.setBeatSound(beatSound);
+			//metronome.setSound(sound);
+			metronome.setBeatSound( MidiNotes.frequency( MidiNotes.A5 ));
+			metronome.setSound( MidiNotes.frequency( MidiNotes.FisGb5 ));
 
 			metronome.play();
 			
