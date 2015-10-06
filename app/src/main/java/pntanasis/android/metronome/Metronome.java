@@ -2,6 +2,7 @@ package pntanasis.android.metronome;
 
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 public class Metronome {
 	
@@ -43,8 +44,6 @@ public class Metronome {
 			soundTickArray[i] = tick[i];
 			soundTockArray[i] = tock[i];
 		}
-		//for(int i=0;i<silence;i++)
-		//	silenceSoundArray[i] = 0;
 	}
 	
 	public void play() {
@@ -58,8 +57,7 @@ public class Metronome {
 				audioGenerator.writeSound(soundTockArray);
 			if(bpm <= 120)
 				mHandler.sendMessage(msg);
-            //audioGenerator.writeSound(silenceSoundArray);
-            audioGenerator.writeSilence( silence );
+            audioGenerator.writeSilence(silence);
 			if(bpm > 120)
 				mHandler.sendMessage(msg);
 			currentBeat++;
@@ -103,7 +101,8 @@ public class Metronome {
 
 	public void setBeatSound(double sound1) {
 		this.beatSound = sound1;
-	}
+        Log.d( "Metronome", "Set BeatSound to"+this.beatSound );
+    }
 
 	public double getSound() {
 		return sound;
@@ -111,6 +110,7 @@ public class Metronome {
 
 	public void setSound(double sound2) {
 		this.sound = sound2;
+        Log.d( "Metronome", "Set Sound to"+this.sound );
 	}
 
 }
