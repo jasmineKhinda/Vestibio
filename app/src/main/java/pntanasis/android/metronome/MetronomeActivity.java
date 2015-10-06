@@ -149,7 +149,6 @@ public class MetronomeActivity extends Activity {
 
 		@Override
 		public boolean onLongClick(View v) {
-			// TODO Auto-generated method stub
 			bpm+=20;
 			if(bpm >= maxBpm)
 				bpm = maxBpm;
@@ -183,7 +182,6 @@ public class MetronomeActivity extends Activity {
 
 		@Override
 		public boolean onLongClick(View v) {
-			// TODO Auto-generated method stub
 			bpm-=20;
 			if(bpm <= minBpm)
 				bpm = minBpm;
@@ -199,22 +197,17 @@ public class MetronomeActivity extends Activity {
     private OnSeekBarChangeListener volumeListener = new OnSeekBarChangeListener() {
 
 		@Override
-		public void onProgressChanged(SeekBar seekBar, int progress,
-				boolean fromUser) {
-			// TODO Auto-generated method stub
+		public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 			volume = (short) progress;
 			audio.setStreamVolume(AudioManager.STREAM_MUSIC, progress, AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
 		}
 
 		@Override
 		public void onStartTrackingTouch(SeekBar seekBar) {
-			// TODO Auto-generated method stub
-			
 		}
 
 		@Override
 		public void onStopTrackingTouch(SeekBar seekBar) {
-			// TODO Auto-generated method stub
 		}   	
     	
     };
@@ -222,9 +215,7 @@ public class MetronomeActivity extends Activity {
     private OnItemSelectedListener beatsSpinnerListener = new OnItemSelectedListener() {
 
 		@Override
-		public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
-				long arg3) {
-			// TODO Auto-generated method stub
+		public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 			Beats beat = (Beats) arg0.getItemAtPosition(arg2);
 			TextView timeSignature = (TextView) findViewById(R.id.timesignature);
 			timeSignature.setText(""+beat+"/"+noteValue);
@@ -233,8 +224,6 @@ public class MetronomeActivity extends Activity {
 
 		@Override
 		public void onNothingSelected(AdapterView<?> arg0) {
-			// TODO Auto-generated method stub
-			
 		}
     	
     };
@@ -242,9 +231,7 @@ public class MetronomeActivity extends Activity {
     private OnItemSelectedListener noteValueSpinnerListener = new OnItemSelectedListener() {
 
 		@Override
-		public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
-				long arg3) {
-			// TODO Auto-generated method stub
+		public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 			NoteValues noteValue = (NoteValues) arg0.getItemAtPosition(arg2);
 			TextView timeSignature = (TextView) findViewById(R.id.timesignature);
 			timeSignature.setText(""+beats+"/"+noteValue);
@@ -252,8 +239,6 @@ public class MetronomeActivity extends Activity {
 
 		@Override
 		public void onNothingSelected(AdapterView<?> arg0) {
-			// TODO Auto-generated method stub
-			
 		}
     	
     };
