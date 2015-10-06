@@ -43,8 +43,8 @@ public class Metronome {
 			soundTickArray[i] = tick[i];
 			soundTockArray[i] = tock[i];
 		}
-		for(int i=0;i<silence;i++)
-			silenceSoundArray[i] = 0;
+		//for(int i=0;i<silence;i++)
+		//	silenceSoundArray[i] = 0;
 	}
 	
 	public void play() {
@@ -58,7 +58,8 @@ public class Metronome {
 				audioGenerator.writeSound(soundTockArray);
 			if(bpm <= 120)
 				mHandler.sendMessage(msg);
-			audioGenerator.writeSound(silenceSoundArray);
+            //audioGenerator.writeSound(silenceSoundArray);
+            audioGenerator.writeSilence( silence );
 			if(bpm > 120)
 				mHandler.sendMessage(msg);
 			currentBeat++;
