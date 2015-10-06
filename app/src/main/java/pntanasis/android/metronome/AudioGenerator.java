@@ -21,8 +21,9 @@ public class AudioGenerator {
     
     public double[] getSineWave(int samples,int sampleRate,double frequencyOfTone) {
     	double[] sample = new double[samples];
+        double temp = 2 * Math.PI/( sampleRate/frequencyOfTone );
         for (int i = 0; i < samples; i++) {
-            sample[i] = Math.sin(2 * Math.PI * i / (sampleRate/frequencyOfTone));
+            sample[i] = Math.sin( temp * i );
         }
 		return sample;
     }
@@ -36,7 +37,6 @@ public class AudioGenerator {
             // in 16 bit wav PCM, first byte is the low order byte
             generatedSound[index++] = (byte) (maxSample & 0x00ff);
             generatedSound[index++] = (byte) ((maxSample & 0xff00) >>> 8);
-
         }
     	return generatedSound;
     }
