@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="pure_white">#fff</color>
+    <color name="black">#000</color>
+    <color name="transparent">#00ffffff</color>
+    <color name="background_trans_35">#59000000</color>
+    <color name="background_trans_55">#8C000000</color>
+    <color name="background_trans_80">#CC000000</color>
+
+    <color name="accent">@color/themeA200</color>
+    <color name="primary">@color/theme500</color>
+    <color name="primary_dark">@color/theme700</color>
+
+    <color name="primary_text">@color/theme50</color>
+    <color name="primary_text_dark">@color/theme500</color>
+    <color name="hint_text_white_back">@color/grey_500</color>
+    <color name="secondary_text">@color/theme100</color>
+    <color name="hint_text">@color/theme300</color>
+
+    <color name="background">@color/theme200</color>
+
+    <color name="theme50">@color/orange_50</color>
+    <color name="theme100">@color/orange_100</color>
+    <color name="theme200">@color/orange_200</color>
+    <color name="theme300">@color/orange_300</color>
+    <color name="theme400">@color/orange_400</color>
+    <color name="theme500">@color/orange_500</color>
+    <color name="theme600">@color/orange_600</color>
+    <color name="theme700">@color/orange_700</color>
+    <color name="theme800">@color/orange_800</color>
+    <color name="theme900">@color/orange_900</color>
+
+    <color name="themeA100">@color/orange_A100</color>
+    <color name="themeA200">@color/orange_A200</color>
+    <color name="themeA400">@color/orange_A400</color>
+    <color name="themeA700">@color/orange_A700</color>
+
+    <!-- Grey -->
+    <color name="grey_50">#FAFAFA</color>
+    <color name="grey_100">#F5F5F5</color>
+    <color name="grey_200">#EEEEEE</color>
+    <color name="grey_300">#E0E0E0</color>
+    <color name="grey_400">#BDBDBD</color>
+    <color name="grey_500">#9E9E9E</color>
+    <color name="grey_600">#757575</color>
+    <color name="grey_700">#616161</color>
+    <color name="grey_800">#424242</color>
+    <color name="grey_900">#212121</color>
+
+    <!-- Indigo -->
+    <color name="indigo_50">#E8EAF6</color>
+    <color name="indigo_100">#C5CAE9</color>
+    <color name="indigo_200">#9FA8DA</color>
+    <color name="indigo_300">#7986CB</color>
+    <color name="indigo_400">#5C6BC0</color>
+    <color name="indigo_500">#3F51B5</color>
+    <color name="indigo_600">#3949AB</color>
+    <color name="indigo_700">#303F9F</color>
+    <color name="indigo_800">#283593</color>
+    <color name="indigo_900">#1A237E</color>
+
+    <color name="indigo_A100">#8C9EFF</color>
+    <color name="indigo_A200">#536DFE</color>
+    <color name="indigo_A400">#3D5AFE</color>
+    <color name="indigo_A700">#304FFE</color>
+
+    <!-- Pink -->
+    <color name="pink_50">#FCE4EC</color>
+    <color name="pink_100">#F8BBD0</color>
+    <color name="pink_200">#F48FB1</color>
+    <color name="pink_300">#F06292</color>
+    <color name="pink_400">#EC407A</color>
+    <color name="pink_500">#E91E63</color>
+    <color name="pink_600">#D81B60</color>
+    <color name="pink_700">#C2185B</color>
+    <color name="pink_800">#AD1457</color>
+    <color name="pink_900">#880E4F</color>
+
+    <color name="pink_A100">#FF80AB</color>
+    <color name="pink_A200">#FF4081</color>
+    <color name="pink_A400">#F50057</color>
+    <color name="pink_A700">#C51162</color>
+
+
+    <color name="fab_color_1">#ff5252</color>
+    <color name="fab_color_1_muted">#ff8080</color>
+    <color name="fab_color_2">#9c27b0</color>
+    <color name="fab_color_2_muted">#a56ab0</color>
+
+    <!-- Deep Orange -->
+    <color name="orange_50">#FBE9E7</color>
+    <color name="orange_100">#FFCCBC</color>
+    <color name="orange_200">#FFAB91</color>
+    <color name="orange_300">#FF8A65</color>
+    <color name="orange_400">#FF7043</color>
+    <color name="orange_500">#FF5722</color>
+    <color name="orange_600">#F4511E</color>
+    <color name="orange_700">#E64A19</color>
+    <color name="orange_800">#D84315</color>
+    <color name="orange_900">#BF360C</color>
+
+    <color name="orange_A100">#FF9E80</color>
+    <color name="orange_A200">#FF6E40</color>
+    <color name="orange_A400">#FF3D00</color>
+    <color name="orange_A700">#DD2C00</color>
+
+</resources>

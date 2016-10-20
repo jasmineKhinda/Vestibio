@@ -1,4 +1,41 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.MyTheme" parent="@android:style/Theme.Black" />
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:editTextStyle">@style/App_EditTextStyle</item>
+        <item name="android:progressBarStyleHorizontal">@style/ProgressBarStyle</item>
+    </style>
+
+    <style name="CardViewStyle" parent="android:Widget.TextView">
+        <item name="android:background">@drawable/button_background</item>
+        <item name="android:textColor">@drawable/text_selector</item>
+    </style>
+
+    <style name="App_EditTextStyle" parent="@android:style/Widget.EditText">
+        <item name="android:background">@null</item>
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:textColorHint">@color/hint_text</item>
+    </style>
+
+    <style name="WhiteBackEditTextStyle" parent="@android:style/Widget.EditText">
+        <item name="android:background">@null</item>
+        <item name="android:textColor">@color/primary_text_dark</item>
+        <item name="android:textColorHint">@color/hint_text_white_back</item>
+    </style>
+
+    <style name="ProgressBarStyle" parent="Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:background">@drawable/progress_drawable</item>
+    </style>
+
+    <style name="MetronomeButton" parent="@android:style/Widget.Holo.Button.Borderless">
+        <item name="android:textColor">@drawable/text_selector_inverted</item>
+        <item name="android:background">@drawable/background_transparent_select</item>
+    </style>
+
+    <style name="DarkTextSpinner" parent="Base.Widget.AppCompat.Spinner">
+        <item name="android:textColor">@color/primary_text_dark</item>
+    </style>
+
 </resources>

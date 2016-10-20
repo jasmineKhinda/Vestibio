@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MetroSong</string>
+    <string name="action_apply">Сохранить</string>
+    <string name="action_remove">Удалить</string>
+    <string name="app_name_short">MetroSong</string>
+    <string name="bars_count">Тактов</string>
+    <string name="beat">Доля</string>
+    <string name="beat_per_bar">Долей в такте</string>
+    <string name="bpm">BPM</string>
+    <string name="confirm_delete">Подтвердите удаление трека</string>
+    <string name="empty_field">Пустое поле</string>
+    <string name="no">Нет</string>
+    <string name="snippet">Часть</string>
+    <string name="snippet_number">Часть %d</string>
+    <string name="snippets">%d частей</string>
+    <string name="song">Трек</string>
+    <string name="start">Старт</string>
+    <string name="stop">Стоп</string>
+    <string name="timesignature">Размер</string>
+    <string name="title">Название</string>
+    <string name="title_section1">Метроном</string>
+    <string name="title_section2">Треки</string>
+    <string name="volume">громкость</string>
+    <string name="yes">Да</string>
+</resources>

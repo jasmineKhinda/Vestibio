@@ -11,26 +11,26 @@ import android.media.AudioManager;
 import android.media.AudioTrack;
 
 public class AudioGenerator {
-	
+
     private int sampleRate;
     private AudioTrack audioTrack;
-    
+
     public AudioGenerator(int sampleRate) {
-    	this.sampleRate = sampleRate;
+        this.sampleRate = sampleRate;
     }
-    
+
     public double[] getSineWave(int samples,int sampleRate,double frequencyOfTone) {
-    	double[] sample = new double[samples];
+        double[] sample = new double[samples];
         double temp = 2 * Math.PI/( sampleRate/frequencyOfTone );
         for (int i = 0; i < samples; i++) {
             sample[i] = Math.sin( temp * i );
         }
-		return sample;
+        return sample;
     }
-    
+
     public byte[] get16BitPcm(double[] samples) {
-    	byte[] generatedSound = new byte[2 * samples.length];
-    	int index = 0;
+        byte[] generatedSound = new byte[2 * samples.length];
+        int index = 0;
         for (double sample : samples) {
             // scale to maximum amplitude
             short maxSample = (short) ((sample * Short.MAX_VALUE));
@@ -38,33 +38,42 @@ public class AudioGenerator {
             generatedSound[index++] = (byte) (maxSample & 0x00ff);
             generatedSound[index++] = (byte) ((maxSample & 0xff00) >>> 8);
         }
-    	return generatedSound;
+        return generatedSound;
     }
-    
+
     public void createPlayer(){
-    	//FIXME sometimes audioTrack isn't initialized
+        //FIXME sometimes audioTrack isn't initialized
         audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC,
                 sampleRate, AudioFormat.CHANNEL_OUT_MONO,
                 AudioFormat.ENCODING_PCM_16BIT, sampleRate,
                 AudioTrack.MODE_STREAM);
-    	audioTrack.play();
+        audioTrack.play();
     }
-    
+
     public void writeSound(double[] samples) {
-    	byte[] generatedSnd = get16BitPcm(samples);
-    	audioTrack.write(generatedSnd, 0, generatedSnd.length);
+        byte[] generatedSnd = get16BitPcm(samples);
+        try{
+            audioTrack.write(generatedSnd, 0, generatedSnd.length);
+        }catch (IllegalStateException e){
+            e.printStackTrace();
+        }
     }
+
     public void writeSilence( int samples ) {
         byte[] temp = new byte[ 2 * samples ];
         for( int kk=0; kk<temp.length; kk++ ) {
             temp[ kk ] = 0;
         }
-        audioTrack.write( temp, 0, temp.length );
+        try{
+            audioTrack.write( temp, 0, temp.length );
+        }catch(IllegalStateException e){
+            e.printStackTrace();
+        }
     }
-    
+
     public void destroyAudioTrack() {
-    	audioTrack.stop();
-    	audioTrack.release();
+        audioTrack.stop();
+        audioTrack.release();
     }
     
 }

@@ -1,16 +1,34 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">uber Metronome</string>
+    <string name="app_name">MetroSong</string>
+    <string name="app_name_short">MetroSong</string>
+
+    <string name="title_section1">Metronome</string>
+    <string name="title_section2">Songs</string>
+
+    <string name="action_apply">Apply</string>
+    <string name="action_remove">Remove</string>
+
     <string name="start">Start</string>
     <string name="stop">Stop</string>
-    <color name="yellow">#DEE054</color>
-    <string name="plus">+</string>
-    <string name="minus">-</string>
-    <string name="bps">bps</string>
+    <string name="plus" translatable="false">+</string>
+    <string name="minus" translatable="false">-</string>
+    <string name="snippet">Snippet</string>
+    <string name="snippet_number">Snippet %d</string>
+    <string name="bpm">BPM</string>
     <string name="timesignature">time signature</string>
-    <string name="dash">/</string>
+    <string name="dash" translatable="false">/</string>
     <string name="volume">volume</string>
-    <color name="black">#000000</color>
-    <string name="one">1</string>
+    <string name="one" translatable="false">1</string>
+    <string name="song">Song</string>
+    <string name="beat">Beat</string>
+    <string name="beat_per_bar">Beats per bar</string>
+    <string name="bars_count">Bars count</string>
+    <string name="snippets">%d snippets</string>
+    <string name="empty_field">Empty field</string>
+    <string name="title">Title</string>
+    <string name="confirm_delete">Confirm song remove</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
 </resources>
+

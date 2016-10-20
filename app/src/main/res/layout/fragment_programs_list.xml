@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:float="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:background="@color/theme100"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.andreyaleev.metrosong.tools.EmptyRecyclerView
+            android:id="@+id/rvPrograms"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fabNew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="12dp"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/fab_add"
+            app:fab_elevationCompat="4dp"/>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <LinearLayout
+        android:id="@+id/llSongPlayback"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@color/background_trans_80"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            android:layout_width="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            float:fletPaddingBottom="10dp">
+            <EditText
+                android:id="@+id/edtSnippet"
+                android:editable="false"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/snippet"
+                style="@style/App_EditTextStyle"/>
+        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            android:layout_width="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            float:fletPaddingBottom="10dp">
+            <EditText
+                android:id="@+id/edtBPM"
+                android:editable="false"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/bpm"
+                style="@style/App_EditTextStyle"/>
+        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            android:layout_width="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            float:fletPaddingBottom="10dp">
+            <EditText
+                android:id="@+id/edtCurrentBeat"
+                android:editable="false"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/beat"
+                style="@style/App_EditTextStyle"/>
+        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            android:layout_width="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            float:fletPaddingBottom="10dp">
+            <EditText
+                android:id="@+id/edtCurrentBar"
+                android:editable="false"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/beat_per_bar"
+                style="@style/App_EditTextStyle"/>
+        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            android:layout_width="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            float:fletPaddingBottom="10dp">
+            <EditText
+                android:id="@+id/edtBarCount"
+                android:editable="false"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/bars_count"
+                style="@style/App_EditTextStyle"/>
+        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+        <Button
+            android:id="@+id/btnStopCurrent"
+            style="@style/Base.TextAppearance.AppCompat.Large"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:background="@drawable/button_background"
+            android:text="@string/stop"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</RelativeLayout>
