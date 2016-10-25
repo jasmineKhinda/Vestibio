@@ -28,7 +28,6 @@ import butterknife.ButterKnife;
  */
 public class SongActivity extends BaseActivity implements SnippetRemoveListener {
 
-    private static final String TAG = "SongActivity";
     public static String SONG_TAG = "SONG_TAG";
 
     @BindView(R.id.rvSnippets)
@@ -65,6 +64,7 @@ public class SongActivity extends BaseActivity implements SnippetRemoveListener 
             edtTitle.setText(song.getTitle());
         } else {
             snippets = new ArrayList<>();
+            addNewSnippet(); // adds one default snippet
         }
 
         dataSource = new SongsDataSource(this);

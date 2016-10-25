@@ -17,7 +17,6 @@ import java.util.ArrayList;
  */
 public class SongsDataSource {
 
-    private static final String TAG = "SongsDataSource";
     private SQLiteDatabase database;
     private MySQLiteHelper dbHelper;
     private String[] songsColumns = {
@@ -53,7 +52,7 @@ public class SongsDataSource {
         if(song.getSnippets()!=null) {
             for (SongSnippet snippet : song.getSnippets()) {
                 long id = insertSnippet(song.getId(), snippet);
-                Log.d(TAG, "snippet " + id + " created");
+                Log.d(this.getClass().getSimpleName(), "snippet " + id + " created");
             }
         }
         return database.update(MySQLiteHelper.TABLE_SONGS, values, "_id "+"="+song.getId(), null);
@@ -67,7 +66,7 @@ public class SongsDataSource {
         if(song.getSnippets()!=null){
             for(SongSnippet snippet: song.getSnippets()){
                 long idSnippet = insertSnippet((int) id, snippet);
-                Log.d(TAG, "snippet " + idSnippet + " created");
+                Log.d(this.getClass().getSimpleName(), "snippet " + idSnippet + " created");
             }
         }
         return id;
@@ -136,7 +135,7 @@ public class SongsDataSource {
             SongSnippet snippet = getSnippet(cursor);
             int id = cursor.getInt(cursor.getColumnIndex(MySQLiteHelper.COLUMN_ID));
             String song_id = cursor.getString(cursor.getColumnIndex(MySQLiteHelper.COLUMN_SONG_ID));
-            Log.d(TAG, "id: " + id  + " song_id: " + song_id + " " + snippet.toString());
+            Log.d(this.getClass().getSimpleName(), "id: " + id  + " song_id: " + song_id + " " + snippet.toString());
             cursor.moveToNext();
         }
 

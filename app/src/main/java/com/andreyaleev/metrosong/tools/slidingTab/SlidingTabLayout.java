@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.andreyaleev.metrosong.slidingTab;
+package com.andreyaleev.metrosong.tools.slidingTab;
 
 import android.content.Context;
 import android.graphics.Typeface;

@@ -9,14 +9,16 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:titleTextColor="@color/primary_text"
+        android:elevation="3dp"
         android:minHeight="?attr/actionBarSize"
         android:background="@color/primary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </android.support.v7.widget.Toolbar>
 
-    <com.andreyaleev.metrosong.slidingTab.SlidingTabLayout
+    <com.andreyaleev.metrosong.tools.slidingTab.SlidingTabLayout
         android:id="@+id/slidingTabs"
+        android:elevation="3dp"
         android:animateLayoutChanges="true"
         android:background="@color/primary"
         android:layout_width="match_parent"

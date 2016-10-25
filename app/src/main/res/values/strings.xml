@@ -29,6 +29,10 @@
     <string name="confirm_delete">Confirm song remove</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="enter_title">Enter track title</string>
+
+    <string name="service_started">Metronome service started</string>
+    <string name="service_stopped">Metronome service stopped</string>
 
 </resources>
 

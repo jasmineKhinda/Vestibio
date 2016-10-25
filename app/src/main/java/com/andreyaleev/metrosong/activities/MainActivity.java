@@ -11,7 +11,7 @@ import com.andreyaleev.metrosong.Constants;
 import com.andreyaleev.metrosong.R;
 import com.andreyaleev.metrosong.fragments.MetronomeFragment;
 import com.andreyaleev.metrosong.fragments.SongsListFragment;
-import com.andreyaleev.metrosong.slidingTab.SlidingTabLayout;
+import com.andreyaleev.metrosong.tools.slidingTab.SlidingTabLayout;
 import com.andreyaleev.metrosong.tools.CustomViewPager;
 
 import java.util.Locale;

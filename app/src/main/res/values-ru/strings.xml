@@ -23,4 +23,7 @@
     <string name="title_section2">Треки</string>
     <string name="volume">громкость</string>
     <string name="yes">Да</string>
+    <string name="enter_title">Введите название трека</string>
+    <string name="service_started">Служба стартовала</string>
+    <string name="service_stopped">Служба остановлена</string>
 </resources>

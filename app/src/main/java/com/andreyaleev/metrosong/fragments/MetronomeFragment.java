@@ -1,13 +1,13 @@
 package com.andreyaleev.metrosong.fragments;
 
-import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
-import android.media.AudioManager;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,15 +18,19 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.andreyaleev.metrosong.BuildConfig;
 import com.andreyaleev.metrosong.Constants;
 import com.andreyaleev.metrosong.R;
 import com.andreyaleev.metrosong.activities.MainActivity;
+import com.andreyaleev.metrosong.bus.TickEvent;
+import com.andreyaleev.metrosong.metronome.MetronomeSingleton;
+import com.andreyaleev.metrosong.services.MetronomeService;
+import com.andreyaleev.metrosong.tools.Utils;
+import com.squareup.otto.Subscribe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pntanasis.android.metronome.Beats;
-import pntanasis.android.metronome.Metronome;
-import pntanasis.android.metronome.MidiNotes;
 import pntanasis.android.metronome.NoteValues;
 
 /**
@@ -34,9 +38,8 @@ import pntanasis.android.metronome.NoteValues;
  */
 public class MetronomeFragment extends MetronomableFragment {
 
-    private final static String TAG = "MetronomeFragment";
-
     private View contentView;
+    private SharedPreferences prefs;
 
     @BindView(R.id.tvBPM)
     TextView tvBPM;
@@ -52,8 +55,6 @@ public class MetronomeFragment extends MetronomableFragment {
     SeekBar seekbarBPM;
     @BindView(R.id.btnStartStop)
     Button btnStartStop;
-
-    private MetronomeAsyncTask metroTask;
 
     public static MetronomeFragment newInstance() {
         MetronomeFragment frag = new MetronomeFragment();
@@ -74,38 +75,42 @@ public class MetronomeFragment extends MetronomableFragment {
         ButterKnife.bind(this, view);
     }
 
+
+    @Subscribe
+    public void onTickEvent(TickEvent event) {
+        if (BuildConfig.DEBUG) {
+            Log.d(this.getClass().getSimpleName(), event.toString());
+        }
+    }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         activity = (MainActivity) getActivity();
-        audio = (AudioManager) activity.getSystemService(Context.AUDIO_SERVICE);
-        initialVolume = (short) audio.getStreamVolume(AudioManager.STREAM_MUSIC);
-        volume = initialVolume;
-        metroTask = new MetronomeAsyncTask(beats, noteValue, bpm);
+        prefs = activity.getSettings();
 
-        Integer savedBPM = activity.getSettings().getInt(Constants.BPM, bpm);
-        if (savedBPM != null) {
-            bpm = ((short) (int) savedBPM);
-        }
+        MetronomeSingleton.getInstance().setBeat(prefs.getInt(Constants.SELECTED_BEAT_PER_BAR, 4));
+        MetronomeSingleton.getInstance().setNoteValue(prefs.getInt(Constants.SELECTED_NOTE_VALUE, 4));
+        int savedBPM = prefs.getInt(Constants.SELECTED_BPM, Constants.BPM_DEFAULT);
+        MetronomeSingleton.getInstance().setBpm(savedBPM);
 
-        tvBPM.setText(String.valueOf(bpm));
+        tvBPM.setText(String.valueOf(savedBPM));
 
         btnPlus.setOnClickListener(view -> onPlusClick());
         btnMinus.setOnClickListener(view -> onMinusClick());
 
-        ArrayAdapter<Beats> arrayBeats = new ArrayAdapter<Beats>(activity, android.R.layout.simple_spinner_item, Beats.values());
+        ArrayAdapter<Beats> arrayBeats = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_item, Beats.values());
         spinnerBeat.setAdapter(arrayBeats);
         spinnerBeat.setSelection(Beats.four.ordinal());
         arrayBeats.setDropDownViewResource(R.layout.spinner_dropdown);
         spinnerBeat.setOnItemSelectedListener(beatsSpinnerListener);
 
         ArrayAdapter<NoteValues> noteValues =
-                new ArrayAdapter<NoteValues>(getActivity(),
+                new ArrayAdapter<>(getActivity(),
                         android.R.layout.simple_spinner_item, NoteValues.values());
         spinnerNote.setAdapter(noteValues);
         spinnerNote.setSelection(NoteValues.four.ordinal());
         noteValues.setDropDownViewResource(R.layout.spinner_dropdown);
-//        spinnerNote.setOnItemSelectedListener(noteValuesSpinnerListener);
 
         seekbarBPM.getProgressDrawable().setColorFilter(
                 new PorterDuffColorFilter(getResources().getColor(R.color.primary), PorterDuff.Mode.SRC_ATOP));
@@ -113,7 +118,7 @@ public class MetronomeFragment extends MetronomableFragment {
             seekbarBPM.getThumb().setColorFilter(getResources().getColor(R.color.primary), PorterDuff.Mode.SRC_ATOP);
         }
 
-        seekbarBPM.setProgress((bpm - 40));
+        seekbarBPM.setProgress((savedBPM - 40));
         seekbarBPM.setOnSeekBarChangeListener(bpmSeekBarListener);
 
         btnStartStop.setOnClickListener(view -> onStartStopClick());
@@ -125,28 +130,15 @@ public class MetronomeFragment extends MetronomableFragment {
     }
 
     public synchronized void onStartStopClick() {
-        if (metroTask != null && metroTask.getStatus() != AsyncTask.Status.RUNNING) {
-            activity.getSlidingTabLayout().setVisibility(View.GONE);
-            activity.getViewPager().setPagingEnabled(false);
-            btnStartStop.setText(R.string.stop);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                metroTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[]) null);
-            } else {
-                metroTask.execute();
-            }
-            contentView.setKeepScreenOn(true);
+        if (Utils.isMetronomeServiceRunning(getContext())) {
+            stopMetronome();
         } else {
-            activity.getSlidingTabLayout().setVisibility(View.VISIBLE);
-            activity.getViewPager().setPagingEnabled(true);
-            btnStartStop.setText(R.string.start);
-            metroTask.stop();
-            metroTask = new MetronomeAsyncTask(beats, noteValue, bpm);
-            Runtime.getRuntime().gc();
-            contentView.setKeepScreenOn(false);
+            startMetronome();
         }
     }
 
     private void maxBpmGuard() {
+        int bpm = MetronomeSingleton.getInstance().getBpm();
         if (bpm >= Constants.BPM_MAX) {
             btnPlus.setEnabled(false);
             btnPlus.setPressed(false);
@@ -156,13 +148,53 @@ public class MetronomeFragment extends MetronomableFragment {
     }
 
     public void onPlusClick() {
-        bpm++;
-        tvBPM.setText(String.valueOf(bpm));
-        metroTask.setBpm(bpm);
+        int currentBPM = MetronomeSingleton.getInstance().getBpm();
+        int newBPM = currentBPM + 1;
+        prefs.edit().putInt(Constants.SELECTED_BPM, newBPM).apply();
+        MetronomeSingleton.getInstance().setBpm(newBPM);
+        tvBPM.setText(String.valueOf(newBPM));
+        updateMetronome();
         maxBpmGuard();
     }
 
+    public void onMinusClick() {
+        int currentBPM = MetronomeSingleton.getInstance().getBpm();
+        int newBPM = currentBPM - 1;
+        prefs.edit().putInt(Constants.SELECTED_BPM, newBPM).apply();
+        MetronomeSingleton.getInstance().setBpm(newBPM);
+        tvBPM.setText(String.valueOf(newBPM));
+        updateMetronome();
+        minBpmGuard();
+    }
+
+    private void updateMetronome() {
+        if (Utils.isMetronomeServiceRunning(getContext())) {
+            Intent intent = new Intent(Constants.ACTION_PARAMS_CHANGED);
+            getContext().sendBroadcast(intent);
+        }
+    }
+
+    private void stopMetronome() {
+        MetronomeSingleton.getInstance().setPlay(false);
+        Utils.checkAndStopService(getContext());
+        activity.getSlidingTabLayout().setVisibility(View.VISIBLE);
+        activity.getViewPager().setPagingEnabled(true);
+        btnStartStop.setText(R.string.start);
+        contentView.setKeepScreenOn(false);
+    }
+
+    private void startMetronome() {
+        btnStartStop.setText(R.string.stop);
+        MetronomeSingleton.getInstance().setPlay(true);
+        activity.getSlidingTabLayout().setVisibility(View.GONE);
+        activity.getViewPager().setPagingEnabled(false);
+        Intent myIntent = new Intent(getContext(), MetronomeService.class);
+        getActivity().startService(myIntent);
+        contentView.setKeepScreenOn(true);
+    }
+
     private void minBpmGuard() {
+        int bpm = MetronomeSingleton.getInstance().getBpm();
         if (bpm <= Constants.BPM_MIN) {
             btnMinus.setEnabled(false);
             btnMinus.setPressed(false);
@@ -171,19 +203,11 @@ public class MetronomeFragment extends MetronomableFragment {
         }
     }
 
-    public void onMinusClick() {
-        bpm--;
-        tvBPM.setText(String.valueOf(bpm));
-        metroTask.setBpm(bpm);
-        minBpmGuard();
-    }
-
     private SeekBar.OnSeekBarChangeListener bpmSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            bpm = (short) (((short) progress) + 40);
+            int bpm = (short) (((short) seekBar.getProgress()) + 40);
             tvBPM.setText(String.valueOf(bpm));
-            metroTask.setBpm(bpm);
         }
 
         @Override
@@ -192,6 +216,10 @@ public class MetronomeFragment extends MetronomableFragment {
 
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
+            int bpm = (short) (((short) seekBar.getProgress()) + 40);
+            MetronomeSingleton.getInstance().setBpm(bpm);
+            prefs.edit().putInt(Constants.SELECTED_BPM, bpm).apply();
+            updateMetronome();
         }
     };
 
@@ -199,11 +227,14 @@ public class MetronomeFragment extends MetronomableFragment {
         @Override
         public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
             Beats beat = (Beats) arg0.getItemAtPosition(arg2);
-            beats = beat.getNum();
+            int beats = beat.getNum();
+            int noteValue = prefs.getInt(Constants.SELECTED_NOTE_VALUE, 4);
             if (beats > noteValue) {
                 beats = noteValue; // TODO fixme =(
             }
-            metroTask.setBeat(beats);
+            MetronomeSingleton.getInstance().setBeat(beats);
+            prefs.edit().putInt(Constants.SELECTED_BEAT_PER_BAR, beats).apply();
+            updateMetronome();
         }
 
         @Override
@@ -215,66 +246,16 @@ public class MetronomeFragment extends MetronomableFragment {
     private AdapterView.OnItemSelectedListener noteValuesSpinnerListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-            NoteValues noteValue = (NoteValues) arg0.getItemAtPosition(arg2);
-//            metroTask.setNoteValue(noteValue.getNum());
+            NoteValues noteValueObj = (NoteValues) arg0.getItemAtPosition(arg2);
+            int noteValue = noteValueObj.getNum();
+            MetronomeSingleton.getInstance().setNoteValue(noteValue);
+            prefs.edit().putInt(Constants.SELECTED_NOTE_VALUE, noteValue).apply();
+            updateMetronome();
         }
 
         @Override
         public void onNothingSelected(AdapterView<?> arg0) {
         }
     };
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        // save bpm
-        if (activity != null)
-            activity.getSettings().edit().putInt(Constants.BPM, bpm).apply();
-        metroTask.stop();
-        metroTask.cancel(true);
-        Runtime.getRuntime().gc();
-        audio.setStreamVolume(AudioManager.STREAM_MUSIC, initialVolume, AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
-    }
-
-    private class MetronomeAsyncTask extends AsyncTask<Void, Void, String> {
-
-        private Metronome metronome;
-        private short beatsPerBar;
-        private short noteValue;
-        private int bpm;
-
-        MetronomeAsyncTask(short beatsPerBar, short noteValue, int bpm) {
-            this.metronome = new Metronome();
-            this.beatsPerBar = beatsPerBar;
-            this.noteValue = noteValue;
-            this.bpm = bpm;
-        }
-
-        protected String doInBackground(Void... params) {
-            metronome.setBeat(beats);
-            metronome.setNoteValue(noteValue);
-            metronome.setBpm(bpm);
-            metronome.setBeatSound(MidiNotes.frequency(MidiNotes.A5));
-            metronome.setSound(MidiNotes.frequency(MidiNotes.FisGb5));
-            metronome.play();
-            return null;
-        }
-
-        public void stop() {
-            metronome.stop();
-            metronome = null;
-        }
-
-        public void setBpm(short bpm) {
-            metronome.setBpm(bpm);
-            metronome.calcSilence();
-        }
-
-        public void setBeat(short beat) {
-            if (metronome != null)
-                metronome.setBeat(beat);
-        }
-
-    }
 
 }

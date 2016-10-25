@@ -1,14 +1,8 @@
 package com.andreyaleev.metrosong.fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.media.AudioManager;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,30 +12,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.andreyaleev.metrosong.R;
 import com.andreyaleev.metrosong.activities.SongActivity;
+import com.andreyaleev.metrosong.adapters.ProgramsAdapter;
+import com.andreyaleev.metrosong.bus.SongStateEvent;
+import com.andreyaleev.metrosong.bus.SongTickEvent;
 import com.andreyaleev.metrosong.db.SongsDataSource;
 import com.andreyaleev.metrosong.metronome.Song;
-import com.andreyaleev.metrosong.metronome.SongSnippet;
+import com.andreyaleev.metrosong.services.MetronomeService;
 import com.andreyaleev.metrosong.tools.OnBackPressedListener;
+import com.andreyaleev.metrosong.tools.Utils;
+import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import pntanasis.android.metronome.Metronome;
-import pntanasis.android.metronome.MidiNotes;
 
 /**
  * Created by Andrey Aleev on 09.09.2015.
  */
-public class SongsListFragment extends MetronomableFragment implements OnBackPressedListener {
-
-    private final static String TAG = "ProgramsListFragment";
+public class SongsListFragment extends MetronomableFragment implements OnBackPressedListener,
+        ProgramsAdapter.ProgramsItemsListener {
 
     @BindView(R.id.rvPrograms)
     RecyclerView rvPrograms;
@@ -65,38 +59,24 @@ public class SongsListFragment extends MetronomableFragment implements OnBackPre
     private ProgramsAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<Song> songs;
-    private MetronomeAsyncTask metroTask;
 
-    private Handler mHandler;
     private SongsDataSource dataSource;
 
-    // have in mind that: http://stackoverflow.com/questions/11407943/this-handler-class-should-be-static-or-leaks-might-occur-incominghandler
-    // in this case we should be fine as no delayed messages are queued
-    private Handler getHandler() {
-        return new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                if (msg.what == Metronome.SONG_ENDED) {
-                    stopSong();
-                    return;
-                }
-                Bundle data = msg.getData();
-                if (data != null) {
-//                    Log.d(TAG, "handleMessage bpm" + data);
-                    Integer bpm = data.getInt(Metronome.BPM);
-                    Integer currentBeat = data.getInt(Metronome.CURRENT_BEAT);
-                    Integer noteValue = data.getInt(Metronome.NOTE_VALUE);
-                    Integer barCount = data.getInt(Metronome.BARS_COUNT);
-                    Integer beatsPerBar = data.getInt(Metronome.BEATS_PER_BAR);
-                    Integer barsPassed = data.getInt(Metronome.BARS_PASSED) + 1;
-                    Integer snippetNumber = data.getInt(Metronome.SNIPPET_NUMBER) + 1;
-                    updateUI(snippetNumber, bpm, currentBeat, barCount, noteValue, beatsPerBar, barsPassed);
-                }
-            }
-        };
+    @Subscribe
+    public void onSongStateChanged(SongStateEvent event) {
+        if(!event.trackIsRunning){
+            stopSong();
+        }
     }
 
-    private void updateUI(Integer snippetNumber, Integer bpm, Integer currentBeat, Integer barCount, Integer noteValue, Integer beatsPerBar, Integer barsPassed) {
+    @Subscribe
+    public void onTickEvent(SongTickEvent event) {
+        updateUI(event.snippetNumber + 1, event.bpm, event.currentBeat, event.barsCount,
+                event.noteValue, event.beatsPerBar, event.barsPassed + 1);
+    }
+
+    private void updateUI(Integer snippetNumber, Integer bpm, Integer currentBeat, Integer barCount,
+                          Integer noteValue, Integer beatsPerBar, Integer barsPassed) {
         Resources res = getResources();
         String text = String.format(res.getString(R.string.snippet_number), snippetNumber);
         edtSnippet.setText(text);
@@ -132,11 +112,7 @@ public class SongsListFragment extends MetronomableFragment implements OnBackPre
     }
 
     private void stopSong() {
-        if (metroTask != null && (metroTask.getStatus() == AsyncTask.Status.RUNNING)) {
-            // My AsyncTask is currently doing work in doInBackground()
-            metroTask.stop();
-        }
-        metroTask = new MetronomeAsyncTask();
+        Utils.checkAndStopService(getContext());
         Runtime.getRuntime().gc();
         llSongPlayback.setVisibility(View.GONE);
         llSongPlayback.setKeepScreenOn(false);
@@ -170,9 +146,9 @@ public class SongsListFragment extends MetronomableFragment implements OnBackPre
 
         songs = dataSource.getAllSongs();
         for (Song song : songs) {
-            Log.d(TAG, song.toString());
+            Log.d(this.getClass().getSimpleName(), song.toString());
         }
-        mAdapter = new ProgramsAdapter(activity, songs);
+        mAdapter = new ProgramsAdapter(activity, songs, this);
         rvPrograms.setAdapter(mAdapter);
     }
 
@@ -185,79 +161,27 @@ public class SongsListFragment extends MetronomableFragment implements OnBackPre
         }
     }
 
+    @Override
+    public void onPlayClicked(Song song) {
+        activity.getSlidingTabLayout().setVisibility(View.GONE);
+        activity.getViewPager().setPagingEnabled(false);
+        llSongPlayback.setVisibility(View.VISIBLE);
+        llSongPlayback.setKeepScreenOn(true);
 
-    class ProgramsAdapter extends RecyclerView.Adapter<ProgramsAdapter.ViewHolder> {
+        Intent serviceIntent = new Intent(getContext(), MetronomeService.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(MetronomeService.SNIPPETS_KEY, song.getSnippets());
+        serviceIntent.putExtras(bundle);
+        getContext().startService(serviceIntent);
+    }
 
-        private ArrayList<Song> songs;
-        private Context mContext;
-
-        public class ViewHolder extends RecyclerView.ViewHolder {
-            @BindView(R.id.tvTitle) TextView tvTitle;
-            @BindView(R.id.tvDescription) TextView tvDescription;
-            @BindView(R.id.ivPlayCard) ImageView ivPlayCard;
-            @BindView(R.id.ivEditCard) ImageView ivEditCard;
-
-            public ViewHolder(View v) {
-                super(v);
-                ButterKnife.bind(this, v);
-            }
-        }
-
-        public ProgramsAdapter(Context context, ArrayList<Song> songs) {
-            this.songs = songs;
-            this.mContext = context;
-        }
-
-        public Song getItem(int position) {
-            return songs.get(position);
-        }
-
-        @Override
-        public int getItemCount() {
-            return songs.size();
-        }
-
-        @Override
-        public ProgramsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View v;
-            v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_program, parent, false);
-            ViewHolder vh = new ViewHolder(v);
-            return vh;
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder holder, final int position) {
-
-            final Song song = getItem(position);
-            holder.tvTitle.setText(song.getTitle());
-            holder.tvDescription.setText(String.format(getString(R.string.snippets), song.getSnippets().size()));
-            holder.ivPlayCard.setOnClickListener(view -> {
-                activity.getSlidingTabLayout().setVisibility(View.GONE);
-                activity.getViewPager().setPagingEnabled(false);
-                llSongPlayback.setVisibility(View.VISIBLE);
-                llSongPlayback.setKeepScreenOn(true);
-
-                metroTask = new MetronomeAsyncTask(song.getSnippets());
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                    metroTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[]) null);
-                } else {
-                    metroTask.execute();
-                }
-
-            });
-            holder.tvTitle.setOnClickListener(view -> editCard(song));
-            holder.tvDescription.setOnClickListener(view -> editCard(song));
-            holder.ivEditCard.setOnClickListener(view -> editCard(song));
-        }
-
-        private void editCard(Song song) {
-            Intent intent = new Intent(mContext, SongActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable(SongActivity.SONG_TAG, song);
-            intent.putExtras(bundle);
-            mContext.startActivity(intent);
-        }
-
+    @Override
+    public void onEditClicked(Song song) {
+        Intent intent = new Intent(getContext(), SongActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(SongActivity.SONG_TAG, song);
+        intent.putExtras(bundle);
+        getContext().startActivity(intent);
     }
 
     @Override
@@ -270,65 +194,5 @@ public class SongsListFragment extends MetronomableFragment implements OnBackPre
     public void onPause() {
         dataSource.close();
         super.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (metroTask != null) {
-            metroTask.stop();
-        }
-        Runtime.getRuntime().gc();
-        audio.setStreamVolume(AudioManager.STREAM_MUSIC, initialVolume, AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
-    }
-
-    private class MetronomeAsyncTask extends AsyncTask<Void, Void, String> {
-
-        Metronome metronome;
-        ArrayList<SongSnippet> snippets;
-
-        MetronomeAsyncTask(ArrayList<SongSnippet> snippets) {
-            mHandler = getHandler();
-            this.metronome = new Metronome(mHandler);
-            this.snippets = snippets;
-        }
-
-        MetronomeAsyncTask() {
-            mHandler = getHandler();
-            metronome = new Metronome(mHandler);
-        }
-
-        protected String doInBackground(Void... params) {
-            metronome.setBeat(beats);
-            metronome.setNoteValue(noteValue);
-            metronome.setBpm(bpm);
-//            metronome.setBeatSound(beatSound);
-//            metronome.setSound(sound);
-            metronome.setBeatSound(MidiNotes.frequency(MidiNotes.A5));
-            metronome.setSound(MidiNotes.frequency(MidiNotes.FisGb5));
-            if (snippets == null) {
-                metronome.play();
-            } else {
-                metronome.playProgram(snippets);
-            }
-
-            return null;
-        }
-
-        public void stop() {
-            metronome.stop();
-            metronome = null;
-        }
-
-        public void setBpm(short bpm) {
-            metronome.setBpm(bpm);
-            metronome.calcSilence();
-        }
-
-        public void setBeat(short beat) {
-            if (metronome != null)
-                metronome.setBeat(beat);
-        }
-
     }
 }
