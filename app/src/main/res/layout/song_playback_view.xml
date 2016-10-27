@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:float="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/llSongPlayback"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_trans_80"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            float:fletPaddingBottom="10dp">
+
+            <EditText
+                android:id="@+id/edtSnippet"
+                style="@style/App_EditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:hint="@string/snippet"
+                android:textSize="@dimen/text_size_20"
+                android:inputType="none" />
+        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/base_margin_eight"
+            float:fletPaddingBottom="10dp">
+
+            <EditText
+                android:id="@+id/edtBarCount"
+                style="@style/App_EditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:hint="@string/bars_count"
+                android:textSize="@dimen/text_size_20"
+                android:inputType="none" />
+        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+    </LinearLayout>
+
+    <com.wrapp.floatlabelededittext.FloatLabeledEditText
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        float:fletPaddingBottom="10dp">
+
+        <EditText
+            android:id="@+id/edtBPM"
+            style="@style/App_EditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:hint="@string/bpm"
+            android:inputType="none"
+            android:textSize="@dimen/text_size_big" />
+    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/base_margin_big"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            float:fletPaddingBottom="10dp">
+
+            <EditText
+                android:id="@+id/edtCurrentBeat"
+                style="@style/App_EditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:hint="@string/beat"
+                android:textSize="@dimen/text_size_20"
+                android:inputType="none" />
+        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/base_margin_eight"
+            float:fletPaddingBottom="10dp">
+
+            <EditText
+                android:id="@+id/edtCurrentBar"
+                style="@style/App_EditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:hint="@string/beat_per_bar"
+                android:textSize="@dimen/text_size_20"
+                android:inputType="none" />
+        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnStopCurrent"
+        style="@style/Base.TextAppearance.AppCompat.Large"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/base_margin_big"
+        android:background="@drawable/button_background"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:text="@string/stop" />
+
+</LinearLayout>

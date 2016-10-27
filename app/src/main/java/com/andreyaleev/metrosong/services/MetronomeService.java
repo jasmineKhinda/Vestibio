@@ -1,5 +1,6 @@
 package com.andreyaleev.metrosong.services;
 
+import android.app.NotificationManager;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -87,6 +88,10 @@ public class MetronomeService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+
+        NotificationManager mManager = (NotificationManager) this.getApplicationContext().getSystemService(this.getApplicationContext().NOTIFICATION_SERVICE);
+        mManager.cancel(Constants.SERVICE_NOTIFICATION_ID);
+
         unregisterReceiver(parametersReceiver);
         App.getBus().unregister(this);
         audioGenerator.destroyAudioTrack();

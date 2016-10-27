@@ -13,6 +13,7 @@
         android:id="@+id/toolbar"
         android:titleTextColor="@color/primary_text"
         android:minHeight="?attr/actionBarSize"
+        android:elevation="3dp"
         android:background="@color/primary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

@@ -10,6 +10,8 @@
 
     <string name="start">Start</string>
     <string name="stop">Stop</string>
+    <string name="pause">Pause</string>
+    <string name="resume">Resume</string>
     <string name="plus" translatable="false">+</string>
     <string name="minus" translatable="false">-</string>
     <string name="snippet">Snippet</string>

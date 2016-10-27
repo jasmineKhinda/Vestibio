@@ -21,5 +21,7 @@ public class Constants {
     public final static String SELECTED_BEAT_PER_BAR = "SELECTED_BEAT_PER_BAR";
     public final static String SELECTED_NOTE_VALUE = "SELECTED_NOTE_VALUE";
 
-    public final static String ACTION_PARAMS_CHANGED = "ACTION_PARAMS_CHANGED";
+    public final static String ACTION_PARAMS_CHANGED = "com.andreyaleev.metrosong.ACTION_PARAMS_CHANGED";
+
+    public static final String ACTION_STOP = "com.andreyaleev.metrosong.ACTION_STOP";
 }

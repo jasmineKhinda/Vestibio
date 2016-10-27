@@ -17,6 +17,8 @@
     <string name="song">Трек</string>
     <string name="start">Старт</string>
     <string name="stop">Стоп</string>
+    <string name="pause">Пауза</string>
+    <string name="resume">Продолжить</string>
     <string name="timesignature">Размер</string>
     <string name="title">Название</string>
     <string name="title_section1">Метроном</string>

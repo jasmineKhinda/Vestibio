@@ -127,6 +127,7 @@ public class MetronomeFragment extends MetronomableFragment {
             btnPlus.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_background));
             btnMinus.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_background));
         }
+        registerNotificationReceiver();
     }
 
     public synchronized void onStartStopClick() {
@@ -174,6 +175,11 @@ public class MetronomeFragment extends MetronomableFragment {
         }
     }
 
+    @Override
+    protected void onStopMetronome() {
+        stopMetronome();
+    }
+
     private void stopMetronome() {
         MetronomeSingleton.getInstance().setPlay(false);
         Utils.checkAndStopService(getContext());
@@ -181,16 +187,20 @@ public class MetronomeFragment extends MetronomableFragment {
         activity.getViewPager().setPagingEnabled(true);
         btnStartStop.setText(R.string.start);
         contentView.setKeepScreenOn(false);
+        issueServiceNotification();
     }
 
     private void startMetronome() {
-        btnStartStop.setText(R.string.stop);
         MetronomeSingleton.getInstance().setPlay(true);
         activity.getSlidingTabLayout().setVisibility(View.GONE);
         activity.getViewPager().setPagingEnabled(false);
-        Intent myIntent = new Intent(getContext(), MetronomeService.class);
-        getActivity().startService(myIntent);
+        if(!Utils.isMetronomeServiceRunning(getContext())){
+            Intent myIntent = new Intent(getContext(), MetronomeService.class);
+            getActivity().startService(myIntent);
+        }
+        btnStartStop.setText(R.string.stop);
         contentView.setKeepScreenOn(true);
+        issueServiceNotification();
     }
 
     private void minBpmGuard() {
@@ -257,5 +267,6 @@ public class MetronomeFragment extends MetronomableFragment {
         public void onNothingSelected(AdapterView<?> arg0) {
         }
     };
+
 
 }

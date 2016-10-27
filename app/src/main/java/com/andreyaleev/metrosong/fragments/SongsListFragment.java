@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 
 import com.andreyaleev.metrosong.R;
 import com.andreyaleev.metrosong.activities.SongActivity;
@@ -39,8 +38,8 @@ public class SongsListFragment extends MetronomableFragment implements OnBackPre
 
     @BindView(R.id.rvPrograms)
     RecyclerView rvPrograms;
-    @BindView(R.id.llSongPlayback)
-    LinearLayout llSongPlayback;
+    @BindView(R.id.viewPlayback)
+    View viewPlayback;
     @BindView(R.id.btnStopCurrent)
     Button btnStopCurrent;
     @BindView(R.id.edtSnippet)
@@ -64,7 +63,7 @@ public class SongsListFragment extends MetronomableFragment implements OnBackPre
 
     @Subscribe
     public void onSongStateChanged(SongStateEvent event) {
-        if(!event.trackIsRunning){
+        if (!event.trackIsRunning) {
             stopSong();
         }
     }
@@ -114,8 +113,8 @@ public class SongsListFragment extends MetronomableFragment implements OnBackPre
     private void stopSong() {
         Utils.checkAndStopService(getContext());
         Runtime.getRuntime().gc();
-        llSongPlayback.setVisibility(View.GONE);
-        llSongPlayback.setKeepScreenOn(false);
+        viewPlayback.setVisibility(View.GONE);
+        viewPlayback.setKeepScreenOn(false);
         activity.getSlidingTabLayout().setVisibility(View.VISIBLE);
         activity.getViewPager().setPagingEnabled(true);
     }
@@ -136,6 +135,11 @@ public class SongsListFragment extends MetronomableFragment implements OnBackPre
         getSongs();
     }
 
+    @Override
+    protected void onStopMetronome() {
+        stopSong();
+    }
+
 
     private void getSongs() {
         songs = new ArrayList<>();
@@ -154,7 +158,7 @@ public class SongsListFragment extends MetronomableFragment implements OnBackPre
 
     @Override
     public void onBackPressed() {
-        if (llSongPlayback.getVisibility() == View.VISIBLE) {
+        if (viewPlayback.getVisibility() == View.VISIBLE) {
             stopSong();
         } else {
             activity.superBack();
@@ -165,14 +169,18 @@ public class SongsListFragment extends MetronomableFragment implements OnBackPre
     public void onPlayClicked(Song song) {
         activity.getSlidingTabLayout().setVisibility(View.GONE);
         activity.getViewPager().setPagingEnabled(false);
-        llSongPlayback.setVisibility(View.VISIBLE);
-        llSongPlayback.setKeepScreenOn(true);
+        viewPlayback.setVisibility(View.VISIBLE);
+        viewPlayback.setKeepScreenOn(true);
 
-        Intent serviceIntent = new Intent(getContext(), MetronomeService.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(MetronomeService.SNIPPETS_KEY, song.getSnippets());
-        serviceIntent.putExtras(bundle);
-        getContext().startService(serviceIntent);
+        if (!Utils.isMetronomeServiceRunning(getContext())) {
+            Intent serviceIntent = new Intent(getContext(), MetronomeService.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(MetronomeService.SNIPPETS_KEY, song.getSnippets());
+            serviceIntent.putExtras(bundle);
+            getContext().startService(serviceIntent);
+        }
+
+        issueServiceNotification();
     }
 
     @Override
