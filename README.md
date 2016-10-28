@@ -6,6 +6,8 @@ Original metronome by: [felixdollack/BeatKeeper](https://github.com/felixdollack
 
 Download it from Google Play: [MetroSong @ Google Play](https://play.google.com/store/apps/details?id=com.andreyaleev.metrosong)
 
+![alt tag](https://raw.githubusercontent.com/acinonyxjubatus/MetroSong/master/metrosong_demo.gif)
+
 License
 =======
 
