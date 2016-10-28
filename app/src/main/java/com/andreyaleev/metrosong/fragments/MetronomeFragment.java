@@ -99,7 +99,7 @@ public class MetronomeFragment extends MetronomableFragment {
         btnPlus.setOnClickListener(view -> onPlusClick());
         btnMinus.setOnClickListener(view -> onMinusClick());
 
-        ArrayAdapter<Beats> arrayBeats = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_item, Beats.values());
+        ArrayAdapter<Beats> arrayBeats = new ArrayAdapter<>(activity, R.layout.spinner_item, Beats.values());
         spinnerBeat.setAdapter(arrayBeats);
         spinnerBeat.setSelection(Beats.four.ordinal());
         arrayBeats.setDropDownViewResource(R.layout.spinner_dropdown);
@@ -107,7 +107,7 @@ public class MetronomeFragment extends MetronomableFragment {
 
         ArrayAdapter<NoteValues> noteValues =
                 new ArrayAdapter<>(getActivity(),
-                        android.R.layout.simple_spinner_item, NoteValues.values());
+                        R.layout.spinner_item, NoteValues.values());
         spinnerNote.setAdapter(noteValues);
         spinnerNote.setSelection(NoteValues.four.ordinal());
         noteValues.setDropDownViewResource(R.layout.spinner_dropdown);

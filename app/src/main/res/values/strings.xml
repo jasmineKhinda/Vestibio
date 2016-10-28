@@ -33,6 +33,8 @@
     <string name="no">No</string>
     <string name="enter_title">Enter track title</string>
 
+    <string name="song_will_start">Track will start in... </string>
+
     <string name="service_started">Metronome service started</string>
     <string name="service_stopped">Metronome service stopped</string>
 

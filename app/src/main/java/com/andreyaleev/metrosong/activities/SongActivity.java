@@ -62,6 +62,7 @@ public class SongActivity extends BaseActivity implements SnippetRemoveListener 
             this.song = (Song) bundle.getSerializable(SONG_TAG);
             snippets = song.getSnippets();
             edtTitle.setText(song.getTitle());
+            edtTitle.setSelection(edtTitle.getText().length());
         } else {
             snippets = new ArrayList<>();
             addNewSnippet(); // adds one default snippet

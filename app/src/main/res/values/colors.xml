@@ -12,13 +12,13 @@
     <color name="primary">@color/theme500</color>
     <color name="primary_dark">@color/theme700</color>
 
-    <color name="primary_text">@color/theme50</color>
+    <color name="primary_text">@color/primary</color>
     <color name="primary_text_dark">@color/theme500</color>
     <color name="hint_text_white_back">@color/grey_500</color>
-    <color name="secondary_text">@color/theme100</color>
-    <color name="hint_text">@color/theme300</color>
+    <color name="secondary_text">@color/theme300</color>
+    <color name="hint_text">@color/theme200</color>
 
-    <color name="background">@color/theme200</color>
+    <color name="background">@color/pure_white</color>
 
     <color name="theme50">@color/orange_50</color>
     <color name="theme100">@color/orange_100</color>

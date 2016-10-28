@@ -3,6 +3,8 @@ package com.andreyaleev.metrosong.fragments;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.andreyaleev.metrosong.R;
 import com.andreyaleev.metrosong.activities.SongActivity;
@@ -36,6 +40,10 @@ import butterknife.ButterKnife;
 public class SongsListFragment extends MetronomableFragment implements OnBackPressedListener,
         ProgramsAdapter.ProgramsItemsListener {
 
+    @BindView(R.id.countdownLinearLayout)
+    LinearLayout countdownLinearLayout;
+    @BindView(R.id.playbackLinearLayout)
+    LinearLayout playbackLinearLayout;
     @BindView(R.id.rvPrograms)
     RecyclerView rvPrograms;
     @BindView(R.id.viewPlayback)
@@ -54,12 +62,15 @@ public class SongsListFragment extends MetronomableFragment implements OnBackPre
     EditText edtBarCount;
     @BindView(R.id.fabNew)
     com.github.clans.fab.FloatingActionButton fabNew;
+    @BindView(R.id.countTextView)
+    TextView countTextView;
 
     private ProgramsAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ArrayList<Song> songs;
 
     private SongsDataSource dataSource;
+    Thread threadCountdown;
 
     @Subscribe
     public void onSongStateChanged(SongStateEvent event) {
@@ -84,7 +95,7 @@ public class SongsListFragment extends MetronomableFragment implements OnBackPre
         if (currentBeat != null && currentBeat == 1) {
             edtCurrentBeat.setTextColor(getResources().getColor(R.color.accent));
         } else {
-            edtCurrentBeat.setTextColor(getResources().getColor(R.color.primary_text));
+            edtCurrentBeat.setTextColor(getResources().getColor(R.color.theme50));
         }
 
         edtBPM.setText(String.valueOf(bpm));
@@ -159,6 +170,10 @@ public class SongsListFragment extends MetronomableFragment implements OnBackPre
     @Override
     public void onBackPressed() {
         if (viewPlayback.getVisibility() == View.VISIBLE) {
+            if (threadCountdown != null) {
+                threadCountdown.interrupt();
+                threadCountdown = null;
+            }
             stopSong();
         } else {
             activity.superBack();
@@ -170,17 +185,58 @@ public class SongsListFragment extends MetronomableFragment implements OnBackPre
         activity.getSlidingTabLayout().setVisibility(View.GONE);
         activity.getViewPager().setPagingEnabled(false);
         viewPlayback.setVisibility(View.VISIBLE);
+        countdownLinearLayout.setVisibility(View.VISIBLE);
+        playbackLinearLayout.setVisibility(View.GONE);
         viewPlayback.setKeepScreenOn(true);
 
-        if (!Utils.isMetronomeServiceRunning(getContext())) {
+        Runnable runnable = () -> {
+            for (int i = 4; i >=0; i--) {
+                Message msg = new Message();
+                Bundle bundle = new Bundle();
+                bundle.putInt("count", i);
+                bundle.putSerializable("song", song);
+                msg.setData(bundle);
+                handler.sendMessage(msg);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        threadCountdown = new Thread(runnable);
+        threadCountdown.start();
+    }
+
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            Bundle bundle = msg.getData();
+            int count = bundle.getInt("count");
+            if(count == 0){
+                if (threadCountdown != null) {
+                    threadCountdown.interrupt();
+                    threadCountdown = null;
+                }
+                startSong((Song) bundle.getSerializable("song"));
+            }else{
+                countTextView.setText(String.valueOf(count));
+            }
+        }
+    };
+
+    private void startSong(Song song) {
+        countdownLinearLayout.setVisibility(View.GONE);
+        playbackLinearLayout.setVisibility(View.VISIBLE);
+        if (!Utils.isMetronomeServiceRunning(getContext()) &&
+                viewPlayback.getVisibility() == View.VISIBLE) {
             Intent serviceIntent = new Intent(getContext(), MetronomeService.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable(MetronomeService.SNIPPETS_KEY, song.getSnippets());
             serviceIntent.putExtras(bundle);
             getContext().startService(serviceIntent);
+            issueServiceNotification();
         }
-
-        issueServiceNotification();
     }
 
     @Override

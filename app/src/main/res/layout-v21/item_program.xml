@@ -13,10 +13,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/base_margin_eight"
         card_view:cardCornerRadius="5dp"
-        card_view:cardElevation="5dp">
+        card_view:cardElevation="3dp">
 
         <RelativeLayout
-            android:background="@color/theme400"
+            android:background="@color/primary"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="@dimen/activity_vertical_margin">
@@ -49,7 +49,7 @@
                     android:id="@+id/tvTitle"
                     android:text="Title"
                     style="?android:attr/textAppearanceLarge"
-                    android:textColor="@color/primary_text"
+                    android:textColor="@color/theme50"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
@@ -57,7 +57,7 @@
                     android:id="@+id/tvDescription"
                     android:text="snippets count"
                     style="?android:attr/textAppearanceSmall"
-                    android:textColor="@color/secondary_text"
+                    android:textColor="@color/theme100"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 

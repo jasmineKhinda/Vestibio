@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     android:padding="@dimen/activity_horizontal_margin"
     android:animateLayoutChanges="true"
-    android:background="@color/theme100"
+    android:background="@color/background"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -91,6 +91,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:textColor="@color/primary"
                     android:text="@string/dash"
                     android:textAppearance="?android:attr/textAppearanceLarge" />
                 <Spinner

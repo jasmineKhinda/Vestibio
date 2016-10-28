@@ -45,10 +45,10 @@ public class SnippetsAdapter extends RecyclerView.Adapter<SnippetsAdapter.ViewHo
         v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_snippet, parent, false);
         // set the view's size, margins, paddings and layout parameters
         ViewHolder vh = new ViewHolder(v);
-        ArrayAdapter<Beats> arrayBeats = new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_item, Beats.values());
+        ArrayAdapter<Beats> arrayBeats = new ArrayAdapter<>(mContext, R.layout.spinner_item_white, Beats.values());
         vh.spinnerBeat.setAdapter(arrayBeats);
         arrayBeats.setDropDownViewResource(R.layout.spinner_dropdown);
-        ArrayAdapter<NoteValues> noteValues = new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_item, NoteValues.values());
+        ArrayAdapter<NoteValues> noteValues = new ArrayAdapter<>(mContext, R.layout.spinner_item_white, NoteValues.values());
         vh.spinnerNote.setAdapter(noteValues);
         noteValues.setDropDownViewResource(R.layout.spinner_dropdown);
         return vh;
