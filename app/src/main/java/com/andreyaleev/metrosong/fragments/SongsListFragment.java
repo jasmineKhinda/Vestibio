@@ -208,6 +208,8 @@ public class SongsListFragment extends MetronomableFragment implements OnBackPre
         threadCountdown.start();
     }
 
+
+
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {

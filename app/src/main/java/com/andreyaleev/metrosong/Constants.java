@@ -20,6 +20,7 @@ public class Constants {
     public final static String SELECTED_BPM = "SELECTED_BPM";
     public final static String SELECTED_BEAT_PER_BAR = "SELECTED_BEAT_PER_BAR";
     public final static String SELECTED_NOTE_VALUE = "SELECTED_NOTE_VALUE";
+    public final static String SELECTED_REST_VALUE = "SELECTED_REST_VALUE";
 
     public final static String ACTION_PARAMS_CHANGED = "com.andreyaleev.metrosong.ACTION_PARAMS_CHANGED";
 

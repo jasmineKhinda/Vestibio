@@ -25,6 +25,7 @@ public class MetronomeSingleton {
     private int beat;
     private int noteValue;
     private int bpm;
+    private int rest;
 
     public boolean isPlay() {
         return isPlay;
@@ -32,6 +33,10 @@ public class MetronomeSingleton {
 
     public int getBeat() {
         return beat;
+    }
+
+    public int getRest() {
+        return rest;
     }
 
     public int getNoteValue() {
@@ -48,6 +53,10 @@ public class MetronomeSingleton {
 
     public void setBeat(int beat) {
         this.beat = beat;
+    }
+
+    public void setRest(int rest) {
+        this.rest = rest;
     }
 
     public void setNoteValue(int noteValue) {

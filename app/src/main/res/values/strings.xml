@@ -1,12 +1,17 @@
 <resources>
-    <string name="app_name">MetroSong</string>
-    <string name="app_name_short">MetroSong</string>
+    <string name="app_name">Vestibio</string>
+    <string name="app_name_short">Vestibio</string>
 
     <string name="title_section1">Metronome</string>
-    <string name="title_section2">Songs</string>
+    <string name="title_section2">Sessions</string>
+    <string name="title_section3">Graphs</string>
 
     <string name="action_apply">Apply</string>
     <string name="action_remove">Remove</string>
+
+
+    <string name="addsession">Add Session</string>
+
 
     <string name="start">Start</string>
     <string name="stop">Stop</string>
@@ -16,7 +21,14 @@
     <string name="minus" translatable="false">-</string>
     <string name="snippet">Snippet</string>
     <string name="snippet_number">Snippet %d</string>
+    <string name="duration_toast_exceeded">Pick a duration between 10 s and 120 s</string>
+    <string name="rest_toast_exceeded">Pick rest duration between 1 s and 120 s</string>
+    <string name="sets_toast_exceeded">Pick # of sets between 1 and 6</string>
     <string name="bpm">BPM</string>
+    <string name="ex_duration">Duration</string>
+    <string name="optional">Optional fields:</string>
+    <string name="ex_number_sets"># of Sets</string>
+    <string name="rest_duration">Rest</string>
     <string name="timesignature">time signature</string>
     <string name="dash" translatable="false">/</string>
     <string name="volume">volume</string>

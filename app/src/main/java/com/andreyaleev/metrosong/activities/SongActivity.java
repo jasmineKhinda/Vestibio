@@ -49,7 +49,7 @@ public class SongActivity extends BaseActivity implements SnippetRemoveListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_song);
         ButterKnife.bind(this);
-        setTitle(getString(R.string.app_name_short));
+        setTitle(getString(R.string.addsession));
         showBackArrow();
 
         mLayoutManager = new LinearLayoutManager(this);

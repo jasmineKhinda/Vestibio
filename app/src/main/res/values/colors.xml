@@ -8,17 +8,25 @@
     <color name="background_trans_55">#8C000000</color>
     <color name="background_trans_80">#CC000000</color>
 
-    <color name="accent">@color/themeA200</color>
-    <color name="primary">@color/theme500</color>
-    <color name="primary_dark">@color/theme700</color>
+    <color name="accent">@color/themeGradientLight</color>
+    <color name="primary">@color/themeGradientPrimary</color>
+    <color name="primary_dark">@color/themeGradientDark</color>
 
     <color name="primary_text">@color/primary</color>
-    <color name="primary_text_dark">@color/theme500</color>
+    <color name="primary_text_dark">@color/themeGradientPrimary</color>
     <color name="hint_text_white_back">@color/grey_500</color>
     <color name="secondary_text">@color/theme300</color>
     <color name="hint_text">@color/theme200</color>
 
     <color name="background">@color/pure_white</color>
+
+
+    <color name="themeGradientPrimary">#E96D71</color>
+    <color name="themeGradientDark">#b33d46</color>
+    <color name="themeGradientLight">#ff9e9f</color>
+
+
+
 
     <color name="theme50">@color/orange_50</color>
     <color name="theme100">@color/orange_100</color>

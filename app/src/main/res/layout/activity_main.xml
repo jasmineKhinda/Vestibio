@@ -6,28 +6,60 @@
     android:animateLayoutChanges="true"
     tools:context=".activities.MainActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:titleTextColor="@color/theme50"
-        android:elevation="3dp"
-        android:minHeight="?attr/actionBarSize"
-        android:background="@color/primary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </android.support.v7.widget.Toolbar>
 
-    <com.andreyaleev.metrosong.tools.slidingTab.SlidingTabLayout
-        android:id="@+id/slidingTabs"
-        android:elevation="3dp"
-        android:animateLayoutChanges="true"
-        android:background="@color/primary"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rel"
+        android:background="@drawable/linear_gradient_drawable"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="80dp">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentBottom="true"
+            android:title="Android Gradient Toolbar"
+            android:titleTextColor="#52565c">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:fontFamily="cursive"
+                android:text="Toolbar Title"
+                android:textColor="@color/pure_white" />
+
+        </android.support.v7.widget.Toolbar>
+
+    </RelativeLayout>
+
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/toolbar"-->
+        <!--android:titleTextColor="@color/theme50"-->
+        <!--android:elevation="3dp"-->
+        <!--android:minHeight="?attr/actionBarSize"-->
+        <!--android:background="@color/primary"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+    <!--</android.support.v7.widget.Toolbar>-->
+
+    <com.andreyaleev.metrosong.tools.slidingTab.SlidingTabLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/slidingTabs"
+        android:elevation="0dp"
+        android:animateLayoutChanges="true"
+        android:background="@drawable/linear_gradient_drawable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabMode="scrollable"
+        app:tabGravity="fill"
+        />
 
     <com.andreyaleev.metrosong.tools.CustomViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        />
 
 </LinearLayout>
 
