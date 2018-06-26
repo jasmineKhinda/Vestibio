@@ -62,6 +62,7 @@ public class MetronomeFragment extends MetronomableFragment {
     private boolean isCanceled=false;
 
     TextView timer;
+    TextView totalTime;
     @BindView(R.id.tvBPM)
     TextView tvBPM;
     @BindView(R.id.btnPlus)
@@ -87,7 +88,8 @@ public class MetronomeFragment extends MetronomableFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_metronome, null);
         contentView = v;
-       timer= (TextView)v.findViewById(R.id.timer);
+        timer= (TextView)v.findViewById(R.id.timer);
+        totalTime= (TextView)v.findViewById(R.id.totalSession);
         return v;
     }
 
@@ -129,6 +131,7 @@ public class MetronomeFragment extends MetronomableFragment {
         btnPlus.setOnClickListener(view -> onPlusClick());
         btnMinus.setOnClickListener(view -> onMinusClick());
 
+
         numberPicker = (NumberPicker) getView().findViewById(R.id.number_picker);
         numberPicker.setMax(120);
         numberPicker.setMin(10);
@@ -165,6 +168,8 @@ public class MetronomeFragment extends MetronomableFragment {
         numberPickerRest.setValueChangedListener(new DefaultValueChangedListenerRest());
         numberPickerRest.setOnEditorActionListener(new DefaultOnEditorActionListener(numberPickerRest));
 
+        int time = (numberPicker.getValue() + numberPickerRest.getValue()) * numberPickerSets.getValue();
+        totalTime.setText(getResources().getString(R.string.total_session).toString() + " "+timeConversion(time) );
 
 
 //        ArrayAdapter<Beats> arrayBeats = new ArrayAdapter<>(activity, R.layout.spinner_item, Beats.values());
@@ -276,8 +281,9 @@ public class MetronomeFragment extends MetronomableFragment {
 
         MetronomeSingleton.getInstance().setPlay(false);
         Utils.checkAndStopService(getContext());
-        activity.getSlidingTabLayout().setVisibility(View.VISIBLE);
-        activity.getViewPager().setPagingEnabled(true);
+        //uncomment here
+//        activity.getSlidingTabLayout().setVisibility(View.VISIBLE);
+//        activity.getViewPager().setPagingEnabled(true);
         btnStartStop.setText(R.string.start);
         contentView.setKeepScreenOn(false);
         issueServiceNotification();
@@ -348,8 +354,9 @@ public class MetronomeFragment extends MetronomableFragment {
         isCanceled=false;
 
         MetronomeSingleton.getInstance().setPlay(true);
-        activity.getSlidingTabLayout().setVisibility(View.GONE);
-        activity.getViewPager().setPagingEnabled(false);
+        //uncomment here
+//        activity.getSlidingTabLayout().setVisibility(View.GONE);
+//        activity.getViewPager().setPagingEnabled(false);
         if(!Utils.isMetronomeServiceRunning(getContext())){
             Intent myIntent = new Intent(getContext(), MetronomeService.class);
             getActivity().startService(myIntent);
@@ -398,8 +405,9 @@ public class MetronomeFragment extends MetronomableFragment {
 
         if(currentSet<=totalSets){
             MetronomeSingleton.getInstance().setPlay(true);
-            activity.getSlidingTabLayout().setVisibility(View.GONE);
-            activity.getViewPager().setPagingEnabled(false);
+            //uncomment here
+//            activity.getSlidingTabLayout().setVisibility(View.GONE);
+//            activity.getViewPager().setPagingEnabled(false);
             if(!Utils.isMetronomeServiceRunning(getContext())){
                 Intent myIntent = new Intent(getContext(), MetronomeService.class);
                 getActivity().startService(myIntent);
@@ -487,6 +495,10 @@ private void minBpmGuard() {
             prefs.edit().putInt(Constants.SELECTED_BEAT_PER_BAR, value).apply();
             updateMetronome();
             Log.v(this.getClass().getSimpleName(),  "Vestibio " + message);
+
+            int time = (numberPicker.getValue() + numberPickerRest.getValue()) * numberPickerSets.getValue();
+            totalTime.setText(getResources().getString(R.string.total_session).toString() + " "+timeConversion(time) );
+
         }
     }
 
@@ -501,6 +513,10 @@ private void minBpmGuard() {
             prefs.edit().putInt(Constants.SELECTED_NOTE_VALUE, value).apply();
             updateMetronome();
             Log.v(this.getClass().getSimpleName(),  "Vestibio " + message);
+
+            int time = (numberPicker.getValue() + numberPickerRest.getValue()) * numberPickerSets.getValue();
+            totalTime.setText(getResources().getString(R.string.total_session).toString() + " "+timeConversion(time) );
+
         }
     }
 
@@ -515,6 +531,10 @@ private void minBpmGuard() {
             prefs.edit().putInt(Constants.SELECTED_REST_VALUE, value).apply();
             updateMetronome();
             Log.v(this.getClass().getSimpleName(),  "Vestibio " + message);
+
+            int time = (numberPicker.getValue() + numberPickerRest.getValue()) * numberPickerSets.getValue();
+            totalTime.setText(getResources().getString(R.string.total_session).toString() + " "+timeConversion(time) );
+
         }
     }
 
@@ -552,6 +572,9 @@ private void minBpmGuard() {
                             updateMetronome();
                             break;
                     }
+
+                    int time = (numberPicker.getValue() + numberPickerRest.getValue()) * numberPickerSets.getValue();
+                    totalTime.setText(getResources().getString(R.string.total_session).toString() + " "+timeConversion(time) );
 
                     if (layout.getValue() == value) {
                         layout.getValueChangedListener().valueChanged(value, ActionEnum.MANUAL);
@@ -598,6 +621,9 @@ private void minBpmGuard() {
                             updateMetronome();
                             break;
                     }
+
+                    int time = (numberPicker.getValue() + numberPickerRest.getValue()) * numberPickerSets.getValue();
+                    totalTime.setText(getResources().getString(R.string.total_session).toString() + " "+timeConversion(time) );
 
                     if (layout.getValue() == value) {
                         layout.getValueChangedListener().valueChanged(value, ActionEnum.MANUAL);
@@ -674,6 +700,8 @@ private void minBpmGuard() {
     private AdapterView.OnItemSelectedListener noteValuesSpinnerListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+
+
             NoteValues noteValueObj = (NoteValues) arg0.getItemAtPosition(arg2);
             int noteValue = noteValueObj.getNum();
             MetronomeSingleton.getInstance().setNoteValue(noteValue);
@@ -686,7 +714,22 @@ private void minBpmGuard() {
         }
     };
 
+    private static String timeConversion(int totalSeconds) {
+        int hours = totalSeconds / 60 / 60;
+        int minutes = (totalSeconds - (hoursToSeconds(hours)))
+                / 60;
+        int seconds = totalSeconds
+                - ((hoursToSeconds(hours)) + (minutesToSeconds(minutes)));
 
+        return minutes + " min " + seconds + " sec";
+    }
+    private static int hoursToSeconds(int hours) {
+        return hours * 60 * 60;
+    }
+
+    private static int minutesToSeconds(int minutes) {
+        return minutes * 60;
+    }
 
 
 }

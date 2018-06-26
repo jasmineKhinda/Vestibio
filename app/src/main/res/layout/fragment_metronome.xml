@@ -89,8 +89,9 @@
         android:id="@+id/optional"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:text="@string/optional"
-        android:textColor="@color/themeGradientLight"
+        android:textColor="@color/grey_600"
         android:textAppearance="?android:attr/textAppearanceSmall"
         />
 
@@ -297,7 +298,9 @@
             </LinearLayout>
 
             <!--<View-->
-                <!--android:layout_width="0dp"-->
+
+
+            <!--android:layout_width="0dp"-->
                 <!--android:layout_height="0dp"-->
                 <!--android:layout_weight="1" />-->
             <!--<Spinner-->
@@ -306,6 +309,15 @@
                 <!--android:layout_height="wrap_content"-->
                 <!--android:layout_weight="1" />-->
         </LinearLayout>
+        <TextView
+            android:id="@+id/totalSession"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingTop="5dp"
+            android:textSize="12dp"
+            android:textColor="@color/grey_600"
+            android:text="@string/total_session" />
 
     </LinearLayout>
     <Button
@@ -318,12 +330,14 @@
         android:text="@string/start"
         android:textSize="32dp" />
 
+
     <TextView
         android:id="@+id/timer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="32dp"
-        android:text="TextView" />
+        android:text="TextView"
+        android:gravity="center_horizontal"/>
 
 
 </LinearLayout>

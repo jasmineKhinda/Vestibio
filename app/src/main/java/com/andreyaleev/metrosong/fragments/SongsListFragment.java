@@ -126,8 +126,10 @@ public class SongsListFragment extends MetronomableFragment implements OnBackPre
         Runtime.getRuntime().gc();
         viewPlayback.setVisibility(View.GONE);
         viewPlayback.setKeepScreenOn(false);
-        activity.getSlidingTabLayout().setVisibility(View.VISIBLE);
-        activity.getViewPager().setPagingEnabled(true);
+
+        //uncomment here
+//        activity.getSlidingTabLayout().setVisibility(View.VISIBLE);
+//        activity.getViewPager().setPagingEnabled(true);
     }
 
     @Override
@@ -182,8 +184,9 @@ public class SongsListFragment extends MetronomableFragment implements OnBackPre
 
     @Override
     public void onPlayClicked(Song song) {
-        activity.getSlidingTabLayout().setVisibility(View.GONE);
-        activity.getViewPager().setPagingEnabled(false);
+        //uncomment here
+//        activity.getSlidingTabLayout().setVisibility(View.GONE);
+//        activity.getViewPager().setPagingEnabled(false);
         viewPlayback.setVisibility(View.VISIBLE);
         countdownLinearLayout.setVisibility(View.VISIBLE);
         playbackLinearLayout.setVisibility(View.GONE);

@@ -6,6 +6,11 @@
     <string name="title_section2">Sessions</string>
     <string name="title_section3">Graphs</string>
 
+    <string name="bottom_nav_metronome">Metronome</string>
+    <string name="bottom_nav_log">Sessions</string>
+    <string name="bottom_nav_graphs">Graphs</string>
+
+
     <string name="action_apply">Apply</string>
     <string name="action_remove">Remove</string>
 
@@ -27,6 +32,7 @@
     <string name="bpm">BPM</string>
     <string name="ex_duration">Duration</string>
     <string name="optional">Optional fields:</string>
+    <string name="total_session">Total session time: </string>
     <string name="ex_number_sets"># of Sets</string>
     <string name="rest_duration">Rest</string>
     <string name="timesignature">time signature</string>

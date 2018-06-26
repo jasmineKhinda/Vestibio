@@ -34,6 +34,13 @@
 
     </RelativeLayout>
 
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        />
+
     <!--<android.support.v7.widget.Toolbar-->
         <!--android:id="@+id/toolbar"-->
         <!--android:titleTextColor="@color/theme50"-->
@@ -44,23 +51,36 @@
         <!--android:layout_height="wrap_content">-->
     <!--</android.support.v7.widget.Toolbar>-->
 
-    <com.andreyaleev.metrosong.tools.slidingTab.SlidingTabLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/slidingTabs"
-        android:elevation="0dp"
-        android:animateLayoutChanges="true"
-        android:background="@drawable/linear_gradient_drawable"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabMode="scrollable"
-        app:tabGravity="fill"
-        />
 
-    <com.andreyaleev.metrosong.tools.CustomViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+    <!--<com.andreyaleev.metrosong.tools.slidingTab.SlidingTabLayout xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--android:id="@+id/slidingTabs"-->
+        <!--android:elevation="0dp"-->
+        <!--android:animateLayoutChanges="true"-->
+        <!--android:background="@drawable/linear_gradient_drawable"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:tabMode="scrollable"-->
+        <!--app:tabGravity="fill"-->
+        <!--/>-->
 
+    <!--<com.andreyaleev.metrosong.tools.CustomViewPager-->
+        <!--android:id="@+id/viewPager"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--/>-->
+
+    <android.support.design.widget.BottomNavigationView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/themeGradientLighter"
+        app:itemIconTint="@drawable/menu_item_selector"
+        app:itemTextColor="@drawable/menu_item_selector"
+        app:menu="@menu/bottom_navigation_menu">
+    </android.support.design.widget.BottomNavigationView>
 </LinearLayout>
 
+<!--app:itemIconTint="@drawable/menu_item_selector"-->
+    <!--app:itemTextColor="@drawable/menu_item_selector"-->
 
