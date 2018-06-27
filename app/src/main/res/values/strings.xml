@@ -15,10 +15,14 @@
     <string name="action_remove">Remove</string>
 
 
-    <string name="addsession">Add Session</string>
+    <string name="addsession">Session Details</string>
 
 
     <string name="start">Start</string>
+    <string name="Log">Log Session</string>
+    <string name="vestibular_session">Vestibular Session</string>
+    <string name="title_session">Session Title</string>
+    <string name="notes_hint">(Optional) Session Notes...</string>
     <string name="stop">Stop</string>
     <string name="pause">Pause</string>
     <string name="resume">Resume</string>
@@ -28,33 +32,59 @@
     <string name="snippet_number">Snippet %d</string>
     <string name="duration_toast_exceeded">Pick a duration between 10 s and 120 s</string>
     <string name="rest_toast_exceeded">Pick rest duration between 1 s and 120 s</string>
-    <string name="sets_toast_exceeded">Pick # of sets between 1 and 6</string>
+    <string name="sets_toast_exceeded">Pick # of sets between 1 and 15</string>
     <string name="bpm">BPM</string>
-    <string name="ex_duration">Duration</string>
+    <string name="ex_duration">Reps</string>
+    <string name="ex_duration_sec">(seconds)</string>
     <string name="optional">Optional fields:</string>
     <string name="total_session">Total session time: </string>
-    <string name="ex_number_sets"># of Sets</string>
+    <string name="ex_number_sets">Sets</string>
     <string name="rest_duration">Rest</string>
     <string name="timesignature">time signature</string>
     <string name="dash" translatable="false">/</string>
     <string name="volume">volume</string>
     <string name="one" translatable="false">1</string>
     <string name="song">Song</string>
+    <string name="session">Session</string>
     <string name="beat">Beat</string>
     <string name="beat_per_bar">Beats per bar</string>
     <string name="bars_count">Bars count</string>
     <string name="snippets">%d snippets</string>
     <string name="empty_field">Empty field</string>
+
+
     <string name="title">Title</string>
+    <string name="notes">Session Notes</string>
     <string name="confirm_delete">Confirm song remove</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="logAccept">Add</string>
+    <string name="logCancel">Cancel</string>
+    <string name="dizzyness_level_input">Rate your dizzyness (scale 1 -10): </string>
     <string name="enter_title">Enter track title</string>
+
+    <string name="bpm_tag">BPM</string>
+    <string name="duration_tag">  Duration: </string>
 
     <string name="song_will_start">Track will start in... </string>
 
     <string name="service_started">Metronome service started</string>
     <string name="service_stopped">Metronome service stopped</string>
+
+
+
+        <string-array name="dizzyness">
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+            <item>5</item>
+            <item>6</item>
+            <item>7</item>
+            <item>8</item>
+            <item>9</item>
+            <item>10</item>
+        </string-array>
+
 
 </resources>
 

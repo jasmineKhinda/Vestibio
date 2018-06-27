@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/action_home"
+        android:id="@+id/action_metronome"
         android:enabled="true"
         android:icon="@drawable/ic_metronome"
         android:title="@string/bottom_nav_metronome"
         android:checkable="true"/>
     <item
-        android:id="@+id/action_car"
+        android:id="@+id/action_session"
         android:enabled="true"
         android:checkable="true"
         android:icon="@drawable/ic_session"
         android:title="@string/bottom_nav_log" />
     <item
-        android:id="@+id/action_bike"
+        android:id="@+id/action_graph"
         android:enabled="true"
         android:checkable="true"
         android:icon="@drawable/ic_graph"

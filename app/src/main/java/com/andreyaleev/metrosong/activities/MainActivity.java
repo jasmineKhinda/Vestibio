@@ -12,9 +12,12 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.text.Layout;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
@@ -24,6 +27,7 @@ import com.andreyaleev.metrosong.Constants;
 import com.andreyaleev.metrosong.R;
 import com.andreyaleev.metrosong.fragments.GraphFragment;
 import com.andreyaleev.metrosong.fragments.MetronomeFragment;
+import com.andreyaleev.metrosong.fragments.SessionListFragment;
 import com.andreyaleev.metrosong.fragments.SongsListFragment;
 import com.andreyaleev.metrosong.tools.slidingTab.SlidingTabLayout;
 import com.andreyaleev.metrosong.tools.CustomViewPager;
@@ -41,6 +45,8 @@ public class MainActivity extends BaseActivity {
 //    CustomViewPager mViewPager;
      @BindView(R.id.bottomNavigation)
      BottomNavigationView mBottomNavigationView;
+     Toolbar toolbarTop;
+     View layout;
 
 
 //    private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -60,7 +66,8 @@ public class MainActivity extends BaseActivity {
         ButterKnife.bind(this);
         //setTitle(getString(R.string.app_name_short));
 
-        Toolbar toolbarTop = (Toolbar) findViewById(R.id.toolbar);
+        toolbarTop = (Toolbar) findViewById(R.id.toolbar);
+        layout = (View) findViewById(R.id.rel);
         TextView mTitle = (TextView) toolbarTop.findViewById(R.id.toolbar_title);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -91,19 +98,19 @@ public class MainActivity extends BaseActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment selectedFragment = null;
                 switch (item.getItemId()) {
-                    case R.id.action_home:
+                    case R.id.action_metronome:
                         selectedFragment = MetronomeFragment.newInstance();
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
 
                         break;
 
-                    case R.id.action_car:
-                        selectedFragment = SongsListFragment.newInstance();
+                    case R.id.action_session:
+                        selectedFragment = SessionListFragment.newInstance();
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
 
                         break;
 
-                    case R.id.action_bike:
+                    case R.id.action_graph:
                         selectedFragment = GraphFragment.newInstance();
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
 
@@ -116,6 +123,8 @@ public class MainActivity extends BaseActivity {
 
         Fragment selectedFragment = MetronomeFragment.newInstance();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+
+
 
 //        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 //        mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -170,6 +179,13 @@ public class MainActivity extends BaseActivity {
 //        }
     }
 
+    public BottomNavigationView getBottomViewNavigation() {
+        return mBottomNavigationView;
+    }
+
+    public View getViewToolbar() {
+        return layout;
+    }
     public SharedPreferences getSettings() {
         return getSharedPreferences(Constants.PREFS, Context.MODE_PRIVATE);
     }

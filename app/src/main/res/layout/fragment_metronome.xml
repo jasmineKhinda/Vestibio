@@ -13,7 +13,7 @@
     <LinearLayout
         android:id="@+id/llText"
         android:orientation="horizontal"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="4dp"
         android:layout_marginBottom="1dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
@@ -45,7 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/bpm"
-                    android:textColor="@color/accent"
+                    android:textColor="@color/themeGradientPrimary"
                     android:textSize="24sp"
                     android:layout_gravity="center_horizontal"/>
 
@@ -102,43 +102,11 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal">
 
-        <!--<LinearLayout-->
-            <!--android:id="@+id/numberSets"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:orientation="horizontal"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content">-->
-
-
-            <!--<TextView-->
-                <!--android:id="@+id/exSets"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="center_vertical"-->
-                <!--android:textColor="@color/primary"-->
-                <!--android:text="@string/ex_number_sets"-->
-                <!--android:textAppearance="?android:attr/textAppearanceMedium" />-->
-            <!--<View-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_height="0dp"-->
-                <!--android:layout_weight="1" />-->
-            <!--<Spinner-->
-                <!--android:id="@+id/spinnerNote"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1" />-->
-        <!--</LinearLayout>-->
 
 
 
 
 
-        <LinearLayout
-            android:id="@+id/llTimeSignature"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
@@ -147,6 +115,8 @@
                 android:orientation="horizontal"
                 xmlns:numberpicker="http://schemas.android.com/apk/res-auto"
                 android:paddingTop="10dp"
+                android:paddingLeft="19dp"
+                android:gravity="center_horizontal"
                 tools:context="com.travijuu.numberpicker.sample.MainActivity">
 
                 <TextView
@@ -155,9 +125,10 @@
                     android:layout_height="wrap_content"
                     android:text="@string/ex_duration"
                     android:paddingRight="10dp"
-                    android:textColor="@color/primary"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/grey_500"
+                    android:textSize="15dp"
                     android:layout_gravity="center_vertical"
+
                     />
                 <com.travijuu.numberpicker.library.NumberPicker
                     android:id="@+id/number_picker"
@@ -168,147 +139,135 @@
                     numberpicker:value="30"
                     numberpicker:unit="1"
                     numberpicker:focusable="true"
-                    numberpicker:custom_layout="@layout/number_picker_custom_layout" />
+                    numberpicker:custom_layout="@layout/number_picker_custom_layout"
+                    android:layout_gravity="center"
+
+                    />
+
                 <TextView
                     android:id="@+id/durationSeconds"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:textColor="@color/primary"
+
                     android:paddingLeft="10dp"
                     android:text="seconds"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            </LinearLayout>
-            <!--<Spinner-->
-                <!--android:id="@+id/spinnerBeat"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:spinnerMode="dialog"-->
-                <!--android:popupBackground="#E96D71"-->
-                <!--android:popupTheme="@color/pure_white"-->
-                <!--android:prompt="@string/ex_duration"-->
-
-                 <!--/>-->
-
-            /
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout7"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                xmlns:numberpicker="http://schemas.android.com/apk/res-auto"
-                android:paddingTop="10dp"
-                tools:context="com.travijuu.numberpicker.sample.MainActivity">
-
-                <TextView
-                    android:id="@+id/sets"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/ex_number_sets"
-                    android:paddingRight="10dp"
-                    android:textColor="@color/primary"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_gravity="center_vertical"
-                    />
-                <com.travijuu.numberpicker.library.NumberPicker
-                    android:id="@+id/sets_picker"
-                    android:layout_width="130dp"
-                    android:layout_height="40dp"
-                    numberpicker:min="1"
-                    numberpicker:max="6"
-                    numberpicker:value="1"
-                    numberpicker:unit="1"
-                    numberpicker:focusable="true"
-
-                    numberpicker:custom_layout="@layout/number_picker_custom_layout" />
-                <TextView
-                    android:id="@+id/setsSeconds"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:textColor="@color/primary"
-                    android:paddingLeft="40dp"
-                    android:text="sets"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                    android:textColor="@color/grey_500"
+                    android:textSize="15dp" />
 
             </LinearLayout>
 
-        </LinearLayout>
 
 
 
-        <LinearLayout
-            android:id="@+id/rest"
-            android:layout_gravity="center_horizontal"
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            xmlns:numberpicker="http://schemas.android.com/apk/res-auto"
+            android:paddingTop="10dp"
+            android:paddingLeft="25dp"
+            android:gravity="center_horizontal"
+            tools:context="com.travijuu.numberpicker.sample.MainActivity">
 
-
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/sets"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                xmlns:numberpicker="http://schemas.android.com/apk/res-auto"
-                android:paddingTop="10dp"
-                tools:context="com.travijuu.numberpicker.sample.MainActivity">
+                android:text="@string/ex_number_sets"
+                android:paddingRight="10dp"
+                android:textColor="@color/grey_500"
+                android:textSize="15dp"
 
-                <TextView
-                    android:id="@+id/restDuration"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:textColor="@color/primary"
-                    android:paddingRight="40dp"
-                    android:text="@string/rest_duration"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-                <com.travijuu.numberpicker.library.NumberPicker
-                    android:id="@+id/rest_picker"
-                    android:layout_width="130dp"
-                    android:layout_height="40dp"
-                    numberpicker:min="1"
-                    numberpicker:max="120"
-                    numberpicker:value="30"
-                    numberpicker:unit="1"
-                    numberpicker:focusable="true"
-                    numberpicker:custom_layout="@layout/number_picker_custom_layout" />
-                <TextView
-                    android:id="@+id/restSeconds"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:textColor="@color/primary"
-                    android:paddingLeft="10dp"
-                    android:text="seconds"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:layout_gravity="center_vertical"
 
-            </LinearLayout>
+                />
+            <com.travijuu.numberpicker.library.NumberPicker
+                android:id="@+id/sets_picker"
+                android:layout_width="130dp"
+                android:layout_height="40dp"
+                numberpicker:min="5"
+                numberpicker:max="120"
+                numberpicker:value="30"
+                numberpicker:unit="1"
+                numberpicker:focusable="true"
+                numberpicker:custom_layout="@layout/number_picker_custom_layout"
+                android:layout_gravity="center"
 
-            <!--<View-->
+                />
 
+            <TextView
+                android:id="@+id/setsSeconds"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
 
-            <!--android:layout_width="0dp"-->
-                <!--android:layout_height="0dp"-->
-                <!--android:layout_weight="1" />-->
-            <!--<Spinner-->
-                <!--android:id="@+id/restDurationSpin"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1" />-->
+                android:paddingLeft="10dp"
+                android:text=" # of sets"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/grey_500"
+                android:textSize="15dp" />
+
         </LinearLayout>
+
+
+
+
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            xmlns:numberpicker="http://schemas.android.com/apk/res-auto"
+            android:paddingTop="10dp"
+            android:paddingLeft="19dp"
+            android:gravity="center_horizontal"
+            tools:context="com.travijuu.numberpicker.sample.MainActivity">
+
+            <TextView
+                android:id="@+id/restDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rest_duration"
+                android:paddingRight="10dp"
+                android:textColor="@color/grey_500"
+                android:textSize="15dp"
+                android:layout_gravity="center_vertical"
+
+                />
+            <com.travijuu.numberpicker.library.NumberPicker
+                android:id="@+id/rest_picker"
+                android:layout_width="130dp"
+                android:layout_height="40dp"
+                numberpicker:min="5"
+                numberpicker:max="120"
+                numberpicker:value="30"
+                numberpicker:unit="1"
+                numberpicker:focusable="true"
+                numberpicker:custom_layout="@layout/number_picker_custom_layout"
+                android:layout_gravity="center"
+
+                />
+
+            <TextView
+                android:id="@+id/restSeconds"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+
+                android:paddingLeft="10dp"
+                android:text="seconds"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/grey_500"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+
         <TextView
             android:id="@+id/totalSession"
             android:layout_width="match_parent"
@@ -322,14 +281,30 @@
     </LinearLayout>
     <Button
         android:id="@+id/btnStartStop"
-        style="@style/MetronomeButton"
+        style="@style/LogButton"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:padding="@dimen/activity_horizontal_margin"
-        android:layout_width="match_parent"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:text="@string/start"
-        android:textSize="32dp" />
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/border_button"
+        android:textSize="20dp" />
 
+
+
+    <Button
+        android:id="@+id/btnLog"
+        style="@style/LogButton"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_gravity="center_horizontal"
+        android:padding="0dp"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:text="@string/Log"
+        android:background="@drawable/border_button"
+        android:textSize="10dp"
+        />
 
     <TextView
         android:id="@+id/timer"
@@ -338,6 +313,7 @@
         android:textSize="32dp"
         android:text="TextView"
         android:gravity="center_horizontal"/>
+
 
 
 </LinearLayout>

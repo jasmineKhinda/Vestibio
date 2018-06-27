@@ -29,6 +29,12 @@
             android:label="@string/song"
             android:theme="@style/AppTheme">
         </activity>
+        <activity
+            android:name="com.andreyaleev.metrosong.activities.SessionActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:label="@string/session"
+            android:theme="@style/AppTheme">
+        </activity>
         <service android:name=".services.MetronomeService"></service>
     </application>
 

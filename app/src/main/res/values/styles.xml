@@ -52,8 +52,18 @@
         <item name="android:background">@drawable/background_transparent_select</item>
     </style>
 
+    <style name="LogButton">
+        <item name="android:textColor">@color/theme50</item>
+        <item name="android:background">@drawable/background_transparent_select</item>
+    </style>
+
     <style name="DarkTextSpinner" parent="Base.Widget.AppCompat.Spinner">
         <item name="android:textColor">@color/primary_text_dark</item>
+    </style>
+    <style name="Dialog" parent="@android:style/Theme.Holo.Light.Dialog">
+        <item name="android:windowNoTitle">false</item>
+        <item name="android:windowIsFloating">true</item>
+
     </style>
 
 </resources>

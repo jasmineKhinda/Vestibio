@@ -14,7 +14,7 @@
         <item name="android:textColorHint">@color/hint_text</item>
         <item name="android:colorControlNormal">@color/theme200</item>
         <item name="colorControlActivated">@color/accent</item>
-        <item name="colorControlHighlight">@color/themeA400</item>
+        <item name="colorControlHighlight">@color/accent</item>
 
         <item name="android:statusBarColor">@color/primary_dark</item>
         <item name="android:colorButtonNormal">@color/primary</item>
@@ -55,6 +55,11 @@
 
     <style name="mySpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
         <item name="android:textColor">@color/primary</item>
+    </style>
+
+    <style name="Dialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowNoTitle">false</item>
+        <item name="android:windowIsFloating">true</item>
     </style>
 
 </resources>
