@@ -60,9 +60,19 @@
     <style name="DarkTextSpinner" parent="Base.Widget.AppCompat.Spinner">
         <item name="android:textColor">@color/primary_text_dark</item>
     </style>
-    <style name="Dialog" parent="@android:style/Theme.Holo.Light.Dialog">
+    <style name="Dialog" parent="@android:style/Widget.Holo.Light">
         <item name="android:windowNoTitle">false</item>
         <item name="android:windowIsFloating">true</item>
+
+    </style>
+    <style name="SpinnerTheme" parent="android:Widget.Spinner">
+        <item name="android:background">@drawable/bg_spinner</item>
+    </style>
+    <style name="spinnerItemStyle" parent="android:Widget.TextView.SpinnerItem">
+
+    </style>
+
+    <style name="spinnerDropDownItemStyle" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
 
     </style>
 

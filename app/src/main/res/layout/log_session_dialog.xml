@@ -6,23 +6,31 @@
     android:layout_margin="5dp"
     android:orientation="vertical" >
 
+
     <TextView
         android:id="@+id/spinnerTitle"
         android:layout_below="@+id/title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/grey_600"
+        android:textSize="16dp"
         android:ems="20"
+        android:backgroundTint="@color/themeGradientPrimary"
+        android:textColorHighlight="@color/themeGradientDark"
         android:text="@string/dizzyness_level_input"/>
 
     <Spinner
         android:id="@+id/spinner1"
         android:layout_width="match_parent"
-
         android:layout_marginBottom="5dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/spinnerTitle"/>
+        android:theme="@android:style/Theme.Holo.Light"
+        android:layout_below="@id/spinnerTitle"
+        />
+
 
     <EditText
         android:id="@+id/title"
@@ -32,6 +40,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:textColor="@color/themeGradientPrimary"
+        android:backgroundTint="@color/themeGradientPrimary"
+        android:textColorHint="@color/themeGradientPrimary"
+        android:textColorHighlight="@color/themeGradientDark"
         android:hint="@string/title_session"
         android:ems="10"
         android:text="@string/vestibular_session">
@@ -46,29 +58,48 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:textColor="@color/themeGradientPrimary"
+        android:textColorHint="@color/grey_400"
+        android:textColorHighlight="@color/themeGradientDark"
+        android:backgroundTint="@color/grey_600"
         android:hint="@string/notes_hint"
         android:maxLines="20"
         android:ems="10"
-        android:text="">
+        android:text=""
+
+        android:background="@drawable/rectangle"
+        android:drawablePadding="10dp"
+
+        android:padding="5dp"
+        android:textAlignment="gravity"
+        android:layout_gravity="fill_vertical"
+        android:inputType="textMultiLine"
+        android:lines="6"
+
+        android:gravity="top">
 
 
     </EditText>
     <Button
         android:id="@+id/button1"
+        style="@style/LogButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/notes"
         android:text="@string/logAccept"
+        android:background="@drawable/border_button"
         android:textColor="@color/theme50"
+
         />
 
     <Button
         android:id="@+id/buttonCancel"
+        style="@style/MetronomeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:background="@drawable/border_button"
         android:text="@string/logCancel"
         android:textColor="@color/theme50"
         android:layout_below="@+id/notes"

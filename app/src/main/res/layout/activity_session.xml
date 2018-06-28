@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:float="http://schemas.android.com/apk/res-auto"
@@ -67,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
                     android:text="150"
-                    android:textSize="35dp"
+                    android:textSize="30dp"
                     android:layout_gravity="center_horizontal"
                     />
 
@@ -105,7 +108,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
                         android:text="135"
-                        android:textSize="35dp"
+                        android:textSize="30dp"
                         android:layout_gravity="center_horizontal"
                         />
 
@@ -151,7 +154,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
                         android:text="12"
-                        android:textSize="35dp"
+                        android:textSize="30dp"
                         android:layout_gravity="center_horizontal"
                         />
 
@@ -187,7 +190,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
                         android:text="55"
-                        android:textSize="35dp"
+                        android:textSize="30dp"
                         android:layout_gravity="center_horizontal"
                         />
 
@@ -254,6 +257,7 @@
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:layout_width="match_parent"
                 android:paddingBottom="10dp"
+                android:textColorHint="@color/grey_400"
                 android:layout_height="wrap_content">
 
                 <EditText
@@ -265,6 +269,7 @@
                     android:background="@drawable/rectangle"
                     android:drawablePadding="10dp"
                     android:hint="@string/notes"
+                    android:textColorHint="@color/grey_600"
                     android:textColor="@color/themeGradientPrimary"
                     android:textAlignment="gravity"
                     android:layout_gravity="fill_vertical"
@@ -281,3 +286,4 @@
     </android.support.design.widget.CoordinatorLayout>
 
 </LinearLayout>
+</ScrollView>

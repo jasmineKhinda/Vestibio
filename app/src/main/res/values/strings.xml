@@ -31,6 +31,7 @@
     <string name="snippet">Snippet</string>
     <string name="snippet_number">Snippet %d</string>
     <string name="duration_toast_exceeded">Pick a duration between 10 s and 120 s</string>
+    <string name="session_completed">Session completed, good work!</string>
     <string name="rest_toast_exceeded">Pick rest duration between 1 s and 120 s</string>
     <string name="sets_toast_exceeded">Pick # of sets between 1 and 15</string>
     <string name="bpm">BPM</string>
@@ -55,16 +56,19 @@
 
     <string name="title">Title</string>
     <string name="notes">Session Notes</string>
-    <string name="confirm_delete">Confirm song remove</string>
+    <string name="confirm_delete">Confirm session remove</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="logAccept">Add</string>
+    <string name="logAccept">Add Session</string>
     <string name="logCancel">Cancel</string>
-    <string name="dizzyness_level_input">Rate your dizzyness (scale 1 -10): </string>
+    <string name="dizzyness_level_input">Rate dizziness (scale 1 -10): </string>
     <string name="enter_title">Enter track title</string>
 
     <string name="bpm_tag">BPM</string>
     <string name="duration_tag">  Duration: </string>
+    <string name="date_tag">  Date: </string>
+    <string name="dizziness_tag">  Dizziness Level: </string>
+    <string name="na">  N/A </string>
 
     <string name="song_will_start">Track will start in... </string>
 
@@ -74,9 +78,11 @@
 
 
         <string-array name="dizzyness">
+            <item>N/A</item>
             <item>1</item>
             <item>2</item>
             <item>3</item>
+            <item>4</item>
             <item>5</item>
             <item>6</item>
             <item>7</item>

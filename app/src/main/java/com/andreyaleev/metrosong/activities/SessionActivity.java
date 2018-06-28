@@ -9,15 +9,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.andreyaleev.metrosong.R;
 import com.andreyaleev.metrosong.db.SessionsDataSource;
 import com.andreyaleev.metrosong.db.SongsDataSource;
+import com.andreyaleev.metrosong.fragments.MetronomeFragment;
 import com.andreyaleev.metrosong.metronome.Session;
 import com.andreyaleev.metrosong.metronome.Song;
 import com.andreyaleev.metrosong.tools.Utils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,7 +37,22 @@ public class SessionActivity extends BaseActivity {
 
         @BindView(R.id.edtTitle)
         EditText edtTitle;
-
+        @BindView(R.id.beatsNumber)
+        TextView bpm;
+        @BindView(R.id.reps)
+        TextView reps;
+        @BindView(R.id.sets)
+        TextView sets;
+        @BindView(R.id.rest)
+        TextView rest;
+        @BindView(R.id.durationSession)
+        TextView totalDuration;
+        @BindView(R.id.date)
+        TextView timestamp;
+        @BindView(R.id.dizzynessLevel)
+        TextView dizziness;
+        @BindView(R.id.edtNotes)
+        TextView notes;
 
         private RecyclerView.LayoutManager mLayoutManager;
 
@@ -59,6 +78,24 @@ public class SessionActivity extends BaseActivity {
                 this.session = (Session) bundle.getSerializable(SESSION_TAG);
                 edtTitle.setText(session.getTitle());
                 edtTitle.setSelection(edtTitle.getText().length());
+                bpm.setText(String.valueOf(session.getBpm()));
+                reps.setText(String.valueOf(session.getDuration()));
+                sets.setText(String.valueOf(session.getSets()));
+                rest.setText(String.valueOf(session.getRest()));
+                totalDuration.setText( getString(R.string.duration_tag)+"  " +MetronomeFragment.timeConversion(session.getTotalDuration()));
+
+                long timeStampMillis = session.getTimeStamp();
+                SimpleDateFormat sdf = new SimpleDateFormat("EEE, d MMM yyyy 'at' h:mma");
+                Date resultdate = new Date(timeStampMillis);
+                timestamp.setText(getString(R.string.date_tag) +"  "+sdf.format(resultdate));
+                notes.setText(session.getNotes());
+                if(session.getDizzynesslevel()==0){
+                    dizziness.setText(getString(R.string.dizziness_tag)+ "  "+ getString(R.string.na));
+                }else{
+                    dizziness.setText(getString(R.string.dizziness_tag)+ "  "+ session.getDizzynesslevel());
+                }
+
+
             }
 
         dataSource = new SessionsDataSource(this);
@@ -117,6 +154,7 @@ public class SessionActivity extends BaseActivity {
                 songId = this.session.getId();
             }
             this.session.setTitle(edtTitle.getText().toString());
+            this.session.setNotes(notes.getText().toString());
 
             if (songId != -1) {
                 dataSource.updateSession(this.session);

@@ -33,7 +33,8 @@
             android:name="com.andreyaleev.metrosong.activities.SessionActivity"
             android:windowSoftInputMode="stateHidden"
             android:label="@string/session"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
         </activity>
         <service android:name=".services.MetronomeService"></service>
     </application>

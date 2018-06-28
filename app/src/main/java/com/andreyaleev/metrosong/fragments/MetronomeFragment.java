@@ -274,7 +274,7 @@ public class MetronomeFragment extends MetronomableFragment {
 //                alert.show();
 //            }
 //        });
-                final Dialog dialog = new Dialog(getActivity());
+                final Dialog dialog = new Dialog(getActivity(), R.style.Dialog);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.log_session_dialog);
                 dialog.setCancelable(true);
@@ -286,8 +286,15 @@ public class MetronomeFragment extends MetronomableFragment {
                 final EditText notes = (EditText) dialog.findViewById(R.id.notes);
                 Button button = (Button) dialog.findViewById(R.id.button1);
                 Button cancel = (Button) dialog.findViewById(R.id.buttonCancel);
-                spinner.setAdapter(adapter);
-                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                Spinner spinnerDd = (Spinner) dialog.findViewById(R.id.spinner1);
+                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                        R.array.dizzyness, R.layout.simple_spinner_item);
+                adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+                spinnerDd.setAdapter(adapter);
+
+                //spinner.setAdapter(adapter);
+                spinnerDd.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -399,7 +406,11 @@ public class MetronomeFragment extends MetronomableFragment {
 
         this.session = new Session();
         this.session.setTitle(title);
-        this.session.setDizzynesslevel(Integer.parseInt(dizzyness.trim()));
+        if(dizzyness.equals("N/A")){
+            this.session.setDizzynesslevel(0);
+        }else{
+            this.session.setDizzynesslevel(Integer.parseInt(dizzyness.trim()));
+        }
         this.session.setNotes(notes);
         this.session.setTimeStamp(System.currentTimeMillis());
         this.session.setDuration(numberPicker.getValue());
@@ -438,6 +449,12 @@ public class MetronomeFragment extends MetronomableFragment {
         timer.setVisibility(View.INVISIBLE);
         isCanceled=true;
 
+
+        String message = getResources().getString(R.string.session_completed).toString();
+        Toast toast = Toast.makeText(getContext(), message,
+                Toast.LENGTH_LONG);
+        toast.show();
+
     }
 
 
@@ -470,7 +487,7 @@ public class MetronomeFragment extends MetronomableFragment {
 //                        TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis))
 //                );
                     //               timer.setText(hms);
-                    timer.setText("Rest done in : " + ((int) Math.round(l / 1000.0) - 1));
+                    timer.setText("Rest done in : " + ((int) Math.round(l / 1000.0) - 1) + " sec");
                     if (isCanceled) {
                         Log.d("Vestibio", "canceled!!!");
                         timer.setText("");
@@ -523,7 +540,7 @@ public class MetronomeFragment extends MetronomableFragment {
             public void onTick(long l) {
                 //               long millis = millisUntilFinished;
                 Log.d("Vestibio", "onTick start metronome: Start Metronome ");
-                timer.setText("Set done in: "+((int)Math.round(l/1000.0)-1));
+                timer.setText("Set done in: "+((int)Math.round(l/1000.0)-1)+ " sec");
                 if(isCanceled){
                     Log.d("Vestibio", "canceled!!!");
                     timer.setText("");
@@ -577,7 +594,7 @@ public class MetronomeFragment extends MetronomableFragment {
                 @Override
                 public void onTick(long l) {
 
-                    timer.setText("Set done in: "+((int)Math.round(l/1000.0)-1));
+                    timer.setText("Set done in: "+((int)Math.round(l/1000.0)-1)+ " sec");
 
                     if(isCanceled){
                         Log.d("Vestibio", "canceled!!!");
@@ -919,9 +936,9 @@ private void minBpmGuard() {
             View v = convertView;
             if (v == null) {
                 mInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
-                v = mInflater.inflate(R.layout.row_spinner_sessionlog, null);
+                v = mInflater.inflate(R.layout.custom_spinner_layout, null);
                 holder = new ListContent();
-                holder.text = (TextView) v.findViewById(R.id.textView1);
+                holder.text = (TextView) v.findViewById(R.id.spinner_item_text);
 
                 v.setTag(holder);
             } else {
