@@ -25,7 +25,7 @@
         android:layout_marginTop="4dp"
         card_view:cardCornerRadius="3dp"
         card_view:cardElevation="3dp"
-        android:background="@color/pure_white"
+        android:background="@color/themeGradientLighter_background"
 
 
         >
@@ -39,7 +39,7 @@
                 android:text="Add sessions to see data"
                 android:textAlignment="center"
                 android:gravity="center"
-                android:background="@color/pure_white"
+                android:background="@color/themeGradientLighter_background"
                 android:id="@+id/textgraph"
                 android:alpha="1"
                 android:textSize="23dp"
@@ -53,7 +53,7 @@
                 android:layout_height="300dp"
                 android:layout_alignTop="@id/textgraph"
                 android:layout_marginRight="0dp"
-                android:background="@color/pure_white"
+                android:background="@color/themeGradientLighter_background"
                 android:alpha="0.2"
 
                 />
@@ -76,7 +76,7 @@
         android:layout_marginTop="4dp"
         card_view:cardCornerRadius="3dp"
         card_view:cardElevation="3dp"
-        android:background="@color/pure_white"
+        android:background="@color/themeGradientLighter_background"
             >
 
 
@@ -90,7 +90,7 @@
                 android:text="Add sessions to see data"
                 android:textAlignment="center"
                 android:gravity="center"
-                android:background="@color/pure_white"
+                android:background="@color/themeGradientLighter_background"
                 android:id="@+id/textGraphDizzy"
                 android:alpha="1"
                 android:textSize="23dp"
@@ -103,7 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="300dp"
             android:layout_marginRight="0dp"
-            android:background="@color/pure_white"
+            android:background="@color/themeGradientLighter_background"
             android:alpha="0.2"
             />
             </RelativeLayout>

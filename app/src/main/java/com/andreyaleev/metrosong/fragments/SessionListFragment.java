@@ -118,7 +118,7 @@ public class SessionListFragment  extends BaseFragment  implements
         if (mAdapter.getItemCount()<1) {
             rvPrograms.setVisibility(View.GONE);
             empty.setVisibility(View.VISIBLE);
-            coordlay.setBackgroundColor(Color.WHITE);
+            coordlay.setBackgroundColor(getResources().getColor(R.color.themeGradientLighter_background));
             emptyTextHeading.setVisibility(View.VISIBLE);
             emptyTextInstruction.setVisibility(View.VISIBLE);
         }

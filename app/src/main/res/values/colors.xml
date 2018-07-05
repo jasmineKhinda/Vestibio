@@ -22,12 +22,13 @@
 
 
     <color name="themeGradientPrimary">#E96D71</color>
-    <color name="themeGradientDark">#b33d46</color>
+    <color name="themeGradientDark">#E96D71</color>
     <color name="themeGradientLight">#ff9e9f</color>
-    <color name="themeGradientLighter">#fff4e9</color>
+    <color name="themeGradientLighter_background">#fff8f1</color>
+    <color name="themeGradientLighter">#ffeddb</color>
     <color name="themeGradientHighlight">#e64c51</color>
 
-
+    //fff4e9
 
 
 

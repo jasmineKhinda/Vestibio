@@ -33,7 +33,7 @@
             android:layout_gravity="center"
             android:visibility="gone"
             android:src="@mipmap/ic_empty_foreground"
-            android:background="@color/pure_white"
+            android:background="@color/themeGradientLighter_background"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/empty_heading"
             android:alpha="0.6"

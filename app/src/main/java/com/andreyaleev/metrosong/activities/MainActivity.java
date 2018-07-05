@@ -91,6 +91,7 @@ public class MainActivity extends BaseActivity {
         //TextView actionbar_title = (TextView) findViewById(R.id.toolbar_title);
         mTitle.setTypeface(font);
         mTitle.setText(getText(R.string.app_name));
+        mTitle.setTextColor(getResources().getColor(R.color.themeGradientLighter_background));
         mTitle.setTextSize(40);
 
 

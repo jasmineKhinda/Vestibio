@@ -4,7 +4,8 @@
     android:layout_width="130dp"
     android:layout_height="40dp"
     android:orientation="horizontal"
-    android:background="@drawable/background_white">
+    android:background="@drawable/background_tint"
+    >
 
     <Button
         android:id="@+id/decrement"
@@ -19,7 +20,7 @@
     <EditText
         android:id="@+id/display"
         android:layout_width="55dp"
-        android:background="@drawable/border_gray"
+        android:background="@drawable/border_gray_vestibio"
         android:layout_height="match_parent"
         android:text="1"
         android:textColor="@color/grey_800"

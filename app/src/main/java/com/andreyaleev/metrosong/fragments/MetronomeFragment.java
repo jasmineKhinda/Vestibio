@@ -525,7 +525,7 @@ public class MetronomeFragment extends MetronomableFragment {
 //        activity.getViewPager().setPagingEnabled(false);
         activity.getBottomViewNavigation().setVisibility(View.GONE);
         activity.getViewToolbar().setVisibility(View.GONE);
-        buttonLog.setVisibility(View.INVISIBLE);
+        buttonLog.setVisibility(View.GONE);
         timer.setVisibility(View.VISIBLE);
 
         if(!Utils.isMetronomeServiceRunning(getContext())){
