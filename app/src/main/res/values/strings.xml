@@ -37,6 +37,8 @@
     <string name="bpm">BPM</string>
     <string name="ex_duration">Reps</string>
     <string name="ex_duration_sec">(seconds)</string>
+    <string name="empty_state">No sessions logged yet</string>
+    <string name="empty_state_instruction">Log a session in Metronome to start seeing them here</string>
     <string name="optional">Optional fields:</string>
     <string name="total_session">Total session time: </string>
     <string name="ex_number_sets">Sets</string>

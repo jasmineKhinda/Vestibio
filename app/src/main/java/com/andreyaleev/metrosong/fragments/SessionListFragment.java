@@ -1,14 +1,18 @@
 package com.andreyaleev.metrosong.fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.andreyaleev.metrosong.R;
 import com.andreyaleev.metrosong.activities.SessionActivity;
@@ -34,6 +38,16 @@ public class SessionListFragment  extends BaseFragment  implements
 
     @BindView(R.id.rvPrograms)
     RecyclerView rvPrograms;
+    @BindView(R.id.empty_view)
+    ImageView empty;
+    @BindView(R.id.coordinatorLayout)
+    CoordinatorLayout coordlay;
+    @BindView(R.id.empty_heading)
+    TextView emptyTextHeading;
+    @BindView(R.id.empty_instruction)
+    TextView emptyTextInstruction;
+
+
 
 
     private SessionsAdapter mAdapter;
@@ -73,6 +87,8 @@ public class SessionListFragment  extends BaseFragment  implements
 
         mLayoutManager = new LinearLayoutManager(activity);
         rvPrograms.setLayoutManager(mLayoutManager);
+
+
         rvPrograms.setOnLongClickListener(view -> {
             // TODO remove item ??? Possible ??
             return false;
@@ -99,6 +115,18 @@ public class SessionListFragment  extends BaseFragment  implements
         }
         mAdapter = new SessionsAdapter(activity, sessions, this);
         rvPrograms.setAdapter(mAdapter);
+        if (mAdapter.getItemCount()<1) {
+            rvPrograms.setVisibility(View.GONE);
+            empty.setVisibility(View.VISIBLE);
+            coordlay.setBackgroundColor(Color.WHITE);
+            emptyTextHeading.setVisibility(View.VISIBLE);
+            emptyTextInstruction.setVisibility(View.VISIBLE);
+        }
+        else {
+            rvPrograms.setVisibility(View.VISIBLE);
+            empty.setVisibility(View.GONE);
+            coordlay.setBackground(getResources().getDrawable(R.drawable.linear_gradient_drawable));
+        }
     }
 
 

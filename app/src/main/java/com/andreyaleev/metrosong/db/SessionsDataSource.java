@@ -32,6 +32,12 @@ public class SessionsDataSource {
             MYSQLiteHelperVertibio.COLUMN_TIMESTAMP,
             MYSQLiteHelperVertibio.COLUMN_TOTAL_DURATION};
 
+    private String[] dizzyColumn = {
+            MYSQLiteHelperVertibio.COLUMN_ID,
+            MYSQLiteHelperVertibio.COLUMN_DIZZY_LEVEL,
+            };
+
+
 
 
     public SessionsDataSource(Context context) {
@@ -110,6 +116,27 @@ public class SessionsDataSource {
         return sessions;
     }
 
+    public ArrayList<Session> getsAllDizzySessions() {
+        ArrayList<Session> sessions = new ArrayList<>();
+
+        Cursor cursor = database.query(MYSQLiteHelperVertibio.TABLE_SESSIONS,
+                dizzyColumn, null, null, null, null,MYSQLiteHelperVertibio.COLUMN_TIMESTAMP+" desc" );
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Session session = getDizzySessions(cursor);
+            if(session.getDizzynesslevel()!=0){
+                sessions.add(session);
+                Log.d("Vestibio", "Database: "+ session.getDizzynesslevel());
+
+            }
+            cursor.moveToNext();
+        }
+
+        cursor.close();
+        return sessions;
+    }
+
     private Session getSession(Cursor cursor) {
         Session session = new Session();
         int columnIndexID = cursor.getColumnIndex(MYSQLiteHelperVertibio.COLUMN_ID);
@@ -136,6 +163,18 @@ public class SessionsDataSource {
         session.setSets(cursor.getInt(columnIndexSets));
         session.setTotalDuration(cursor.getInt(columnIndexTotalDuration));
 
+        return session;
+    }
+
+    private Session getDizzySessions(Cursor cursor) {
+        Session session = new Session();
+        int columnIndexID = cursor.getColumnIndex(MYSQLiteHelperVertibio.COLUMN_ID);
+
+        int columnIndexDizzy = cursor.getColumnIndex(MYSQLiteHelperVertibio.COLUMN_DIZZY_LEVEL);
+
+        int id = cursor.getInt(columnIndexID);
+        session.setId(id);
+        session.setDizzynesslevel(cursor.getInt(columnIndexDizzy));
         return session;
     }
 

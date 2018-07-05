@@ -1,23 +1,30 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
+    android:fitsSystemWindows="true"
+
     tools:context=".activities.MainActivity">
 
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/rel"
         android:background="@drawable/linear_gradient_drawable"
         android:layout_width="match_parent"
-        android:layout_height="80dp">
+        app:layout_constraintBottom_toTopOf="@id/fragment_container"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="?attr/actionBarSize">
 
-        <android.support.v7.widget.Toolbar
+        <android.support.v7.widget.Toolbar xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:layout_alignParentBottom="true"
+
+
             android:title="Android Gradient Toolbar"
             android:titleTextColor="#52565c">
 
@@ -25,7 +32,8 @@
                 android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
+                android:layout_gravity="left|bottom"
+                android:paddingBottom="5dp"
                 android:fontFamily="cursive"
                 android:text="Toolbar Title"
                 android:textColor="@color/pure_white" />
@@ -34,12 +42,12 @@
 
     </RelativeLayout>
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
-        />
+    <!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--android:id="@+id/fragment_container"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="10"-->
+        <!--/>-->
 
     <!--<android.support.v7.widget.Toolbar-->
         <!--android:id="@+id/toolbar"-->
@@ -69,18 +77,51 @@
         <!--android:layout_height="match_parent"-->
         <!--/>-->
 
-    <android.support.design.widget.BottomNavigationView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/bottomNavigation"
+    <!--<android.support.design.widget.BottomNavigationView xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--android:id="@+id/bottomNavigation"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_gravity="bottom"-->
+        <!--android:background="@color/themeGradientLighter"-->
+        <!--app:itemIconTint="@drawable/menu_item_selector"-->
+        <!--app:itemTextColor="@drawable/menu_item_selector"-->
+        <!--app:menu="@menu/bottom_navigation_menu">-->
+    <!--</android.support.design.widget.BottomNavigationView>-->
+
+
+    <FrameLayout  xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/themeGradientLighter"
-        app:itemIconTint="@drawable/menu_item_selector"
-        app:itemTextColor="@drawable/menu_item_selector"
-        app:menu="@menu/bottom_navigation_menu">
-    </android.support.design.widget.BottomNavigationView>
-</LinearLayout>
+        android:layout_above="@+id/bottomNavigation"
+
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigation"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rel" />
+
+    <android.support.design.widget.BottomNavigationView  xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/bottomNavigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+    android:background="@color/themeGradientLighter"
+    app:itemIconTint="@drawable/menu_item_selector"
+    app:itemTextColor="@drawable/menu_item_selector"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        app:menu="@menu/bottom_navigation_menu"
+        />
+</android.support.constraint.ConstraintLayout>
 
 <!--app:itemIconTint="@drawable/menu_item_selector"-->
     <!--app:itemTextColor="@drawable/menu_item_selector"-->
 
+    <!--android:background="?android:attr/windowBackground"-->

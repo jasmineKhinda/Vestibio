@@ -2,6 +2,7 @@ package com.andreyaleev.metrosong.activities;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
@@ -15,9 +16,16 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.text.Layout;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Display;
+import android.view.KeyCharacterMap;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewConfiguration;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
@@ -58,8 +66,10 @@ public class MainActivity extends BaseActivity {
 //must be called before setContentView(...)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+            //window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+            //window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+
         }
 
         setContentView(R.layout.activity_main);
@@ -80,12 +90,22 @@ public class MainActivity extends BaseActivity {
 
         //TextView actionbar_title = (TextView) findViewById(R.id.toolbar_title);
         mTitle.setTypeface(font);
-        mTitle.setText("Vertibio");
+        mTitle.setText(getText(R.string.app_name));
         mTitle.setTextSize(40);
 
 
         mBottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.bottomNavigation);
+//        BottomNavigationView menuView = (BottomNavigationView) mBottomNavigationView.getChildAt(0);
+//
+//        for (int i = 0; i < menuView.getChildCount(); i++) {
+//            final View iconView = menuView.getChildAt(i).findViewById(android.support.design.R.id.icon);
+//            final ViewGroup.LayoutParams layoutParams = iconView.getLayoutParams();
+//            final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+//            layoutParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, displayMetrics);
+//            layoutParams.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, displayMetrics);
+//            iconView.setLayoutParams(layoutParams);
+//        }
 
 //        final TextView fragmentNameTv = (TextView)
 //                findViewById(R.id);
@@ -120,6 +140,9 @@ public class MainActivity extends BaseActivity {
                 return true;
             }
         });
+
+        Log.d("Vestibio", " is nav bar shown?"+ hasNavBar(getResources()));
+        Log.d("Vestibio", " is nav bar shown?"+ hasNavBar());
 
         Fragment selectedFragment = MetronomeFragment.newInstance();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
@@ -191,5 +214,26 @@ public class MainActivity extends BaseActivity {
     }
 
 
+
+    public boolean hasNavBar (Resources resources)
+    {
+        int id = resources.getIdentifier("config_showNavigationBar", "bool", "android");
+        return id > 0 && resources.getBoolean(id);
+    }
+
+    public boolean hasNavBar() {
+        Display d = getWindowManager().getDefaultDisplay();
+        DisplayMetrics dm = new DisplayMetrics();
+        d.getRealMetrics(dm);
+        int realHeight = dm.heightPixels;
+        int realWidth = dm.widthPixels;
+        d.getMetrics(dm);
+        int displayHeight = dm.heightPixels;
+        int displayWidth = dm.widthPixels;
+        int h= realHeight - displayHeight;
+        Log.d("Vestibio", "hasNavBar height: " + h);
+        return (realWidth - displayWidth) > 0 || (realHeight - displayHeight) > 0;
+
+    }
 
 }
