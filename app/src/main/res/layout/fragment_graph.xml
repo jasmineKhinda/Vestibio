@@ -36,7 +36,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:text="Add sessions to see data"
+                android:text="@string/graph_nodata"
                 android:textAlignment="center"
                 android:gravity="center"
                 android:background="@color/themeGradientLighter_background"
@@ -87,7 +87,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:text="Add sessions to see data"
+                android:text="@string/graph_nodata"
                 android:textAlignment="center"
                 android:gravity="center"
                 android:background="@color/themeGradientLighter_background"

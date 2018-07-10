@@ -23,7 +23,7 @@
     <string name="vestibular_session">Vestibular Session</string>
     <string name="title_session">Session Title</string>
     <string name="notes_hint">(Optional) Session Notes...</string>
-    <string name="stop">Stop</string>
+    <string name="stop">Pause</string>
     <string name="pause">Pause</string>
     <string name="resume">Resume</string>
     <string name="plus" translatable="false">+</string>
@@ -38,7 +38,7 @@
     <string name="ex_duration">Reps</string>
     <string name="ex_duration_sec">(seconds)</string>
     <string name="empty_state">No sessions logged yet</string>
-    <string name="empty_state_instruction">Log a session in Metronome to start seeing them here</string>
+    <string name="empty_state_instruction">Complete a session in Metronome to start seeing them here</string>
     <string name="optional">Optional fields:</string>
     <string name="total_session">Total session time: </string>
     <string name="ex_number_sets">Sets</string>
@@ -62,6 +62,8 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="logAccept">Add Session</string>
+    <string name="continue_button">Continue</string>
+    <string name="finish_button">Finish</string>
     <string name="logCancel">Cancel</string>
     <string name="dizzyness_level_input">Rate dizziness (scale 1 -10): </string>
     <string name="enter_title">Enter track title</string>
@@ -70,6 +72,9 @@
     <string name="duration_tag">  Duration: </string>
     <string name="date_tag">  Date: </string>
     <string name="dizziness_tag">  Dizziness Level: </string>
+    <string name="graph_nodata">Add sessions to see data</string>
+
+    <string name="dizziness_hint">  Dizzy Level (1-10) </string>
     <string name="na">  N/A </string>
 
     <string name="song_will_start">Track will start in... </string>

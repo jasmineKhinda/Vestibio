@@ -6,9 +6,14 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.andreyaleev.metrosong.R;
@@ -49,12 +54,16 @@ public class SessionActivity extends BaseActivity {
         TextView totalDuration;
         @BindView(R.id.date)
         TextView timestamp;
-        @BindView(R.id.dizzynessLevel)
-        TextView dizziness;
+
         @BindView(R.id.edtNotes)
         TextView notes;
+        @BindView(R.id.dizzy_level)
+        Spinner dizzyLevel;
+        int sessionId=0;
 
-        private RecyclerView.LayoutManager mLayoutManager;
+
+
+    private RecyclerView.LayoutManager mLayoutManager;
 
 
         private Session session;
@@ -71,17 +80,46 @@ public class SessionActivity extends BaseActivity {
         mLayoutManager = new LinearLayoutManager(this);
         Utils.setKeyboardAutoHide(this, edtTitle);
 
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                    R.array.dizzyness, R.layout.spinner_item);
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            // Apply the adapter to the spinner
+            dizzyLevel.setAdapter(adapter);
+
+
+            //ONCLICK
+            dizzyLevel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+
+
 
             Intent intent = this.getIntent();
             Bundle bundle = intent.getExtras();
             if (bundle != null) {
                 this.session = (Session) bundle.getSerializable(SESSION_TAG);
-                edtTitle.setText(session.getTitle());
+                edtTitle.setText(session.getTitle() + " " + session.getId());
                 edtTitle.setSelection(edtTitle.getText().length());
                 bpm.setText(String.valueOf(session.getBpm()));
                 reps.setText(String.valueOf(session.getDuration()));
                 sets.setText(String.valueOf(session.getSets()));
                 rest.setText(String.valueOf(session.getRest()));
+
+                if(session.getDizzynesslevel()==0){
+                    dizzyLevel.setSelection(0);
+                }else{
+                    dizzyLevel.setSelection(session.getDizzynesslevel());
+                }
                 totalDuration.setText( getString(R.string.duration_tag)+"  " +MetronomeFragment.timeConversion(session.getTotalDuration()));
 
                 long timeStampMillis = session.getTimeStamp();
@@ -89,17 +127,19 @@ public class SessionActivity extends BaseActivity {
                 Date resultdate = new Date(timeStampMillis);
                 timestamp.setText(getString(R.string.date_tag) +"  "+sdf.format(resultdate));
                 notes.setText(session.getNotes());
-                if(session.getDizzynesslevel()==0){
-                    dizziness.setText(getString(R.string.dizziness_tag)+ "  "+ getString(R.string.na));
-                }else{
-                    dizziness.setText(getString(R.string.dizziness_tag)+ "  "+ session.getDizzynesslevel());
-                }
+
 
 
             }
 
         dataSource = new SessionsDataSource(this);
         dataSource.open();
+
+
+
+
+
+
 
 
     }
@@ -147,7 +187,7 @@ public class SessionActivity extends BaseActivity {
 
     private void saveSong() {
         if (!edtTitle.getText().toString().isEmpty()) {
-            int songId = -1;
+            long songId = -1;
             if (this.session == null) {
                 this.session = new Session();
             } else {
@@ -155,10 +195,19 @@ public class SessionActivity extends BaseActivity {
             }
             this.session.setTitle(edtTitle.getText().toString());
             this.session.setNotes(notes.getText().toString());
+            Log.d("Vestibio", "dizzy level "+ dizzyLevel.getSelectedItem().toString());
+            if(dizzyLevel.getSelectedItem().toString().trim().equals("N/A")){
+                this.session.setDizzynesslevel(0);
+            }else{
+                this.session.setDizzynesslevel(Integer.parseInt(dizzyLevel.getSelectedItem().toString().trim()));
+            }
 
             if (songId != -1) {
                 dataSource.updateSession(this.session);
+                Log.d("Vestibio", "dizzy level -1 "+ songId);
+                Log.d("Vestibio", "dizzy level -1 title "+ this.session.getTitle());
             } else {
+                Log.d("Vestibio", "dizzy level not -1 "+ dizzyLevel.getSelectedItem().toString());
                 long id = dataSource.insertSession(this.session);
             }
             onBackPressed();

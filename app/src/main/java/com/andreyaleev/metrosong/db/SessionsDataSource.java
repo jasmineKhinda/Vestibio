@@ -91,7 +91,7 @@ public class SessionsDataSource {
 
 
     public int removeSession(Session session) {
-        int id = session.getId();
+        long id = session.getId();
         int deletedId = database.delete(MYSQLiteHelperVertibio.TABLE_SESSIONS, MYSQLiteHelperVertibio.COLUMN_ID
                 + " = " + id, null);
         System.out.println("session deleted with id: " + id);

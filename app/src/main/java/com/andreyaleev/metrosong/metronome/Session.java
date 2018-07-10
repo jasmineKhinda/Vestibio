@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class Session implements Serializable {
 
-    public Session(int id, int bpm, String title, int duration, int sets, int rest, int totalDuration, String notes, int dizzynessLevel, long timeStamp) {
+    public Session(long id, int bpm, String title, int duration, int sets, int rest, int totalDuration, String notes, int dizzynessLevel, long timeStamp) {
         this.id = id;
         this.title = title;
         this.duration = duration;
@@ -36,7 +36,7 @@ public class Session implements Serializable {
         this.bpm = bpm;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -92,7 +92,7 @@ public class Session implements Serializable {
         this.dizzynesslevel = dizzynesslevel;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -102,7 +102,7 @@ public class Session implements Serializable {
 
 
 
-    private int id;
+    private long id;
     private int bpm;
     private String title;
     private String notes;

@@ -1,18 +1,16 @@
 package com.andreyaleev.metrosong.fragments;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
-import android.text.Layout;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -27,7 +25,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,13 +32,11 @@ import com.andreyaleev.metrosong.BuildConfig;
 import com.andreyaleev.metrosong.Constants;
 import com.andreyaleev.metrosong.R;
 import com.andreyaleev.metrosong.activities.MainActivity;
-import com.andreyaleev.metrosong.adapters.CustomSpinnerAdapter;
+import com.andreyaleev.metrosong.activities.SessionActivity;
 import com.andreyaleev.metrosong.bus.TickEvent;
 import com.andreyaleev.metrosong.db.SessionsDataSource;
-import com.andreyaleev.metrosong.db.SongsDataSource;
 import com.andreyaleev.metrosong.metronome.MetronomeSingleton;
 import com.andreyaleev.metrosong.metronome.Session;
-import com.andreyaleev.metrosong.metronome.Song;
 import com.andreyaleev.metrosong.services.MetronomeService;
 import com.andreyaleev.metrosong.tools.Utils;
 import com.squareup.otto.Subscribe;
@@ -49,10 +44,6 @@ import com.travijuu.numberpicker.library.Enums.ActionEnum;
 import com.travijuu.numberpicker.library.Interface.LimitExceededListener;
 import com.travijuu.numberpicker.library.Interface.ValueChangedListener;
 import com.travijuu.numberpicker.library.NumberPicker;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -82,6 +73,8 @@ public class MetronomeFragment extends MetronomableFragment {
     TextView totalTime;
     @BindView(R.id.tvBPM)
     TextView tvBPM;
+    @BindView(R.id.timerSetsRemaining)
+    TextView timerSetsRemaining;
     @BindView(R.id.btnPlus)
     Button btnPlus;
     @BindView(R.id.btnMinus)
@@ -94,8 +87,7 @@ public class MetronomeFragment extends MetronomableFragment {
     SeekBar seekbarBPM;
     @BindView(R.id.btnStartStop)
     Button btnStartStop;
-    @BindView(R.id.btnLog)
-    Button buttonLog;
+
 
     public static MetronomeFragment newInstance() {
         MetronomeFragment frag = new MetronomeFragment();
@@ -109,7 +101,7 @@ public class MetronomeFragment extends MetronomableFragment {
         contentView = v;
         timer= (TextView)v.findViewById(R.id.timer);
         totalTime= (TextView)v.findViewById(R.id.totalSession);
-        buttonLog= (Button)v.findViewById(R.id.btnLog);
+
         return v;
     }
 
@@ -149,6 +141,7 @@ public class MetronomeFragment extends MetronomableFragment {
         tvBPM.setText(String.valueOf(savedBPM));
         //spinnerBeat.setSelection(savedBeats);
         timer.setVisibility(View.INVISIBLE);
+        timerSetsRemaining.setVisibility(View.INVISIBLE);
 
         Log.d("vestibio", "instance of beats"+ savedBeats);
 
@@ -239,125 +232,23 @@ public class MetronomeFragment extends MetronomableFragment {
         registerNotificationReceiver();
 
         timer.setText("");
+        timerSetsRemaining.setText("");
         adapter= new SpinnerAdapter(getActivity().getApplicationContext());
         title = getResources().getStringArray(R.array.dizzyness);
-
-
-
-        buttonLog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-//                alert.setTitle("Log Session");
-//
-//
-//                // Set an EditText view to get user input
-//                final EditText inputTitle = new EditText(getActivity());
-//                alert.setView(inputTitle);
-//
-//                alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int whichButton) {
-//                        String value = inputTitle.getText().toString();
-//                        Log.d("", "Pin Value : " + value);
-//                        return;
-//                    }
-//                });
-//
-//                alert.setNegativeButton("Cancel",
-//                        new DialogInterface.OnClickListener() {
-//
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                // TODO Auto-generated method stub
-//                                return;
-//                            }
-//                        });
-//                alert.show();
-//            }
-//        });
-                final Dialog dialog = new Dialog(getActivity(), R.style.Dialog);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.setContentView(R.layout.log_session_dialog);
-                dialog.setCancelable(true);
-                dialog.setTitle(getResources().getString(R.string.Log));
-
-                // set the custom dialog components - text, image and button
-                final Spinner spinner = (Spinner) dialog.findViewById(R.id.spinner1);
-                final EditText edittext = (EditText) dialog.findViewById(R.id.title);
-                final EditText notes = (EditText) dialog.findViewById(R.id.notes);
-                Button button = (Button) dialog.findViewById(R.id.button1);
-                Button cancel = (Button) dialog.findViewById(R.id.buttonCancel);
-
-                Spinner spinnerDd = (Spinner) dialog.findViewById(R.id.spinner1);
-                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
-                        R.array.dizzyness, R.layout.simple_spinner_item);
-                adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
-                spinnerDd.setAdapter(adapter);
-
-                //spinner.setAdapter(adapter);
-                spinnerDd.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        // TODO Auto-generated method stub
-                        spinner_item = title[position];
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-                        // TODO Auto-generated method stub
-
-                    }
-                });
-
-                button.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        // TODO Auto-generated method stub
-                        if (edittext.getText().toString().isEmpty()) {
-                            edittext.setError(getString(R.string.empty_field));
-                        }else{
-                            saveSession(edittext.getText().toString(), spinner.getSelectedItem().toString(),notes.getText().toString() );
-                            dialog.dismiss();
-                            Toast.makeText(getActivity().getApplicationContext(),  "Session added:  " + edittext.getText().toString().trim(), Toast.LENGTH_LONG).show();
-                        }
-
-                    }
-                });
-                dialog.show();
-
-                cancel.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        // TODO Auto-generated method stub
-                        dialog.dismiss();
-                    }
-                });
-                dialog.show();
-
-
-
-            }
-        });
-
-
-
 
     }
 
     public synchronized void onStartStopClick() {
         if (Utils.isMetronomeServiceRunning(getContext())) {
-            Log.d("Vestibio", "stop metronome:  on stop start click");
-            stopMetronome();
-            currentSet=0;
+            Log.d("Vestibio", "pause metronome:  on stop start click" + Utils.isMetronomeServiceRunning(getContext())+ " true or false");
+            pauseMetronome();
         } else if (currentSet<2){
             Log.d("Vestibio", "start metronome:  onstart stop click");
             startMetronome();
         }else{
-            Log.d("Vestibio", "stop metronome first set:  on stop start click");
-            stopMetronome();
-            currentSet=0;
+            Log.d("Vestibio", "pause  metronome during rest:  on stop start click" + currentSet);
+            pauseMetronome();
+
         }
     }
 
@@ -399,32 +290,28 @@ public class MetronomeFragment extends MetronomableFragment {
     }
 
     //save the session into DB
-    private void saveSession(String title, String dizzyness, String notes) {
-
-
-
+    private long saveSession() {
 
         this.session = new Session();
-        this.session.setTitle(title);
-        if(dizzyness.equals("N/A")){
-            this.session.setDizzynesslevel(0);
-        }else{
-            this.session.setDizzynesslevel(Integer.parseInt(dizzyness.trim()));
-        }
-        this.session.setNotes(notes);
+        this.session.setTitle(getResources().getString(R.string.vestibular_session));
+//        if(dizzyness.equals("N/A")){
+//            this.session.setDizzynesslevel(0);
+//        }else{
+//            this.session.setDizzynesslevel(Integer.parseInt(dizzyness.trim()));
+//        }
+//        this.session.setNotes(notes);
         this.session.setTimeStamp(System.currentTimeMillis());
         this.session.setDuration(numberPicker.getValue());
         this.session.setSets(numberPickerSets.getValue());
         this.session.setRest(numberPickerRest.getValue());
         this.session.setTotalDuration(time);
-
         this.session.setBpm(Integer.parseInt(tvBPM.getText().toString()));
 
 
         long id = dataSource.insertSession(this.session);
+        Log.d("Vestibio", "dizzy level session id: " + id);
 
-
-        Log.d("Vestibio", "saveSession: "+ dataSource.getAllSessions());
+        return id;
 
     }
     @Override
@@ -433,6 +320,7 @@ public class MetronomeFragment extends MetronomableFragment {
     }
 
     private void stopMetronome() {
+
 
         MetronomeSingleton.getInstance().setPlay(false);
         Utils.checkAndStopService(getContext());
@@ -445,20 +333,36 @@ public class MetronomeFragment extends MetronomableFragment {
         contentView.setKeepScreenOn(false);
         issueServiceNotification();
         timer.setText("Session stopped");
-        buttonLog.setVisibility(View.VISIBLE);
+        timerSetsRemaining.setText("No Sets");
         timer.setVisibility(View.INVISIBLE);
+        timerSetsRemaining.setVisibility(View.INVISIBLE);
         isCanceled=true;
-
+        currentSet=0;
 
         String message = getResources().getString(R.string.session_completed).toString();
         Toast toast = Toast.makeText(getContext(), message,
                 Toast.LENGTH_LONG);
         toast.show();
 
+        long id =  saveSession();
+        this.session.setId(id);
+
+
+        Intent intent = new Intent(getContext(), SessionActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(SessionActivity.SESSION_TAG, session);
+        intent.putExtras(bundle);
+        getContext().startActivity(intent);
+        Log.d("vestibio", "dizzy level  iddd"+ this.session.getId());
+
+
     }
 
 
-    private void pauseMetronome() {
+
+
+
+    private void restMetronome() {
 
         int totalSets = numberPickerSets.getValue();
         if(currentSet<totalSets ){
@@ -480,17 +384,12 @@ public class MetronomeFragment extends MetronomableFragment {
                 public void onTick(long l) {
                     //               long millis = millisUntilFinished;
                     Log.d("Vestibio", "onTick pause metronome: ");
-//                String hms = String.format("%02d:%02d:%02d",
-//
-//                        TimeUnit.MILLISECONDS.toHours(millis),
-//                        TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
-//                        TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis))
-//                );
-                    //               timer.setText(hms);
+
                     timer.setText("Rest done in : " + ((int) Math.round(l / 1000.0) - 1) + " sec");
+                    timer.setTextColor(Color.RED);
+                    timerSetsRemaining.setText("Current Set: " + currentSet + " out of "+ totalSets);
                     if (isCanceled) {
                         Log.d("Vestibio", "canceled!!!");
-                        timer.setText("");
                         cancel();
                     }
 
@@ -499,7 +398,6 @@ public class MetronomeFragment extends MetronomableFragment {
                 @Override
                 public void onFinish() {
                     Log.d("Vestibio", "finishing ");
-                    timer.setText("");
                     continueMetronome();
                     cancel();
                 }
@@ -508,7 +406,7 @@ public class MetronomeFragment extends MetronomableFragment {
         }else{
             stopMetronome();
             currentSet=0;
-            timer.setText("Session Completed! ");
+            Log.d("Vestibio", "Done, stopping Metronome. ");
         }
 
     }
@@ -518,15 +416,14 @@ public class MetronomeFragment extends MetronomableFragment {
         //first set
         currentSet=1;
         isCanceled=false;
+        int totalSets = numberPickerSets.getValue();
 
         MetronomeSingleton.getInstance().setPlay(true);
-        //uncomment here
-//        activity.getSlidingTabLayout().setVisibility(View.GONE);
-//        activity.getViewPager().setPagingEnabled(false);
+
         activity.getBottomViewNavigation().setVisibility(View.GONE);
         activity.getViewToolbar().setVisibility(View.GONE);
-        buttonLog.setVisibility(View.GONE);
         timer.setVisibility(View.VISIBLE);
+        timerSetsRemaining.setVisibility(View.VISIBLE);
 
         if(!Utils.isMetronomeServiceRunning(getContext())){
             Intent myIntent = new Intent(getContext(), MetronomeService.class);
@@ -541,46 +438,85 @@ public class MetronomeFragment extends MetronomableFragment {
                 //               long millis = millisUntilFinished;
                 Log.d("Vestibio", "onTick start metronome: Start Metronome ");
                 timer.setText("Set done in: "+((int)Math.round(l/1000.0)-1)+ " sec");
+                timer.setTextColor(Color.GREEN);
+                timerSetsRemaining.setText("Current Set: " + currentSet + " out of "+ totalSets);
                 if(isCanceled){
-                    Log.d("Vestibio", "canceled!!!");
-                    timer.setText("");
+                    Log.d("Vestibio", " Timer Canceled!");
                     cancel();
                 }
-//                String hms = String.format("%02d:%02d:%02d",
-//
-//                        TimeUnit.MILLISECONDS.toHours(millis),
-//                        TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
-//                        TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis))
-//                );
-                //               timer.setText(hms);
 
 
             }
 
             @Override
             public void onFinish() {
-                Log.d("Vestibio", "finishing ");
-                timer.setText("");
-                pauseMetronome();
+                Log.d("Vestibio", "Resting Metronome. ");
+                restMetronome();
                 cancel();
             }
         };
         countDownTimer.start();
     }
 
+    private void pauseMetronome() {
+
+        MetronomeSingleton.getInstance().setPlay(false);
+        Utils.checkAndStopService(getContext());
+        isCanceled=true;
+
+        final Dialog dialog = new Dialog(getActivity(), R.style.Dialog);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.temp_stop_metronome_dialog);
+        dialog.setCancelable(false);
+        dialog.setTitle(getResources().getString(R.string.Log));
+
+
+        Button cont = (Button) dialog.findViewById(R.id.continue_button);
+        Button finish = (Button) dialog.findViewById(R.id.finish_button);
+
+
+        cont.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                dialog.dismiss();
+                continueMetronome();
+                isCanceled = false;
+                Log.d("Vestibio", "Continuing Metronome ");
+
+            }
+        });
+        dialog.show();
+
+        finish.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                dialog.dismiss();
+                stopMetronome();
+                isCanceled = true;
+                Log.d("Vestibio", "Stopping Metronome ");
+            }
+        });
+        dialog.show();
+
+
+
+    }
+
     private void continueMetronome() {
         int sessionDuration =( numberPicker.getValue() *1000) +1000;
         int totalSets = numberPickerSets.getValue();
-        //increments the set #
-        //currentSet=currentSet+1;
+
 
         if(currentSet<=totalSets){
             MetronomeSingleton.getInstance().setPlay(true);
-            //uncomment here
- //           activity.getSlidingTabLayout().setVisibility(View.GONE);
-//            activity.getViewPager().setPagingEnabled(false);
-
             activity.getBottomViewNavigation().setVisibility(View.GONE);
+            activity.getViewToolbar().setVisibility(View.GONE);
+            timer.setVisibility(View.VISIBLE);
+            timerSetsRemaining.setVisibility(View.VISIBLE);
 
 
             if(!Utils.isMetronomeServiceRunning(getContext())){
@@ -594,23 +530,22 @@ public class MetronomeFragment extends MetronomableFragment {
                 @Override
                 public void onTick(long l) {
 
+                    timer.setVisibility(View.VISIBLE);
                     timer.setText("Set done in: "+((int)Math.round(l/1000.0)-1)+ " sec");
+                    timer.setTextColor(Color.GREEN);
+                    timerSetsRemaining.setText("Current Set: " + currentSet + " out of "+ totalSets);
 
                     if(isCanceled){
                         Log.d("Vestibio", "canceled!!!");
-                        timer.setText("");
                         cancel();
                     }
-
-                    Log.d("Vestibio", "onTick continue: ");
 
                 }
 
                 @Override
                 public void onFinish() {
-                    Log.d("Vestibio", "finishing ");
-                    timer.setText("");
-                    pauseMetronome();
+                    Log.d("Vestibio", "Metronome Resting");
+                    restMetronome();
                     cancel();
                 }
             };
@@ -618,14 +553,11 @@ public class MetronomeFragment extends MetronomableFragment {
         }else{
             stopMetronome();
             currentSet=0;
-            timer.setText("Session Completed! ");
+            Log.d("Vestibio", "Metronome Stopping");
         }
 
 
     }
-
-
-
 
 
 

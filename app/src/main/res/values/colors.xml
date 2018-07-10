@@ -27,6 +27,8 @@
     <color name="themeGradientLighter_background">#fff8f1</color>
     <color name="themeGradientLighter">#ffeddb</color>
     <color name="themeGradientHighlight">#e64c51</color>
+    <color name="button_green">#00e676</color>
+    <color name="button_red">#d50000</color>
 
     //fff4e9
 
