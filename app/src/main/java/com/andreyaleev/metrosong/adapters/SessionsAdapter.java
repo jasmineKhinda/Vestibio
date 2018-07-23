@@ -7,13 +7,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+
 import android.widget.TextView;
 
 import com.andreyaleev.metrosong.R;
 import com.andreyaleev.metrosong.fragments.MetronomeFragment;
 import com.andreyaleev.metrosong.metronome.Session;
-import com.andreyaleev.metrosong.metronome.Song;
+
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

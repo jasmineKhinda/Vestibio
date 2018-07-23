@@ -8,8 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.andreyaleev.metrosong.metronome.Session;
-import com.andreyaleev.metrosong.metronome.Song;
-import com.andreyaleev.metrosong.metronome.SongSnippet;
+
 
 import java.util.ArrayList;
 

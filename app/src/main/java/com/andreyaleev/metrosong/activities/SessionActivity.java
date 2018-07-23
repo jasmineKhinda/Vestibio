@@ -18,14 +18,14 @@ import android.widget.TextView;
 
 import com.andreyaleev.metrosong.R;
 import com.andreyaleev.metrosong.db.SessionsDataSource;
-import com.andreyaleev.metrosong.db.SongsDataSource;
+
 import com.andreyaleev.metrosong.fragments.MetronomeFragment;
 import com.andreyaleev.metrosong.metronome.Session;
-import com.andreyaleev.metrosong.metronome.Song;
+
 import com.andreyaleev.metrosong.tools.Utils;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 import java.util.Date;
 
 import butterknife.BindView;
@@ -108,7 +108,7 @@ public class SessionActivity extends BaseActivity {
             Bundle bundle = intent.getExtras();
             if (bundle != null) {
                 this.session = (Session) bundle.getSerializable(SESSION_TAG);
-                edtTitle.setText(session.getTitle() + " " + session.getId());
+                edtTitle.setText(session.getTitle());
                 edtTitle.setSelection(edtTitle.getText().length());
                 bpm.setText(String.valueOf(session.getBpm()));
                 reps.setText(String.valueOf(session.getDuration()));

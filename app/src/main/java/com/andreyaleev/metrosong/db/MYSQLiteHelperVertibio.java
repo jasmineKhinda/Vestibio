@@ -55,7 +55,7 @@ public class MYSQLiteHelperVertibio  extends SQLiteOpenHelper {
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            Log.w(com.andreyaleev.metrosong.db.MySQLiteHelper.class.getName(),
+            Log.w(com.andreyaleev.metrosong.db.MYSQLiteHelperVertibio.class.getName(),
                     "Upgrading database from version " + oldVersion + " to "
                             + newVersion + ", which will destroy all old data");
            // db.execSQL("DROP TABLE IF EXISTS " + TABLE_SESSIONS);

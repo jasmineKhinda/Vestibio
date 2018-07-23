@@ -55,6 +55,14 @@
     <string name="snippets">%d snippets</string>
     <string name="empty_field">Empty field</string>
 
+    <string name="graphBpmTitle_AllSessions">BPM/Session - all sessions</string>
+    <string name="graphDizzyTitle_AllSessions">Dizzy/Session - all sessions</string>
+    <string name="graphBpmTitle_40Sessions">BPM/Session - last 40 sessions</string>
+    <string name="graphDizzyTitle_40Sessions">Dizzy/Session - last 40 sessions</string>
+    <string name="graph_sessionNumber">Session #</string>
+    <string name="graph_dizzyLevel">Dizziness Level</string>
+    <string name="graph_Bpm">BPM</string>
+
 
     <string name="title">Title</string>
     <string name="notes">Session Notes</string>

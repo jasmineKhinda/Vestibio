@@ -16,13 +16,11 @@ import android.widget.TextView;
 
 import com.andreyaleev.metrosong.R;
 import com.andreyaleev.metrosong.activities.SessionActivity;
-import com.andreyaleev.metrosong.activities.SongActivity;
-import com.andreyaleev.metrosong.adapters.ProgramsAdapter;
+
 import com.andreyaleev.metrosong.adapters.SessionsAdapter;
 import com.andreyaleev.metrosong.db.SessionsDataSource;
 import com.andreyaleev.metrosong.metronome.Session;
-import com.andreyaleev.metrosong.metronome.Song;
-import com.andreyaleev.metrosong.tools.OnBackPressedListener;
+
 
 import java.util.ArrayList;
 

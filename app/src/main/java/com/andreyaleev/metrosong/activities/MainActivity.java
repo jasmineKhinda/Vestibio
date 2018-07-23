@@ -24,11 +24,10 @@ import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewConfiguration;
-import android.view.ViewGroup;
+
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.RelativeLayout;
+
 import android.widget.TextView;
 
 import com.andreyaleev.metrosong.Constants;
@@ -36,11 +35,7 @@ import com.andreyaleev.metrosong.R;
 import com.andreyaleev.metrosong.fragments.GraphFragment;
 import com.andreyaleev.metrosong.fragments.MetronomeFragment;
 import com.andreyaleev.metrosong.fragments.SessionListFragment;
-import com.andreyaleev.metrosong.fragments.SongsListFragment;
-import com.andreyaleev.metrosong.tools.slidingTab.SlidingTabLayout;
-import com.andreyaleev.metrosong.tools.CustomViewPager;
 
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

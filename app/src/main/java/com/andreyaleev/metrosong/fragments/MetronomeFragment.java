@@ -346,6 +346,7 @@ public class MetronomeFragment extends MetronomableFragment {
 
         long id =  saveSession();
         this.session.setId(id);
+        this.session.setTitle(getResources().getString(R.string.vestibular_session)+ " " + session.getId());
 
 
         Intent intent = new Intent(getContext(), SessionActivity.class);
@@ -784,43 +785,7 @@ private void minBpmGuard() {
         }
     }
 
-    private AdapterView.OnItemSelectedListener beatsSpinnerListener = new AdapterView.OnItemSelectedListener() {
-        @Override
-        public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-            Beats beat = (Beats) arg0.getItemAtPosition(arg2);
-            int beats = beat.getNum();
-//            int noteValue = prefs.getInt(Constants.SELECTED_NOTE_VALUE, 1);
-//            if (beats > noteValue) {
-//                beats = noteValue; // TODO fixme =(
-//            }
 
-            MetronomeSingleton.getInstance().setBeat(beats);
-            prefs.edit().putInt(Constants.SELECTED_BEAT_PER_BAR, beats).apply();
-            updateMetronome();
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> arg0) {
-        }
-    };
-
-
-    private AdapterView.OnItemSelectedListener noteValuesSpinnerListener = new AdapterView.OnItemSelectedListener() {
-        @Override
-        public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-
-
-            NoteValues noteValueObj = (NoteValues) arg0.getItemAtPosition(arg2);
-            int noteValue = noteValueObj.getNum();
-            MetronomeSingleton.getInstance().setNoteValue(noteValue);
-            prefs.edit().putInt(Constants.SELECTED_NOTE_VALUE, noteValue).apply();
-            updateMetronome();
-        }
-
-        @Override
-        public void onNothingSelected(AdapterView<?> arg0) {
-        }
-    };
 
     public static String timeConversion(int totalSeconds) {
         int hours = totalSeconds / 60 / 60;
