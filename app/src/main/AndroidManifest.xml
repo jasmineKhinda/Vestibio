@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.andreyaleev.metrosong" >
+    package="com.andreyaleev.vestibio" >
 
     <application
         android:allowBackup="true"
-        android:name=".App"
+        android:name="com.andreyaleev.vestibio.App"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
@@ -13,7 +13,7 @@
 
 
         <activity
-            android:name="com.andreyaleev.metrosong.activities.MainActivity"
+            android:name="com.andreyaleev.vestibio.activities.MainActivity"
             android:screenOrientation="portrait"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateHidden"
@@ -24,13 +24,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.andreyaleev.metrosong.activities.SessionActivity"
+            android:name="com.andreyaleev.vestibio.activities.SessionActivity"
             android:windowSoftInputMode="stateHidden"
             android:label="@string/session"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait">
         </activity>
-        <service android:name=".services.MetronomeService"></service>
+        <service android:name="com.andreyaleev.vestibio.services.MetronomeService"></service>
     </application>
 
 </manifest>

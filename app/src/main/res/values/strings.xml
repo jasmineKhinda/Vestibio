@@ -54,7 +54,14 @@
     <string name="bars_count">Bars count</string>
     <string name="snippets">%d snippets</string>
     <string name="empty_field">Empty field</string>
+    <string name="nav_menu_metronome">Metronome</string>
+    <string name="nav_menu_donate">Donate</string>
+    <string name="nav_menu_disclaimer">Disclaimer</string>
+    <string name="nav_menu_about">About Vestibio</string>
 
+
+    <string name="navigation_drawer_open">Nav Drawer Opened</string>
+    <string name="navigation_drawer_closed">Nav Drawer Closed</string>
     <string name="graphBpmTitle_AllSessions">BPM/Session - all sessions</string>
     <string name="graphDizzyTitle_AllSessions">Dizzy/Session - all sessions</string>
     <string name="graphBpmTitle_40Sessions">BPM/Session - last 40 sessions</string>
@@ -89,22 +96,45 @@
 
     <string name="service_started">Metronome service started</string>
     <string name="service_stopped">Metronome service stopped</string>
+    <string name="disclaimer"> DISCLAIMER AND TERMS \n \n
+
+The information provided by Vestibio (“we”, “us”, or “our”) on www.vestibio.com (the “Site”) [and our mobile application] is for general informational purposes only. All information on the Site [and our mobile application] is provided in good faith, however we make no representation or warranty of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability or completeness of any information on the Site [or our mobile application].
+
+Under no circumstance shall we have any liability to you for any loss or damage of any kind incurred as a result of the use of the site [or our mobile application] or reliance on any information provided on the site [and our mobile application]. Your use of the site [and our mobile application] and your reliance on any information on the site [and our mobile application] is solely at your own risk.\n \n
+
+HEALTH DISCLAIMER\n\n
+
+The Site cannot and does not contain heath advice. The health information is provided for general informational and educational purposes only, and is not a substitute for professional health advice.
+
+Accordingly, before taking any actions based upon such information, we encourage you to consult with the appropriate medical and healthcare professionals. We do not provide any kind of health advice. The use or reliance of any information contained on this site [or our mobile application] is solely at your own risk.</string>
 
 
 
-        <string-array name="dizzyness">
-            <item>N/A</item>
-            <item>1</item>
-            <item>2</item>
-            <item>3</item>
-            <item>4</item>
-            <item>5</item>
-            <item>6</item>
-            <item>7</item>
-            <item>8</item>
-            <item>9</item>
-            <item>10</item>
-        </string-array>
+    <string name="about"> ABOUT VESTIBIO \n \n
+
+        The Vestibio App was intially developed for my mother who suffered from a vestibular disorder/vertigo which required VRT (Vestibular Rehabilitation Therapy) to recover. This app helped her perform daily exercises without having to keep track or reps, sets or resting durations, which in turn allowed her to focus on performing the exercises correctly and with ease.\n \n
+        Vestibo is a tool to help those who have similar vestibular therapy prescribed to them to do at home by their health care providers.
+        It\'s also a tool which can be used by health care professionals such as vestibular specialists to help their patients perform exercises both in a medical environment and at home. The types of exercises this app can assist with are
+        VOR (Vestibular Ocular Reflex) exercises, gaze stabilization exercises and any others which require a metronome to perform consistently.
+
+</string>
+
+    <string-array name="dizzyness">
+        <item>N/A</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
