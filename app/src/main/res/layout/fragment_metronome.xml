@@ -325,7 +325,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:textSize="32dp"
+        android:textSize="25dp"
         android:text="TextView"
         android:gravity="center_horizontal"/>
 
@@ -334,7 +334,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:textSize="20dp"
+        android:textSize="16dp"
         android:text="TextView"
         android:gravity="center_horizontal"/>
 

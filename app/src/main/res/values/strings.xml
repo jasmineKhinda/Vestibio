@@ -58,6 +58,8 @@
     <string name="nav_menu_donate">Donate</string>
     <string name="nav_menu_disclaimer">Disclaimer</string>
     <string name="nav_menu_about">About Vestibio</string>
+    <string name="set_countdown">Reps countdown:</string>
+    <string name="rest_countdown">Rest countdown:</string>
 
 
     <string name="navigation_drawer_open">Nav Drawer Opened</string>
@@ -93,6 +95,7 @@
     <string name="na">  N/A </string>
 
     <string name="song_will_start">Track will start in... </string>
+    <string name="session_tab">SessionTab </string>
 
     <string name="service_started">Metronome service started</string>
     <string name="service_stopped">Metronome service stopped</string>
@@ -137,5 +140,13 @@ Accordingly, before taking any actions based upon such information, we encourage
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
+    <string-array name="donation_google_catalog_values">
+        <item>1 Euro</item>
+        <item>2 Euros</item>
+        <item>3 Euros</item>
+        <item>5 Euros</item>
+        <item>8 Euros</item>
+        <item>13 Euros</item>
+    </string-array>
 </resources>
 

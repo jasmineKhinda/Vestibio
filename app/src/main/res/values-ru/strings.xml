@@ -28,4 +28,124 @@
     <string name="enter_title">Введите название трека</string>
     <string name="service_started">Служба стартовала</string>
     <string name="service_stopped">Служба остановлена</string>
-</resources>
+
+    <string name="notes">Session Notes</string>
+    <string name="title_section3">Graphs</string>
+
+    <string name="bottom_nav_metronome">Metronome</string>
+    <string name="bottom_nav_log">Sessions</string>
+    <string name="bottom_nav_graphs">Graphs</string>
+
+
+
+    <string name="addsession">Session Details</string>
+
+
+
+    <string name="Log">Log Session</string>
+    <string name="vestibular_session">Vestibular Session</string>
+    <string name="title_session">Session Title</string>
+    <string name="notes_hint">(Optional) Session Notes...</string>
+
+
+
+    <string name="duration_toast_exceeded">Pick a duration between 10 s and 120 s</string>
+    <string name="session_completed">Session completed, good work!</string>
+    <string name="rest_toast_exceeded">Pick rest duration between 1 s and 120 s</string>
+    <string name="sets_toast_exceeded">Pick # of sets between 1 and 15</string>
+
+    <string name="ex_duration">Reps</string>
+    <string name="ex_duration_sec">(seconds)</string>
+    <string name="empty_state">No sessions logged yet</string>
+    <string name="empty_state_instruction">Complete a session in Metronome to start seeing them here</string>
+    <string name="optional">Optional fields:</string>
+    <string name="total_session">Total session time: </string>
+    <string name="ex_number_sets">Sets</string>
+    <string name="rest_duration">Rest</string>
+
+
+    <string name="session">Session</string>
+
+    <string name="nav_menu_metronome">Metronome</string>
+    <string name="nav_menu_donate">Donate</string>
+    <string name="nav_menu_disclaimer">Disclaimer</string>
+    <string name="nav_menu_about">About Vestibio</string>
+    <string name="set_countdown">Reps countdown:</string>
+    <string name="rest_countdown">Rest countdown:</string>
+
+
+    <string name="navigation_drawer_open">Nav Drawer Opened</string>
+    <string name="navigation_drawer_closed">Nav Drawer Closed</string>
+    <string name="graphBpmTitle_AllSessions">BPM/Session - all sessions</string>
+    <string name="graphDizzyTitle_AllSessions">Dizzy/Session - all sessions</string>
+    <string name="graphBpmTitle_40Sessions">BPM/Session - last 40 sessions</string>
+    <string name="graphDizzyTitle_40Sessions">Dizzy/Session - last 40 sessions</string>
+    <string name="graph_sessionNumber">Session #</string>
+    <string name="graph_dizzyLevel">Dizziness Level</string>
+    <string name="graph_Bpm">BPM</string>
+
+
+
+    <string name="logAccept">Add Session</string>
+    <string name="continue_button">Continue</string>
+    <string name="finish_button">Finish</string>
+    <string name="logCancel">Cancel</string>
+    <string name="dizzyness_level_input">Rate dizziness (scale 1 -10): </string>
+
+    <string name="bpm_tag">BPM</string>
+    <string name="duration_tag">  Duration: </string>
+    <string name="date_tag">  Date: </string>
+    <string name="dizziness_tag">  Dizziness Level: </string>
+    <string name="graph_nodata">Add sessions to see data</string>
+
+    <string name="dizziness_hint">  Dizzy Level (1-10) </string>
+    <string name="na">  N/A </string>
+
+    <string name="song_will_start">Track will start in... </string>
+    <string name="session_tab">SessionTab </string>
+
+
+    <string name="disclaimer"> DISCLAIMER AND TERMS \n \n
+
+The information provided by Vestibio (“we”, “us”, or “our”) on www.vestibio.com (the “Site”) [and our mobile application] is for general informational purposes only. All information on the Site [and our mobile application] is provided in good faith, however we make no representation or warranty of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability or completeness of any information on the Site [or our mobile application].
+
+Under no circumstance shall we have any liability to you for any loss or damage of any kind incurred as a result of the use of the site [or our mobile application] or reliance on any information provided on the site [and our mobile application]. Your use of the site [and our mobile application] and your reliance on any information on the site [and our mobile application] is solely at your own risk.\n \n
+
+HEALTH DISCLAIMER\n\n
+
+The Site cannot and does not contain heath advice. The health information is provided for general informational and educational purposes only, and is not a substitute for professional health advice.
+
+Accordingly, before taking any actions based upon such information, we encourage you to consult with the appropriate medical and healthcare professionals. We do not provide any kind of health advice. The use or reliance of any information contained on this site [or our mobile application] is solely at your own risk.</string>
+
+
+
+    <string name="about"> ABOUT VESTIBIO \n \n
+
+        The Vestibio App was intially developed for my mother who suffered from a vestibular disorder/vertigo which required VRT (Vestibular Rehabilitation Therapy) to recover. This app helped her perform daily exercises without having to keep track or reps, sets or resting durations, which in turn allowed her to focus on performing the exercises correctly and with ease.\n \n
+        Vestibo is a tool to help those who have similar vestibular therapy prescribed to them to do at home by their health care providers.
+        It\'s also a tool which can be used by health care professionals such as vestibular specialists to help their patients perform exercises both in a medical environment and at home. The types of exercises this app can assist with are
+        VOR (Vestibular Ocular Reflex) exercises, gaze stabilization exercises and any others which require a metronome to perform consistently.
+
+</string>
+
+    <string-array name="dizzyness">
+        <item>N/A</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+
+
+    </resources>

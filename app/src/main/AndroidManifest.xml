@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.andreyaleev.vestibio" >
+    package="com.amagesoftware.vestibio" >
+
+    <uses-permission android:name="com.android.vending.BILLING" />
 
     <application
         android:allowBackup="true"
-        android:name="com.andreyaleev.vestibio.App"
+        android:name="com.amagesoftware.vestibio.App"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
+
         tools:replace="icon,theme">
 
 
         <activity
-            android:name="com.andreyaleev.vestibio.activities.MainActivity"
+            android:name="com.amagesoftware.vestibio.activities.MainActivity"
             android:screenOrientation="portrait"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateHidden"
@@ -24,13 +27,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.andreyaleev.vestibio.activities.SessionActivity"
+            android:name="com.amagesoftware.vestibio.activities.SessionActivity"
             android:windowSoftInputMode="stateHidden"
             android:label="@string/session"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait">
         </activity>
-        <service android:name="com.andreyaleev.vestibio.services.MetronomeService"></service>
+
+        <activity
+            android:name="com.amagesoftware.vestibio.fragments.DonateFragment"
+            android:windowSoftInputMode="stateHidden"
+            android:theme="@style/AppDonateTheme"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <service android:name="com.amagesoftware.vestibio.services.MetronomeService"></service>
     </application>
 
 </manifest>

@@ -21,7 +21,8 @@
         android:layout_marginRight="20dp"
         android:text="@string/continue_button"
         android:background="@drawable/border_button"
-        android:backgroundTint="@color/button_green"
+        android:backgroundTint="@color/button_green_cont"
+        android:drawableTint="@color/button_green_cont"
         android:textColor="@color/theme50"
 
         />
@@ -32,7 +33,8 @@
         android:layout_height="wrap_content"
 
         android:background="@drawable/border_button"
-        android:backgroundTint="@color/button_red"
+        android:backgroundTint="@color/button_red_finish"
+        android:drawableTint="@color/button_red_finish"
         android:text="@string/finish_button"
         android:textColor="@color/theme50"
 
