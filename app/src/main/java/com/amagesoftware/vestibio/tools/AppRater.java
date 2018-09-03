@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.Build;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -34,7 +35,7 @@ public class AppRater {
         SharedPreferences prefs = mContext.getSharedPreferences("apprater", 0);
         Log.d("vestibio", "dontshowagain"+ prefs.getBoolean("dontshowagain", false) );
         ///TODO: UNCOMMENT FOLLOWING LINE BEFORE RELEASE
-        // /if (prefs.getBoolean("dontshowagain", false)) { return ; }
+        // if (prefs.getBoolean("dontshowagain", false)) { return ; }
 
         SharedPreferences.Editor editor = prefs.edit();
 
@@ -81,6 +82,7 @@ public class AppRater {
         ll.setOrientation(LinearLayout.VERTICAL);
         ll.setBackgroundColor(mContext.getResources().getColor(R.color.background));
         ll.setHorizontalGravity(Gravity.CENTER);
+
         ll.setPadding(0,5,0,50);
 
 
@@ -104,7 +106,7 @@ public class AppRater {
         tv2.setText("If yes, we'd love to hear! Please take a moment to rate us. Thanks so much!");
 
         //tv.setText("Thanks for using " + APP_TITLE + "! If this app has been useful in your recovery so far, we'd love to hear. Thanks for your support!");
-        tv2.setGravity(Gravity.LEFT);
+        tv2.setGravity(Gravity.CENTER);
 
         tv2.setTextSize(16);
         //tv.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
@@ -120,7 +122,11 @@ public class AppRater {
         b1.setTypeface(tv.getTypeface(), Typeface.BOLD);
         b1.setTextColor(mContext.getResources().getColor(R.color.themeGradientPrimary));
         b1.setBackgroundColor(mContext.getResources().getColor(R.color.background));
-       // b1.setTextColor(mContext.getResources().getColor(R.color.grey_900));
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            b1.setStateListAnimator(null);
+        }
+
+
         b1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + APP_PNAME)));
@@ -139,7 +145,11 @@ public class AppRater {
         b2.setTextColor(mContext.getResources().getColor(R.color.themeGradientPrimary));
         b2.setTypeface(tv.getTypeface(), Typeface.BOLD);
         b2.setBackgroundColor(mContext.getResources().getColor(R.color.background));
-       // b2.setTextColor(mContext.getResources().getColor(R.color.themeGradientPrimary));
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            b2.setStateListAnimator(null);
+        }
+
         b2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (editor != null) {
@@ -157,7 +167,11 @@ public class AppRater {
         b3.setBackgroundColor(mContext.getResources().getColor(R.color.background));
         b3.setTextColor(mContext.getResources().getColor(R.color.themeGradientPrimary));
         b3.setTypeface(tv.getTypeface(), Typeface.BOLD);
-        //b3.setTextColor(mContext.getResources().getColor(R.color.grey_900));
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            b3.setStateListAnimator(null);
+        }
+
         b3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (editor != null) {
