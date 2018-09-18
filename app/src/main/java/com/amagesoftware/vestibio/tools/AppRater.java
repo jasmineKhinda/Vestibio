@@ -34,8 +34,8 @@ public class AppRater {
         APP_PNAME = mContext.getPackageName();
         SharedPreferences prefs = mContext.getSharedPreferences("apprater", 0);
         Log.d("vestibio", "dontshowagain"+ prefs.getBoolean("dontshowagain", false) );
-        ///TODO: UNCOMMENT FOLLOWING LINE BEFORE RELEASE
-        // if (prefs.getBoolean("dontshowagain", false)) { return ; }
+
+        if (prefs.getBoolean("dontshowagain", false)) { return ; }
 
         SharedPreferences.Editor editor = prefs.edit();
 

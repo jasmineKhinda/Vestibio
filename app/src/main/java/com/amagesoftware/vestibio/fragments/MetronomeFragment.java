@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -152,7 +153,7 @@ public class MetronomeFragment extends MetronomableFragment {
 
 
         numberPicker = (NumberPicker) getView().findViewById(R.id.number_picker);
-        numberPicker.setMax(121);
+        numberPicker.setMax(240);
         numberPicker.setMin(10);
         numberPicker.setUnit(1);
         numberPicker.setValue(savedBeats);
@@ -168,7 +169,7 @@ public class MetronomeFragment extends MetronomableFragment {
 
 
         numberPickerSets = (NumberPicker) getView().findViewById(R.id.sets_picker);
-        numberPickerSets.setMax(16);
+        numberPickerSets.setMax(20);
         numberPickerSets.setMin(1);
         numberPickerSets.setUnit(1);
         numberPickerSets.setValue(savedSets);
@@ -178,7 +179,7 @@ public class MetronomeFragment extends MetronomableFragment {
         numberPickerSets.setOnEditorActionListener(new DefaultOnEditorActionListener(numberPickerSets));
 
         numberPickerRest = (NumberPicker) getView().findViewById(R.id.rest_picker);
-        numberPickerRest.setMax(121);
+        numberPickerRest.setMax(240);
         numberPickerRest.setMin(1);
         numberPickerRest.setUnit(1);
         numberPickerRest.setValue(savedRest);
@@ -191,38 +192,13 @@ public class MetronomeFragment extends MetronomableFragment {
         totalTime.setText(getResources().getString(R.string.total_session).toString() + " "+timeConversion(time) );
 
 
-//        ArrayAdapter<Beats> arrayBeats = new ArrayAdapter<>(activity, R.layout.spinner_item, Beats.values());
-//        spinnerBeat.setAdapter(arrayBeats);
-//        spinnerBeat.setSelection(savedBeats);
-//        arrayBeats.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-//        spinnerBeat.setVerticalScrollBarEnabled(true);
-//       spinnerBeat.setOnItemSelectedListener(beatsSpinnerListener);
-//
-//        final List<Beats> mGoalFilterArrayList = Arrays.asList(Beats.values());
-
-//        CustomSpinnerAdapter customSpinnerAdapter = new CustomSpinnerAdapter (getContext(),android.R.layout.simple_dropdown_item_1line, mGoalFilterArrayList);
-//        customSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_list_item_activated_1);
-//        final Spinner mNavigationSpinner = (Spinner) getView().findViewById(R.id.spinnerBeat);
-//        mNavigationSpinner.setAdapter(customSpinnerAdapter);
-//        mNavigationSpinner.setOnItemSelectedListener(beatsSpinnerListener);
-//        mNavigationSpinner.setVerticalScrollBarEnabled(true);
-////
-
-
-//        ArrayAdapter<NoteValues> noteValues =
-//                new ArrayAdapter<>(getActivity(),
-//                        R.layout.spinner_item, NoteValues.values());
-//        spinnerNote.setAdapter(noteValues);
-//        spinnerNote.setSelection(NoteValues.four.ordinal());
-//        noteValues.setDropDownViewResource(R.layout.spinner_dropdown);
-
         seekbarBPM.getProgressDrawable().setColorFilter(
                 new PorterDuffColorFilter(getResources().getColor(R.color.primary), PorterDuff.Mode.SRC_ATOP));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             seekbarBPM.getThumb().setColorFilter(getResources().getColor(R.color.primary), PorterDuff.Mode.SRC_ATOP);
         }
 
-        seekbarBPM.setProgress((savedBPM - 40));
+        seekbarBPM.setProgress((savedBPM - 1));
         seekbarBPM.setOnSeekBarChangeListener(bpmSeekBarListener);
 
         btnStartStop.setOnClickListener(view -> onStartStopClick());
@@ -370,11 +346,8 @@ public class MetronomeFragment extends MetronomableFragment {
 
         MetronomeSingleton.getInstance().setPlay(false);
         Utils.checkAndStopService(getContext());
-        activity.getBottomViewNavigation().setVisibility(View.VISIBLE);
+       // activity.getBottomViewNavigation().setVisibility(View.VISIBLE);
         activity.getViewToolbar().setVisibility(View.VISIBLE);
-        //uncomment here
-//        activity.getSlidingTabLayout().setVisibility(View.VISIBLE);
-//        activity.getViewPager().setPagingEnabled(true);
         btnStartStop.setText(R.string.start);
         contentView.setKeepScreenOn(false);
         issueServiceNotification();
@@ -709,7 +682,7 @@ private void minBpmGuard() {
     private SeekBar.OnSeekBarChangeListener bpmSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
         @Override
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            int bpm = (short) (((short) seekBar.getProgress()) + 40);
+            int bpm = (short) (((short) seekBar.getProgress()) + 1);
             tvBPM.setText(String.valueOf(bpm));
         }
 
@@ -719,7 +692,7 @@ private void minBpmGuard() {
 
         @Override
         public void onStopTrackingTouch(SeekBar seekBar) {
-            int bpm = (short) (((short) seekBar.getProgress()) + 40);
+            int bpm = (short) (((short) seekBar.getProgress()) + 1);
             MetronomeSingleton.getInstance().setBpm(bpm);
             prefs.edit().putInt(Constants.SELECTED_BPM, bpm).apply();
             updateMetronome();
@@ -1027,6 +1000,7 @@ private void minBpmGuard() {
 
     @Override
     public void onDestroy() {
+
 
         super.onDestroy();
         Log.d("vestibio", "Vestibio:onDestroy: in metronome frag ");

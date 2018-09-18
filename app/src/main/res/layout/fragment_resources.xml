@@ -7,59 +7,36 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:backgroundTint="@color/pure_white"
         tools:context="com.amagesoftware.vestibio.fragments.DisclaimerFragment">
+
         <!-- TODO: Update blank fragment layout -->
         <LinearLayout
-            android:id="@+id/about"
+            android:id="@+id/resources_activity_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:backgroundTint="@color/pure_white"
-
             >
             <TextView
-                android:id="@+id/story"
+                android:id="@+id/note"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/about"
+                android:text="@string/note"
                 android:layout_margin="10dp"
-
                 android:textColor="@color/grey_600"
                 android:textSize="@dimen/text_size_20"/>
 
-
             <TextView
-                android:id="@+id/version"
+                android:id="@+id/resourceslink"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="@string/version"
-                android:layout_marginTop="20dp"
-                android:backgroundTint="@color/pure_white"
-                android:textColor="@color/grey_600"
-                android:textSize="14dp"/>
-            <TextView
-                android:id="@+id/website"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/about"
-                android:layout_gravity="center"
-
-                android:gravity="center"
+                android:text="@string/disclaimer_link"
+                android:layout_margin="10dp"
                 android:textColor="@color/grey_600"
                 android:textSize="@dimen/text_size_title"/>
 
 
 
 
-
         </LinearLayout>
-
-    <!-- TODO: Update blank fragment layout -->
-
     </FrameLayout>
-
-
 </ScrollView>

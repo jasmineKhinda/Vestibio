@@ -40,7 +40,7 @@ public class SessionActivity extends BaseActivity {
 
         public static String SESSION_TAG = "SESSION_TAG";
         public static String RATER_SHOW = "RATER_SHOW";
-        private Boolean showRater= false;
+
 
 
         @BindView(R.id.edtTitle)
@@ -64,7 +64,7 @@ public class SessionActivity extends BaseActivity {
         Spinner dizzyLevel;
         int sessionId=0;
 
-
+    private Boolean showRater= false;
 
     private RecyclerView.LayoutManager mLayoutManager;
 
@@ -142,10 +142,7 @@ public class SessionActivity extends BaseActivity {
         dataSource = new SessionsDataSource(this);
         dataSource.open();
 
-        if(showRater){
-            AppRater.app_launched(this);
-            showRater= false;
-        }
+
 
 
 
@@ -174,6 +171,8 @@ public class SessionActivity extends BaseActivity {
         int id = item.getItemId();
         if (id == R.id.action_apply) {
             saveSong();
+
+
             return true;
         }
         if (id == R.id.action_remove) {
@@ -182,6 +181,7 @@ public class SessionActivity extends BaseActivity {
         } else if (id == android.R.id.home) {
             saveSong();
             onBackPressed();
+
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -226,7 +226,14 @@ public class SessionActivity extends BaseActivity {
             }
             //onBackPressed();
             Intent viewTaskIntent = new Intent(getApplicationContext(), MainActivity.class);
-            viewTaskIntent.putExtra("TAB", getResources().getString(R.string.session_tab));
+            Bundle bundle = new Bundle();
+            bundle.putString("TAB", getResources().getString(R.string.session_tab));
+            bundle.putBoolean(SessionActivity.RATER_SHOW, showRater);
+            viewTaskIntent.putExtras(bundle);
+
+            //viewTaskIntent.putExtra("TAB", getResources().getString(R.string.session_tab));
+            //viewTaskIntent.putExtra("SHOWRATER", getResources().getString(R.string.session_tab));
+
             this.startActivity(viewTaskIntent);
 
         } else {
@@ -250,6 +257,7 @@ public class SessionActivity extends BaseActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(getString(R.string.confirm_delete)).setPositiveButton(getString(R.string.yes), dialogClickListener)
                 .setNegativeButton(getString(R.string.no), dialogClickListener).show();
+
 
     }
 

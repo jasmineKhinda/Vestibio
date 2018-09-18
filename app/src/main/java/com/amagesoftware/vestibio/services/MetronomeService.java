@@ -70,9 +70,9 @@ public class MetronomeService extends Service {
             }
         }
         this.audioGenerator.createPlayer();
-        this.beatSound = MidiNotes.frequency(MidiNotes.A5);
+        this.beatSound = MidiNotes.frequency(MidiNotes.FisGb5);
         this.sound = MidiNotes.frequency(MidiNotes.FisGb5);
-
+//FisGb5
         if (snippets == null) {
             calcSilence();
             this.metronomeThread = new MetronomeThread();

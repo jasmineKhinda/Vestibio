@@ -7,19 +7,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/pure_white"
     tools:context="com.amagesoftware.vestibio.fragments.DisclaimerFragment">
 
     <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:id="@+id/donations_activity_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        >
+        <TextView
+            android:id="@+id/note"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/note"
+            android:layout_margin="10dp"
+
+            android:textColor="@color/grey_600"
+            android:textSize="@dimen/text_size_20"/>
 
     <TextView
+        android:id="@+id/disclaimerId"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/disclaimer"
+        android:text="@string/disclaimer_link"
         android:layout_margin="10dp"
-        android:backgroundTint="@color/pure_white"
+
         android:textColor="@color/grey_600"
         android:textSize="@dimen/text_size_title"/>
 
+    <TextView
+        android:id="@+id/privacyId"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/privacy_policy_link"
+        android:layout_margin="10dp"
+
+        android:textColor="@color/grey_600"
+        android:textSize="@dimen/text_size_title"/>
+
+
+    </LinearLayout>
 </FrameLayout>
 </ScrollView>

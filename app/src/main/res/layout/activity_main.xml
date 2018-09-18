@@ -62,7 +62,6 @@
                 <!--android:layout_height="match_parent"-->
                 <!--android:dropDownVerticalOffset="40dp"-->
                 <!--/>-->
-
             <TextView
                 android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"
@@ -72,6 +71,8 @@
                 android:fontFamily="cursive"
                 android:text="Toolbar Title"
                 android:textColor="@color/pure_white" />
+
+
 
         </android.support.v7.widget.Toolbar>
 
@@ -118,7 +119,7 @@
         app:menu="@menu/drawer_view"
         app:headerLayout="@layout/nav_header"
         app:itemBackground="@drawable/nav_item_drawable"
-        android:backgroundTint="@color/pure_white"
+        android:backgroundTint="@color/themeGradientLighter_background"
         app:itemTextColor="@color/grey_600"/>
 
 </android.support.v4.widget.DrawerLayout>

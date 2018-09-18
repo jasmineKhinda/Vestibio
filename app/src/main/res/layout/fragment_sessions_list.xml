@@ -10,7 +10,8 @@
         android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:foregroundGravity="center">
+        android:foregroundGravity="center"
+        >
 
         <com.amagesoftware.vestibio.tools.EmptyRecyclerView
             android:id="@+id/rvPrograms"

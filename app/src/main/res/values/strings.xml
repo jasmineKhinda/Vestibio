@@ -19,6 +19,7 @@
 
 
     <string name="start">Start</string>
+    <string name="backup">Backup to Google Drive</string>
     <string name="Log">Log Session</string>
     <string name="vestibular_session">Vestibular Session</string>
     <string name="title_session">Session Title</string>
@@ -30,10 +31,10 @@
     <string name="minus" translatable="false">-</string>
     <string name="snippet">Snippet</string>
     <string name="snippet_number">Snippet %d</string>
-    <string name="duration_toast_exceeded">Pick a duration between 10 s and 120 s</string>
+    <string name="duration_toast_exceeded">Pick a duration between 10 s and 240 s</string>
     <string name="session_completed">Session completed, good work!</string>
-    <string name="rest_toast_exceeded">Pick rest duration between 1 s and 120 s</string>
-    <string name="sets_toast_exceeded">Pick # of sets between 1 and 15</string>
+    <string name="rest_toast_exceeded">Pick rest duration between 1 s and 240 s</string>
+    <string name="sets_toast_exceeded">Pick # of sets between 1 and 20</string>
     <string name="bpm">BPM</string>
     <string name="ex_duration">Reps</string>
     <string name="ex_duration_sec">(seconds)</string>
@@ -56,8 +57,12 @@
     <string name="empty_field">Empty field</string>
     <string name="nav_menu_metronome">Metronome</string>
     <string name="nav_menu_donate">Donate</string>
-    <string name="nav_menu_disclaimer">Disclaimer</string>
+    <string name="nav_menu_disclaimer">Disclaimer &amp; Privacy</string>
+    <string name="nav_menu_resources"> Vestibular Resources</string>
     <string name="nav_menu_about">About Vestibio</string>
+    <string name="nav_menu_rate">Rate us</string>
+    <string name="nav_menu_backup">Backup Data</string>
+
     <string name="set_countdown">Reps countdown:</string>
     <string name="rest_countdown">Rest countdown:</string>
 
@@ -93,12 +98,23 @@
 
     <string name="dizziness_hint">  Dizzy Level (1-10) </string>
     <string name="na">  N/A </string>
+    <string name="help">  Help </string>
 
     <string name="song_will_start">Track will start in... </string>
     <string name="session_tab">SessionTab </string>
 
     <string name="service_started">Metronome service started</string>
     <string name="service_stopped">Metronome service stopped</string>
+    <string name="disclaimer_link">Read Vestibio\'s Disclaimer and Terms</string>
+
+    <string name="privacy_policy_link">Read Vestibio\'s Privacy Policy </string>
+    <string name="resources_link">Vestibular Disorder Resources List </string>
+    <string name="privacy_policy_url">http://www.vestibio.com/privacy-policy-vestibio-app/</string>
+    <string name="resources_url">http://www.vestibio.com/resources/</string>
+    <string name="about_url">http://www.vestibio.com/about-us/</string>
+    <string name="privacy_disclaimer_url">http://www.vestibio.com/disclaimer-and-terms/</string>
+    <string name="note">The links below will direct you to Vestibio\'s official website.</string>
+    <string name="read_more_about">Read more about Vestibio\'s story including our Design and Pricing</string>
     <string name="disclaimer"> DISCLAIMER AND TERMS \n \n
 
 The information provided by Vestibio (“we”, “us”, or “our”) on www.vestibio.com (the “Site”) [and our mobile application] is for general informational purposes only. All information on the Site [and our mobile application] is provided in good faith, however we make no representation or warranty of any kind, express or implied, regarding the accuracy, adequacy, validity, reliability, availability or completeness of any information on the Site [or our mobile application].
@@ -113,14 +129,10 @@ Accordingly, before taking any actions based upon such information, we encourage
 
 
 
-    <string name="about"> ABOUT VESTIBIO \n \n
-
-        The Vestibio App was intially developed for my mother who suffered from a vestibular disorder/vertigo which required VRT (Vestibular Rehabilitation Therapy) to recover. This app helped her perform daily exercises without having to keep track or reps, sets or resting durations, which in turn allowed her to focus on performing the exercises correctly and with ease.\n \n
-        Vestibo is a tool to help those who have similar vestibular therapy prescribed to them to do at home by their health care providers.
-        It\'s also a tool which can be used by health care professionals such as vestibular specialists to help their patients perform exercises both in a medical environment and at home. The types of exercises this app can assist with are
-        VOR (Vestibular Ocular Reflex) exercises, gaze stabilization exercises and any others which require a metronome to perform consistently.
-
-</string>
+    <string name="about"> Want to know more? Read our story on Vestibio\'s official site</string>
+    <string name="version">Version </string>
+    <string name="website_url">http://www.vestibio.com/</string>
+    <string name="website">www.vestibio.com</string>
 
     <string-array name="dizzyness">
         <item>N/A</item>

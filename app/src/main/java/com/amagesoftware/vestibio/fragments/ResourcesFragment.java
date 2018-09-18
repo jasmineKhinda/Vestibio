@@ -1,5 +1,8 @@
 package com.amagesoftware.vestibio.fragments;
 
+/**
+ * Created by jasmine on 11/09/18.
+ */
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -19,15 +22,8 @@ import com.travijuu.numberpicker.library.NumberPicker;
 
 import butterknife.BindView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link DisclaimerFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link DisclaimerFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class DisclaimerFragment extends Fragment {
+
+public class ResourcesFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -36,14 +32,9 @@ public class DisclaimerFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    @BindView(R.id.disclaimerId)
-    TextView disclaimer;
-    @BindView(R.id.privacyId)
-    TextView privacy;
-    @BindView(R.id.note)
-    TextView note;
 
-    public DisclaimerFragment() {
+
+    public ResourcesFragment() {
         // Required empty public constructor
     }
 
@@ -56,8 +47,8 @@ public class DisclaimerFragment extends Fragment {
      * @return A new instance of fragment DisclaimerFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static DisclaimerFragment newInstance(String param1, String param2) {
-        DisclaimerFragment fragment = new DisclaimerFragment();
+    public static ResourcesFragment newInstance(String param1, String param2) {
+        ResourcesFragment fragment = new ResourcesFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -79,23 +70,15 @@ public class DisclaimerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_disclaimer, container, false);
+        View view = inflater.inflate(R.layout.fragment_resources, container, false);
 
-        SpannableString privacyPolicy = new SpannableString(getString(R.string.privacy_policy_link));
-        String urlPrivacy = getString(R.string.privacy_policy_url);
-        privacyPolicy.setSpan(new URLSpan(urlPrivacy), 16, privacyPolicy.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        SpannableString resources = new SpannableString(getString(R.string.resources_link));
+        String urlPrivacy = getString(R.string.resources_url);
+        resources.setSpan(new URLSpan(urlPrivacy), 20, resources.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-        SpannableString disclaimerPolicy = new SpannableString(getString(R.string.disclaimer_link));
-        String urlDisclaimer = getString(R.string.privacy_disclaimer_url);
-        disclaimerPolicy.setSpan(new URLSpan(urlDisclaimer), 16, disclaimerPolicy.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        TextView disclaimer = (TextView) view.findViewById(R.id.disclaimerId);
-        disclaimer.setText(disclaimerPolicy);
-        disclaimer.setMovementMethod(LinkMovementMethod.getInstance()); // enable clicking on url span
-
-        TextView privacy = (TextView) view.findViewById(R.id.privacyId);
-        privacy.setText(privacyPolicy);
-        privacy.setMovementMethod(LinkMovementMethod.getInstance()); // enable clicking on url span
+        TextView res = (TextView) view.findViewById(R.id.resourceslink);
+        res.setText(resources);
+        res.setMovementMethod(LinkMovementMethod.getInstance()); // enable clicking on url span
 
         return view;
 

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/themeGradientLighter_background">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:float="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:orientation="vertical"
+        tools:context=".activities.SongActivity">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primary"
+            android:elevation="3dp"
+            android:minHeight="?attr/actionBarSize"
+            android:titleTextColor="@color/theme50"/>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/themeGradientLighter_background"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/base_margin_eight"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:id="@+id/empty_view"
+                    android:layout_width="175dp"
+                    android:layout_height="175dp"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/ic_backup_foreground"
+                    android:background="@color/themeGradientLighter_background"
+
+                    android:alpha="0.8"
+                    />
+
+                <Button
+                    android:id="@+id/activity_backup_drive_button_backup"
+                    style="@style/LogButton"
+
+                    android:layout_width="250dp"
+                    android:layout_height="75dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/border_button"
+                    android:paddingHorizontal="40dp"
+                    android:text="@string/backup"
+                    android:textAllCaps="false"
+                    android:textSize="20dp" />
+
+
+
+
+    <Button
+        android:id="@+id/activity_backup_drive_button_restore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Restore"
+        android:textColor="@color/pure_white"/>
+
+
+</LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/driveoutput"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/driveoutputList"
+            />
+
+    </LinearLayout>
+</ScrollView>

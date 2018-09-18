@@ -9,8 +9,8 @@ public class Constants {
 
     public static final int SERVICE_NOTIFICATION_ID = 5505;
 
-    public final static short BPM_MIN = 40;
-    public final static short BPM_MAX = 208;
+    public final static short BPM_MIN = 1;
+    public final static short BPM_MAX = 260;
     public final static short BPM_DEFAULT = 100;
 
     public final static String BPM = "BPM";

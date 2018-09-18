@@ -1,11 +1,18 @@
 package com.amagesoftware.vestibio.fragments;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.style.URLSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.amagesoftware.vestibio.R;
 
@@ -63,7 +70,40 @@ public class AboutVestibioFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_about_vestibio, container, false);
+        View view = inflater.inflate(R.layout.fragment_about_vestibio, container, false);
+        String vrs = "0.0";
+
+
+        SpannableString about = new SpannableString(getString(R.string.about));
+        String urlAbout = getString(R.string.about_url);
+        about.setSpan(new URLSpan(urlAbout), 19, 33, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+        TextView aboutStory = (TextView) view.findViewById(R.id.story);
+        aboutStory.setText(about);
+        aboutStory.setMovementMethod(LinkMovementMethod.getInstance());
+
+        SpannableString website = new SpannableString(getString(R.string.website));
+        String websiteUrl = getString(R.string.website_url);
+        website.setSpan(new URLSpan(websiteUrl), 0, website.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+        TextView websiteLink = (TextView) view.findViewById(R.id.website);
+        websiteLink.setText(website);
+        websiteLink.setMovementMethod(LinkMovementMethod.getInstance()); // enable clicking on url span
+
+
+        TextView version = (TextView) view.findViewById(R.id.version);
+
+        try {
+            PackageInfo pInfo = getContext().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0);
+            vrs = pInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        version.setText(getString(R.string.version) + vrs);
+
+        return view;
     }
 
 

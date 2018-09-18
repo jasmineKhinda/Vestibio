@@ -91,11 +91,6 @@ public class GraphFragment extends Fragment {
             graphTextDizzy40.setVisibility(View.VISIBLE);
         }
 
-//        if(sessions.size()>0){
-//            graphDizzy.setAlpha(1f);
-//        }else{
-//            graphDizzy.setAlpha(0.2f);
-//        }
 
 
         DataPoint[] dp = new DataPoint[sessions.size()];
@@ -109,22 +104,12 @@ public class GraphFragment extends Fragment {
 
         Log.d("Vestibio", "session size " + sessions.size());
         DataPoint[] dp40;
-//        if (sessions.size() >39){
-//             dp40 = new DataPoint[40];
-//        }else{
-             dp40 = new DataPoint[sessions.size()];
- //       }
+
+        dp40 = new DataPoint[sessions.size()];
+
 
         int index40=0;
-//        if (sessions.size() >39){
-//            for (int i =39; i >= 0; i--){
-//                dp40[index40] = new DataPoint(index40, sessions.get(i).getBpm());
-//                Log.d("Vestibio1", "bpm " + sessions.get(i).getBpm());
-//                Log.d("Vestibio1", "index " + index40);
-//                Log.d("Vestibio1", "dp i " + dp40[index40]);
-//                index40++;
-//            }
-//        }else{
+
             for (int i =sessions.size()-1; i >= 0; i--){
                 dp40[index40] = new DataPoint(index40, sessions.get(i).getBpm());
                 Log.d("Vestibio2", "index " + sessions.get(i).getBpm());
@@ -153,7 +138,7 @@ public class GraphFragment extends Fragment {
         viewport1.setYAxisBoundsManual(true);
         viewport1.setXAxisBoundsManual(true);
         viewport1.setMinY(0);
-        viewport1.setMaxY(208);
+        viewport1.setMaxY(280);
         if (sessions.size() >40){
             viewport1.setMinX((sessions.size()-40));
             viewport1.setMaxX(sessions.size()+1);
@@ -196,7 +181,7 @@ public class GraphFragment extends Fragment {
         viewport.setYAxisBoundsManual(true);
         viewport.setXAxisBoundsManual(true);
         viewport.setMinY(0);
-        viewport.setMaxY(208);
+        viewport.setMaxY(280);
         viewport.setMinX(0);
         viewport.setMaxX(sessions.size()+1);
         viewport.setScrollable(true);

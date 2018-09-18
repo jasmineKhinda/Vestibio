@@ -39,7 +39,10 @@ import com.amagesoftware.vestibio.fragments.DisclaimerFragment;
 import com.amagesoftware.vestibio.fragments.DonateFragment;
 import com.amagesoftware.vestibio.fragments.GraphFragment;
 import com.amagesoftware.vestibio.fragments.MetronomeFragment;
+import com.amagesoftware.vestibio.fragments.ResourcesFragment;
 import com.amagesoftware.vestibio.fragments.SessionListFragment;
+import com.amagesoftware.vestibio.metronome.Session;
+import com.amagesoftware.vestibio.tools.AppRater;
 
 
 import butterknife.BindView;
@@ -47,17 +50,20 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-//    @BindView(R.id.slidingTabs)
+    //    @BindView(R.id.slidingTabs)
 //    SlidingTabLayout mSlidingTabLayout;
 //    @BindView(R.id.viewPager)
 //    CustomViewPager mViewPager;
-     @BindView(R.id.bottomNavigation)
-     BottomNavigationView mBottomNavigationView;
-     Toolbar toolbarTop;
-     View layout;
+    @BindView(R.id.bottomNavigation)
+    BottomNavigationView mBottomNavigationView;
+    Toolbar toolbarTop;
+    View layout;
     android.support.v4.app.Fragment fragment;
-    private String selectedTab ="";
-
+    private String selectedTab = "";
+    private static String RATER_SHOW = "RATER_SHOW";
+    private static String TAB = "TAB";
+    private Fragment selectedFragment;
+    private Boolean showRater= false;
 
 
     @Override
@@ -69,9 +75,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             super.onBackPressed();
         }
     }
-
-
-
 
 
 //    private SectionsPagerAdapter mSectionsPagerAdapter;
@@ -89,12 +92,22 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         }
 
+        if (getIntent().getExtras() != null) {
+            Bundle bundle = getIntent().getExtras();
 
-        if(getIntent().getExtras() != null){
-            selectedTab = getIntent().getExtras().getString("TAB");
+                this.selectedTab =  bundle.getString(TAB);
+                this.showRater = (Boolean) bundle.getBoolean(RATER_SHOW);
         }
 
 
+//        if (getIntent().getExtras() != null) {
+//            selectedTab = getIntent().getExtras().getString("TAB");
+//        }
+
+            if(showRater){
+                AppRater.app_launched(this);
+                showRater= false;
+            }
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
@@ -106,13 +119,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
-
         setToolbar(toolbarTop);
 
-       Typeface font = Typeface.createFromAsset(
+        Typeface font = Typeface.createFromAsset(
                 getAssets(),
                 "fonts/Variane Script.ttf");
-        Log.d("vertigo", "onCreate:  font is"+ font);
+        Log.d("vertigo", "onCreate:  font is" + font);
 
         //TextView actionbar_title = (TextView) findViewById(R.id.toolbar_title);
         mTitle.setTypeface(font);
@@ -125,27 +137,26 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 findViewById(R.id.bottomNavigation);
 
 
-
         mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment selectedFragment = null;
+                 fragment = null;
                 switch (item.getItemId()) {
                     case R.id.action_metronome:
-                        selectedFragment = MetronomeFragment.newInstance();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+                        fragment = MetronomeFragment.newInstance();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
 
                         break;
 
                     case R.id.action_session:
-                        selectedFragment = SessionListFragment.newInstance();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+                        fragment = SessionListFragment.newInstance();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
 
                         break;
 
                     case R.id.action_graph:
-                        selectedFragment = GraphFragment.newInstance();
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
+                        fragment = GraphFragment.newInstance();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
 
                         break;
 
@@ -154,11 +165,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             }
         });
 
-        Log.d("Vestibio", " is nav bar shown?"+ hasNavBar(getResources()));
-        Log.d("Vestibio", " is nav bar shown?"+ hasNavBar());
 
 
-        if(selectedTab!=null && selectedTab.equals(getResources().getString(R.string.session_tab))){
+        if (selectedTab != null && selectedTab.equals(getResources().getString(R.string.session_tab))) {
             mBottomNavigationView.setSelectedItemId(R.id.action_session);
             Fragment selectedFragment = null;
             selectedFragment = SessionListFragment.newInstance();
@@ -173,7 +182,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
 
 
-
     }
 
     public BottomNavigationView getBottomViewNavigation() {
@@ -183,9 +191,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public Toolbar getViewToolbar() {
         return toolbar;
     }
+
     public Toolbar getToolbar() {
         return toolbarTop;
     }
+
     public SharedPreferences getSettings() {
         return getSharedPreferences(Constants.PREFS, Context.MODE_PRIVATE);
     }
@@ -201,7 +211,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -210,17 +219,24 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-
         switch (item.getItemId()) {
             case android.R.id.home:
                 drawer.openDrawer(GravityCompat.START);
                 return true;
-//            case R.id.action_settings:
-//                return true;
+            case R.id.action_help:
+               // android.app.Fragment f = getFragmentManager().getFragments();
+                if(null != fragment){
+                   if(fragment.getClass() == MetronomeFragment.class){
+                       launchHelp(1);
+                   }else if(fragment.getClass() == SessionListFragment.class){
+                       launchHelp(4);
+                   }else if(fragment.getClass() == GraphFragment.class){
+                       launchHelp(5);
+                   }
+                }
+                Log.d("Vestibio","Fragment is "+ fragment );
+                return true;
+
         }
 
 
@@ -231,32 +247,57 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         //creating fragment object
         fragment = null;
-        Log.d("Vestibio", " display?"+ hasNavBar());
+
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)
+                findViewById(R.id.bottomNavigation);
         //initializing the fragment object which is selected
         switch (itemId) {
             case R.id.nav_metronome:
-                mBottomNavigationView.setVisibility(View.VISIBLE);
-                if(selectedTab!=null && selectedTab.equals(getResources().getString(R.string.session_tab))){
+                bottomNavigationView.setVisibility(View.VISIBLE);
+                if (selectedTab != null && selectedTab.equals(getResources().getString(R.string.session_tab))) {
                     fragment = new SessionListFragment();
-                    selectedTab="";
-                }
-                else
+                    selectedTab = "";
+                } else
                     fragment = new MetronomeFragment();
-                Log.d("Vestibio", " metronome?");
+                Log.d("Vestibio", " vrt metronome?");
+                supportInvalidateOptionsMenu();
                 break;
             case R.id.nav_disclaimer:
-                Log.d("Vestibio", " disclaimer?");
-                mBottomNavigationView.setVisibility(View.GONE);
+                Log.d("Vestibio", " vrt disclaimer?");
+                bottomNavigationView.setVisibility(View.GONE);
                 fragment = new DisclaimerFragment();
+                invalidateOptionsMenu();
+                break;
+            case R.id.nav_resources:
+                Log.d("Vestibio", " vrt resources");
+                bottomNavigationView.setVisibility(View.GONE);
+                fragment = new ResourcesFragment();
+                invalidateOptionsMenu();
+
                 break;
             case R.id.nav_donate:
+                Log.d("Vestibio", " vrt donate");
+                bottomNavigationView.setVisibility(View.GONE);
                 startActivity(new Intent(this, DonateFragment.class));
                 break;
             case R.id.nav_about:
-                mBottomNavigationView.setVisibility(View.GONE);
+                Log.d("Vestibio", " vrt about");
+                bottomNavigationView.setVisibility(View.GONE);
                 fragment = new AboutVestibioFragment();
+                invalidateOptionsMenu();
+                break;
+            case R.id.nav_rate:
+                Log.d("Vestibio", " vrt rate");
+                bottomNavigationView.setVisibility(View.GONE);
+                launchMarket();
+                break;
+            case R.id.nav_backup:
+                Log.d("Vestibio", " vrt donate");
+                bottomNavigationView.setVisibility(View.GONE);
+                startActivity(new Intent(this, BackupActivity.class));
                 break;
             default:
+                Log.d("Vestibio", " vrt wrong");
                 Toast.makeText(getApplicationContext(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
                 break;
         }
@@ -265,6 +306,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragment_container, fragment);
             ft.commit();
+            Log.d("Vestibio", " vrt wrong");
 
         }
 
@@ -275,29 +317,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
 
 
-
-    public boolean hasNavBar (Resources resources)
-    {
-        int id = resources.getIdentifier("config_showNavigationBar", "bool", "android");
-        return id > 0 && resources.getBoolean(id);
-    }
-
-    public boolean hasNavBar() {
-        Display d = getWindowManager().getDefaultDisplay();
-        DisplayMetrics dm = new DisplayMetrics();
-        d.getRealMetrics(dm);
-        int realHeight = dm.heightPixels;
-        int realWidth = dm.widthPixels;
-        d.getMetrics(dm);
-        int displayHeight = dm.heightPixels;
-        int displayWidth = dm.widthPixels;
-        int h= realHeight - displayHeight;
-        Log.d("Vestibio", "hasNavBar height: " + h);
-        return (realWidth - displayWidth) > 0 || (realHeight - displayHeight) > 0;
-
-    }
-
-    public void setToolbar(Toolbar toolbar){
+    public void setToolbar(Toolbar toolbar) {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_closed);
@@ -310,21 +330,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
         final Menu menu = navigationView.getMenu();
         final SubMenu subMenu = menu.addSubMenu("Lists");
-//        Realm realm = Realm.getDefaultInstance();
-//        RealmResults<ListCategory> cat = realm.where(ListCategory.class).findAll();
-//        for(ListCategory category: cat) {
-//
-//            if ((!(category.getName().trim().equalsIgnoreCase(getResources().getString(R.string.category_Inbox).trim()))) && (!(category.getName().trim().equalsIgnoreCase(getResources().getString(R.string.category_Project).trim()))))
-//            {
-//
-//                subMenu.add(category.getName()).setIcon(R.drawable.ic_list_black_24dp);
-//
-//            }
-//
-//
-//        }
+
     }
 
 
@@ -335,40 +344,74 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             startActivity(myAppLinkToMarket);
         } catch (ActivityNotFoundException e) {
             Toast.makeText(this, " unable to find market app", Toast.LENGTH_LONG).show();
-        }}
+        }
+    }
+
+    private void launchHelp(int i) {
+        Uri uri;
+
+        if(4 ==i){
+            uri = Uri.parse("http://www.vestibio.com/help-guide-session-details-add-edit-and-delete/");
+        }else if (5==i){
+            uri = Uri.parse("http://www.vestibio.com/help-guide-5-smart-graphs/");
+        }
+        else{
+            uri = Uri.parse("http://www.vestibio.com/help-metronome-setup/");
+        }
+        Intent myAppLinkToMarket = new Intent(Intent.ACTION_VIEW, uri);
+        try {
+            startActivity(myAppLinkToMarket);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(this, " Unable to open help", Toast.LENGTH_LONG).show();
+        }
+    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         //No call for super(). Bug on API Level > 11.
     }
+
     @Override
     protected void onResume() {
         super.onResume();
 
-        if (null == fragment){
+        if (null == fragment) {
+            Log.d("Vestibio", "voo 1");
             displaySelectedScreen(R.id.nav_metronome);
-        }else if(fragment.getClass().equals(MetronomeFragment.class)){
+        } else if (fragment.getClass().equals(MetronomeFragment.class)) {
+            Log.d("Vestibio", "voo 2");
             displaySelectedScreen(R.id.nav_metronome);
-        }else if(fragment.getClass().equals(DisclaimerFragment.class)){
+        } else if (fragment.getClass().equals(DisclaimerFragment.class)) {
+            Log.d("Vestibio", "voo 3");
             displaySelectedScreen(R.id.nav_disclaimer);
-        }else if(fragment.getClass().equals(AboutVestibioFragment.class)){
+        } else if (fragment.getClass().equals(ResourcesFragment.class)) {
+            Log.d("Vestibio", "voo 4");
+            displaySelectedScreen(R.id.nav_resources);
+        } else if (fragment.getClass().equals(AboutVestibioFragment.class)) {
+            Log.d("Vestibio", "voo 5");
             displaySelectedScreen(R.id.nav_about);
-        }else if(fragment.getClass().equals(DonateFragment.class)){
-            launchMarket();
+        } else if (fragment.getClass().equals(DonateFragment.class)) {
+            Log.d("Vestibio", "voo 6");
+
         }
 
 
-
-        Log.d("GOALS", "fragment in OnResume");
-//        if (true== fragment.getClass().equals(InboxMenu.class)) {
-//            InboxMenu ref = (InboxMenu) fragment;
-//            ref.refreshDataset();
-//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//            ft.replace(R.id.content_frame, fragment);
-//            ft.commit();
-//
-//        }
+        Log.d("Vestibio", "MainActivity in OnResume");
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        if(fragment != null){
+            if(fragment.getClass() == MetronomeFragment.class ||fragment.getClass() == SessionListFragment.class || fragment.getClass() == GraphFragment.class){
+                getMenuInflater().inflate(R.menu.menu, menu);
+
+            }
+        }
+        Log.d("Vestibio", "onCreateOptionsMenu: ");
+
+        return true;
     }
 }

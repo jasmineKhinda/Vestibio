@@ -21,8 +21,8 @@
     <color name="background">@color/pure_white</color>
 
 
-    <color name="themeGradientPrimary">#E96D71</color>
-    <color name="themeGradientDark">#E96D71</color>
+    <color name="themeGradientPrimary">#d6686c</color>
+    <color name="themeGradientDark">#d6686c</color>
     <color name="themeGradientLight">#ff9e9f</color>
     <color name="themeGradientLighter_background">#fff8f1</color>
     <color name="themeGradientLighter">#ffeddb</color>
@@ -31,7 +31,7 @@
     <color name="button_red">#d50000</color>
     <color name="button_green_cont">#26c274</color>
     <color name="button_red_finish">#e43d4b</color>
-
+    <!--<color name="themeGradientPrimary">#E96D71</color>-->
 
 
 
