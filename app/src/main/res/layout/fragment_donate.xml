@@ -16,6 +16,7 @@
             android:orientation="vertical"
             android:backgroundTint="@color/pure_white"
             android:background="@color/pure_white"
+
             >
         </LinearLayout>
 

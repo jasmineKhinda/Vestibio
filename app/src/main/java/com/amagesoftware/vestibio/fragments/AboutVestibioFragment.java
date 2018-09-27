@@ -15,15 +15,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.amagesoftware.vestibio.R;
-
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link DisclaimerFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link DisclaimerFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Created by jkhinda on 22/06/18.
  */
+
 public class AboutVestibioFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -73,6 +68,13 @@ public class AboutVestibioFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_about_vestibio, container, false);
         String vrs = "0.0";
 
+        SpannableString resources = new SpannableString(getString(R.string.resources_link));
+        String urlPrivacy = getString(R.string.resources_url);
+        resources.setSpan(new URLSpan(urlPrivacy), 20, 29, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        TextView res = (TextView) view.findViewById(R.id.resourceslink);
+        res.setText(resources);
+        res.setMovementMethod(LinkMovementMethod.getInstance()); // enable clicking on url span
 
         SpannableString about = new SpannableString(getString(R.string.about));
         String urlAbout = getString(R.string.about_url);

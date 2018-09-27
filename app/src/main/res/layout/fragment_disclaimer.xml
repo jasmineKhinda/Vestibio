@@ -23,7 +23,7 @@
             android:layout_height="match_parent"
             android:text="@string/note"
             android:layout_margin="10dp"
-
+            android:textStyle="italic"
             android:textColor="@color/grey_600"
             android:textSize="@dimen/text_size_20"/>
 
@@ -35,7 +35,7 @@
         android:layout_margin="10dp"
 
         android:textColor="@color/grey_600"
-        android:textSize="@dimen/text_size_title"/>
+        android:textSize="20dp"/>
 
     <TextView
         android:id="@+id/privacyId"
@@ -45,7 +45,7 @@
         android:layout_margin="10dp"
 
         android:textColor="@color/grey_600"
-        android:textSize="@dimen/text_size_title"/>
+        android:textSize="20dp"/>
 
 
     </LinearLayout>

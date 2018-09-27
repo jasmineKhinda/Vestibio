@@ -68,6 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left|bottom"
                 android:paddingBottom="5dp"
+                android:paddingTop="5dp"
                 android:fontFamily="cursive"
                 android:text="Toolbar Title"
                 android:textColor="@color/pure_white" />
@@ -115,8 +116,9 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:fitsSystemWindows="true"
+        android:fitsSystemWindows="false"
         app:menu="@menu/drawer_view"
+        app:itemIconTint="@color/themeGradientIcon"
         app:headerLayout="@layout/nav_header"
         app:itemBackground="@drawable/nav_item_drawable"
         android:backgroundTint="@color/themeGradientLighter_background"

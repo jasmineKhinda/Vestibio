@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Main theme colors -->
         <!--   your app branding color for the app bar -->
         <item name="android:colorPrimary">@color/primary</item>
@@ -44,22 +44,7 @@
 
     </style>
 
-    <style name="RestoreDialogTheme" parent="Theme.AppCompat.Dialog.MinWidth">
-        <!-- Customize your theme here. -->
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:editTextStyle">@style/EditTextStyle</item>
-        <item name="android:progressBarStyleHorizontal">@style/ProgressBarStyle</item>
-        <item name="android:spinnerDropDownItemStyle">@style/mySpinnerItemStyle</item>
-        <item name="android:textColor">@color/grey_800</item>
-        <item name="android:textColorPrimary">@color/grey_800</item>
-        <item name="android:colorControlNormal" >@color/primary</item>
-        <item name="android:background">@color/background</item>
-        <item name="android:windowBackground">@color/background</item>
-        <item name="android:colorBackground">@color/background</item>
-        <item name="android:textColorAlertDialogListItem">@color/grey_800</item>
 
-
-    </style>
 
 
     <style name="DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
@@ -122,6 +107,43 @@
         <item name="android:textSize">21sp</item>
         <item name="android:textColor">@color/pure_white</item>
         <item name="android:divider">@color/themeGradientPrimary</item>
+
+    </style>
+
+    <style name="RestoreDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <!-- Customize your theme here. -->
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:editTextStyle">@style/EditTextStyle</item>
+        <item name="android:progressBarStyleHorizontal">@style/ProgressBarStyle</item>
+        <item name="android:spinnerDropDownItemStyle">@style/mySpinnerItemStyle</item>
+        <item name="android:textColor">@color/grey_800</item>
+        <item name="android:textColorPrimary">@color/grey_800</item>
+        <item name="android:background">@color/background</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="android:textColorAlertDialogListItem">@color/grey_800</item>
+
+        <item name="colorPrimary">@color/themeGradientPrimary</item>
+        <item name="colorPrimaryDark">@color/themeGradientDark</item>
+        <item name="colorAccent">@color/accent</item>
+
+    </style>
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <!-- Customize color of navigation drawer icon and back arrow -->
+
+    </style>
+
+    <style name="AppDonateHeaderTheme" parent="android:Theme.Holo.Light.Dialog.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:editTextStyle">@style/EditTextStyle</item>
+        <item name="android:spinnerDropDownItemStyle">@style/mySpinnerItemStyle</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+        <item name="android:background">@color/background</item>
+        <item name="android:buttonStyle">@style/DonateButton</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackground">@color/background</item>
+
 
     </style>
 </resources>

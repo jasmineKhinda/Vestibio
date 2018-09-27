@@ -6,6 +6,7 @@ package com.amagesoftware.vestibio;
 public class Constants {
 
     public final static String PREFS = "programmable_metronome_preferences";
+    public final static String PREFS_BACKUP = "backup_preferences";
 
     public static final int SERVICE_NOTIFICATION_ID = 5505;
 
@@ -25,4 +26,7 @@ public class Constants {
     public final static String ACTION_PARAMS_CHANGED = "com.andreyaleev.metrosong.ACTION_PARAMS_CHANGED";
 
     public static final String ACTION_STOP = "com.andreyaleev.metrosong.ACTION_STOP";
+
+    public final static String LAST_BACKUP = "LAST_BACKUP";
+
 }

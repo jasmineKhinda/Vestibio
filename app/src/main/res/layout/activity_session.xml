@@ -20,7 +20,8 @@
         android:background="@color/primary"
         android:elevation="3dp"
         android:minHeight="?attr/actionBarSize"
-        android:titleTextColor="@color/theme50"/>
+        android:titleTextColor="@color/theme50"
+        app:theme="@style/ToolbarTheme"/>
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -47,7 +48,8 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/title"
                     android:textColor="@color/themeGradientPrimary"
-                    android:inputType="text"/>
+                    android:inputType="text"
+                    android:textSize="20dp"/>
             </android.support.design.widget.TextInputLayout>
 
             <LinearLayout
@@ -229,7 +231,7 @@
                 android:layout_marginLeft="0dp"
                 android:textColor="@color/grey_600"
                 android:text="Session Duration: 55 min 60 sec"
-                android:textSize="15dp"
+                android:textSize="18dp"
                 />
 
 
@@ -241,7 +243,7 @@
                 android:layout_height="wrap_content"
                 android:text="Date: June 27,2018 at 11:59AM"
                 android:textColor="@color/grey_600"
-                android:textSize="15dp"/>
+                android:textSize="18dp"/>
 
 
             <LinearLayout
@@ -256,7 +258,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/dizzyness_level_input"
-                    android:textSize="15dp"
+                    android:textSize="18dp"
                     android:layout_gravity="center"/>
                 <Spinner
                     android:id="@+id/dizzy_level"
@@ -264,7 +266,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:hint="@string/dizziness_hint"
-                    android:textSize="20dp"
+                    android:textSize="25dp"
                     android:textIsSelectable="true"
                     android:singleLine="true"
                     android:focusable="false"
@@ -303,7 +305,7 @@
                     android:layout_gravity="fill_vertical"
                     android:inputType="textMultiLine"
                     android:lines="6"
-
+                    android:textSize="18dp"
                     android:gravity="top"/>
             </android.support.design.widget.TextInputLayout>
 

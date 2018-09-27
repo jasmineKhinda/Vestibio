@@ -19,13 +19,9 @@ import com.amagesoftware.vestibio.R;
 import org.sufficientlysecure.donations.DonationsFragment;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link DonateFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link DonateFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Created by jkhinda on 22/06/18.
  */
+
 public class DonateFragment extends FragmentActivity {
 
     /**

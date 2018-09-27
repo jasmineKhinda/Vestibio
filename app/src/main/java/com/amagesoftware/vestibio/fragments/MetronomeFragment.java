@@ -66,7 +66,7 @@ public class MetronomeFragment extends MetronomableFragment {
     private int currentSet=0;
     private boolean isCanceled=false;
     private Session session;
-   SpinnerAdapter adapter;
+    SpinnerAdapter adapter;
     private String spinner_item;
     private String[] title;
     private int time=0;
@@ -203,10 +203,10 @@ public class MetronomeFragment extends MetronomableFragment {
 
         btnStartStop.setOnClickListener(view -> onStartStopClick());
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            btnPlus.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_background));
-            btnMinus.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_background));
-        }
+//        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+//            btnPlus.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_background));
+//            btnMinus.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_background));
+//        }
         registerNotificationReceiver();
 
         timer.setText("");
@@ -309,7 +309,7 @@ public class MetronomeFragment extends MetronomableFragment {
 //        activity.getViewPager().setPagingEnabled(true);
         btnStartStop.setText(R.string.start);
         contentView.setKeepScreenOn(false);
-        issueServiceNotification();
+
         timer.setText("Session stopped");
         timerSetsRemaining.setText("No Sets");
         timer.setVisibility(View.INVISIBLE);
@@ -350,7 +350,7 @@ public class MetronomeFragment extends MetronomableFragment {
         activity.getViewToolbar().setVisibility(View.VISIBLE);
         btnStartStop.setText(R.string.start);
         contentView.setKeepScreenOn(false);
-        issueServiceNotification();
+        //issueServiceNotification();
         timer.setText("Session stopped");
         timerSetsRemaining.setText("No Sets");
         timer.setVisibility(View.INVISIBLE);

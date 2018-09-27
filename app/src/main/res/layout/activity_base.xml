@@ -7,13 +7,14 @@
     tools:context=".activities.MainActivity">
 
     <android.support.v7.widget.Toolbar
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/toolbar"
         android:titleTextColor="@color/theme50"
         android:minHeight="?attr/actionBarSize"
         android:background="@color/primary"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="wrap_content"
+         >
 
     </android.support.v7.widget.Toolbar>
 

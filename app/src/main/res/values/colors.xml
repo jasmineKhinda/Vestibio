@@ -24,6 +24,7 @@
     <color name="themeGradientPrimary">#d6686c</color>
     <color name="themeGradientDark">#d6686c</color>
     <color name="themeGradientLight">#ff9e9f</color>
+    <color name="themeGradientIcon">#FFE67D7E</color>
     <color name="themeGradientLighter_background">#fff8f1</color>
     <color name="themeGradientLighter">#ffeddb</color>
     <color name="themeGradientHighlight">#e64c51</color>

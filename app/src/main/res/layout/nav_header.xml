@@ -6,13 +6,31 @@
     android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:orientation="vertical"
-    android:gravity="bottom">
+    android:gravity="top">
     <!--android:layout_height="192dp"-->
+    <Button
+        android:id="@+id/donateButton"
+        android:text="@string/nav_menu_donate"
+        style="@style/DonateButton"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button_donate"
+        android:paddingHorizontal="10dp"
+        android:textAllCaps="false"
+        android:layout_marginBottom="10dp"
+        android:textSize="17dp"
+        android:layout_gravity="right"/>
+    <View android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_size_title"
-        android:text="&quot;Even the darkest night will end and the sun will rise&quot; - Victor Hugo"
+        android:text="&quot;Even the darkest night will end and the sun will rise&quot; \n-Victor Hugo"
         android:textColor="@color/pure_white"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+    
+
 </LinearLayout>

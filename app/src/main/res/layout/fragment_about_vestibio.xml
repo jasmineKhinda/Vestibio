@@ -16,15 +16,34 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:backgroundTint="@color/pure_white"
-
             >
+
+            <TextView
+                android:id="@+id/resources"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textColor="@color/grey_600"
+                android:textSize="@dimen/text_size_20"
+                android:text="@string/note"
+                android:textStyle="italic"/>
+
+            <TextView
+                android:id="@+id/resourceslink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/resources_link"
+                android:textColor="@color/grey_600"
+                android:textSize="@dimen/text_size_20"
+                />
+
             <TextView
                 android:id="@+id/story"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/about"
                 android:layout_margin="10dp"
-
                 android:textColor="@color/grey_600"
                 android:textSize="@dimen/text_size_20"/>
 

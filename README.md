@@ -1,17 +1,17 @@
 # MetroSong
 
-Android metronome with programmable tracks. Create your own song parts sequences with variable BPM.
+Android Vestibular Metronome.
 
+Forked progragrammable Metronome: (https://github.com/acinonyxjubatus/MetroSong)
 Original metronome by: [felixdollack/BeatKeeper](https://github.com/felixdollack/BeatKeeper)
 
-Download it from Google Play: [MetroSong @ Google Play](https://play.google.com/store/apps/details?id=com.andreyaleev.metrosong)
+Download it from Google Play:
 
-![alt tag](https://raw.githubusercontent.com/acinonyxjubatus/MetroSong/master/metrosong_demo.gif)
 
 License
 =======
 
-    Copyright 2016 Andrey Aleev
+    Copyright 2018 Jasmine Khinda
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

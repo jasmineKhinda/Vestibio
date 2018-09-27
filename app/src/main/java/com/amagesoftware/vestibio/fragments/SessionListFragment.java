@@ -33,7 +33,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by jkhinda on 26/06/18.
+ * Created by jkhinda on 22/06/18.
  */
 
 public class SessionListFragment  extends BaseFragment  implements
@@ -119,9 +119,9 @@ public class SessionListFragment  extends BaseFragment  implements
         dataSource.getAllSessions();
 
         sessions = dataSource.getAllSessions();
-        for (Session session : sessions) {
-            Log.d("Vestibio", session.toString());
-        }
+//        for (Session session : sessions) {
+//            Log.d("Vestibio", session.toString());
+//        }
         mAdapter = new SessionsAdapter(activity, sessions, this);
         rvPrograms.setAdapter(mAdapter);
         if (mAdapter.getItemCount()<1) {

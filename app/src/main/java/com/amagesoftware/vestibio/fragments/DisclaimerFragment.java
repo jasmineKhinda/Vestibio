@@ -20,12 +20,7 @@ import com.travijuu.numberpicker.library.NumberPicker;
 import butterknife.BindView;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link DisclaimerFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link DisclaimerFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Created by jkhinda on 22/06/18.
  */
 public class DisclaimerFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match

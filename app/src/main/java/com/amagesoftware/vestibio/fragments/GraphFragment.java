@@ -384,7 +384,7 @@ public class GraphFragment extends Fragment {
 
         sessions = dataSource.getAllSessions();
         for (Session session : sessions) {
-            Log.d("Vestibio", session.toString());
+
         }
 
     }
@@ -393,17 +393,17 @@ public class GraphFragment extends Fragment {
     private void getDizzySessions() {
         dizzySessions = new ArrayList<>();
         dataSource.open();
-        Log.d("Vestibio", "BLAH");
+
 
         //debug
         dataSource.getsAllDizzySessions();
-        Log.d("Vestibio", "BLAH2");
+
 
 
         dizzySessions = dataSource.getsAllDizzySessions();
-        for (Session session : dizzySessions) {
-            Log.d("Vestibio", "is there dizzyness?" +session.getDizzynesslevel());
-        }
+//        for (Session session : dizzySessions) {
+//            Log.d("Vestibio", "is there dizzyness?" +session.getDizzynesslevel());
+//        }
 
 
     }

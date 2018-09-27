@@ -1,7 +1,7 @@
 package com.amagesoftware.vestibio.fragments;
 
 /**
- * Created by jasmine on 11/09/18.
+ * Created by jkhinda on 22/06/18.
  */
 import android.content.Context;
 import android.content.res.Resources;

@@ -35,7 +35,6 @@ import butterknife.ButterKnife;
 /**
  * Created by jkhinda on 27/06/18.
  */
-
 public class SessionActivity extends BaseActivity {
 
         public static String SESSION_TAG = "SESSION_TAG";
@@ -171,20 +170,26 @@ public class SessionActivity extends BaseActivity {
         int id = item.getItemId();
         if (id == R.id.action_apply) {
             saveSong();
-
-
             return true;
         }
         if (id == R.id.action_remove) {
             removeSong();
             return true;
         } else if (id == android.R.id.home) {
-            saveSong();
             onBackPressed();
 
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        //this is only needed if you have specific things
+        //that you want to do when the user presses the back button.
+        /* your specific things...*/
+        saveSong();
+        super.onBackPressed();
     }
 
     @Override
@@ -209,7 +214,7 @@ public class SessionActivity extends BaseActivity {
             }
             this.session.setTitle(edtTitle.getText().toString());
             this.session.setNotes(notes.getText().toString());
-            Log.d("Vestibio", "dizzy level "+ dizzyLevel.getSelectedItem().toString());
+
             if(dizzyLevel.getSelectedItem().toString().trim().equals("N/A")){
                 this.session.setDizzynesslevel(0);
             }else{
@@ -218,10 +223,9 @@ public class SessionActivity extends BaseActivity {
 
             if (songId != -1) {
                 dataSource.updateSession(this.session);
-                Log.d("Vestibio", "dizzy level -1 "+ songId);
-                Log.d("Vestibio", "dizzy level -1 title "+ this.session.getTitle());
+
             } else {
-                Log.d("Vestibio", "dizzy level not -1 "+ dizzyLevel.getSelectedItem().toString());
+
                 long id = dataSource.insertSession(this.session);
             }
             //onBackPressed();
@@ -231,8 +235,6 @@ public class SessionActivity extends BaseActivity {
             bundle.putBoolean(SessionActivity.RATER_SHOW, showRater);
             viewTaskIntent.putExtras(bundle);
 
-            //viewTaskIntent.putExtra("TAB", getResources().getString(R.string.session_tab));
-            //viewTaskIntent.putExtra("SHOWRATER", getResources().getString(R.string.session_tab));
 
             this.startActivity(viewTaskIntent);
 

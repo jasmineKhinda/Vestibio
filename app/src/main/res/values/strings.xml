@@ -7,6 +7,7 @@
     <string name="title_section3">Graphs</string>
 
     <string name="bottom_nav_metronome">Metronome</string>
+    <string name="nav_exercises">Home</string>
     <string name="bottom_nav_log">Sessions</string>
     <string name="bottom_nav_graphs">Graphs</string>
 
@@ -20,6 +21,18 @@
 
     <string name="start">Start</string>
     <string name="backup">Backup to Google Drive</string>
+    <string name="processing">Processing</string>
+    <string name="please_wait">Please wait...</string>
+    <string name="account">Account</string>
+    <string name="not_logged_in">Not logged in</string>
+    <string name="backup_success">Awesome! Your data is now backed up!</string>
+    <string name="backup_failure">Oops, couldn\'t backup. Please try again.</string>
+    <string name="restore_success">Your data has been restored!</string>
+    <string name="restore_failure">Oops, couldn\'t restore. Please check internet connection and try again.</string>
+    <string name="nothing_backed_up">"Nothing backed up yet"</string>
+    <string name="date_backed_up">"Last backup: "</string>
+
+    <string name="action_failure">Oops, couldn\'t perform that action. Please try again.</string>
     <string name="Log">Log Session</string>
     <string name="vestibular_session">Vestibular Session</string>
     <string name="title_session">Session Title</string>
@@ -40,7 +53,7 @@
     <string name="ex_duration_sec">(seconds)</string>
     <string name="empty_state">No sessions logged yet</string>
     <string name="empty_state_instruction">Complete a session in Metronome to start seeing them here</string>
-    <string name="optional">Optional fields:</string>
+    <string name="optional">Optional fields</string>
     <string name="total_session">Total session time: </string>
     <string name="ex_number_sets">Sets</string>
     <string name="rest_duration">Rest</string>
@@ -61,7 +74,7 @@
     <string name="nav_menu_resources"> Vestibular Resources</string>
     <string name="nav_menu_about">About Vestibio</string>
     <string name="nav_menu_rate">Rate us</string>
-    <string name="nav_menu_backup">Backup Data</string>
+    <string name="nav_menu_backup">Backup &amp; Restore Data</string>
 
     <string name="set_countdown">Reps countdown:</string>
     <string name="rest_countdown">Rest countdown:</string>
@@ -108,12 +121,12 @@
     <string name="disclaimer_link">Read Vestibio\'s Disclaimer and Terms</string>
 
     <string name="privacy_policy_link">Read Vestibio\'s Privacy Policy </string>
-    <string name="resources_link">Vestibular Disorder Resources List </string>
+    <string name="resources_link">Vestibular Disorder Resources page</string>
     <string name="privacy_policy_url">http://www.vestibio.com/privacy-policy-vestibio-app/</string>
     <string name="resources_url">http://www.vestibio.com/resources/</string>
     <string name="about_url">http://www.vestibio.com/about-us/</string>
     <string name="privacy_disclaimer_url">http://www.vestibio.com/disclaimer-and-terms/</string>
-    <string name="note">The links below will direct you to Vestibio\'s official website.</string>
+    <string name="note">The links below will direct you to Vestibio\'s official website - Internet connection is needed</string>
     <string name="read_more_about">Read more about Vestibio\'s story including our Design and Pricing</string>
     <string name="disclaimer"> DISCLAIMER AND TERMS \n \n
 

@@ -37,7 +37,7 @@
         <activity
             android:name="com.amagesoftware.vestibio.fragments.DonateFragment"
             android:windowSoftInputMode="stateHidden"
-            android:theme="@style/AppDonateTheme"
+            android:theme="@style/AppDonateHeaderTheme"
             android:screenOrientation="portrait"
             >
         </activity>

@@ -60,8 +60,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.ViewHo
     @Override
     public void onBindViewHolder(SessionsAdapter.ViewHolder holder, final int position) {
         final Session session = getItem(position);
-        Log.d("Vestibio", "beats   " +session.getBpm());
-        Log.d("Vestibio", "beats   " +session.getTotalDuration());
+
         holder.tvTitle.setText(session.getTitle());
         holder.beatsNumber.setText(String.valueOf(session.getBpm()));
         holder.durationSession.setText(mContext.getString(R.string.duration_tag)+ MetronomeFragment.timeConversion(session.getTotalDuration()));
@@ -71,18 +70,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.ViewHo
         Date resultdate = new Date(timeStampMillis);
         holder.date.setText(sdf.format(resultdate));
 
-
-
-//        holder.tvDescription.setText(String.format(mContext.getString(R.string.snippets), song.getSnippets().size()));
-//        holder.ivPlayCard.setOnClickListener(view -> {
-//            if(sessionsItemsListener !=null){
-//                sessionsItemsListener.onPlayClicked(song);
-//            }
-//        });
         holder.tvTitle.setOnClickListener(view -> editCard(session));
-//        holder.tvDescription.setOnClickListener(view -> editCard(song));
-//        holder.ivEditCard.setOnClickListener(view -> editCard(song));
-
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,19 +101,12 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.ViewHo
         TextView date;
         @BindView(R.id.cvItem)
         CardView cardView;
-//        @BindView(R.id.tvDescription) TextView tvDescription;
-//        @BindView(R.id.ivPlayCard)
-//        ImageView ivPlayCard;
-//        @BindView(R.id.ivEditCard) ImageView ivEditCard;
+
 
         public ViewHolder(View v) {
             super(v);
             ButterKnife.bind(this, v);
-//            v.setOnClickListener(new View.OnClickListener() {
-//                @Override public void onClick(View v) {
-//                    editCard(session);
-//                }
-//            });
+
         }
     }
 

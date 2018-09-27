@@ -26,13 +26,16 @@ public class AppRater {
     private  static String APP_TITLE = "";// App Name
     private  static String APP_PNAME = "";// Package Name
 
-    private final static int DAYS_UNTIL_PROMPT = 0;//Min number of days
-    private final static int LAUNCHES_UNTIL_PROMPT = 0;//Min number of launches
+    private final static int DAYS_UNTIL_PROMPT = 7;//Min number of days
+    private final static int LAUNCHES_UNTIL_PROMPT = 10;//Min number of launches
 
     public static void app_launched(Context mContext) {
         APP_TITLE = mContext.getString(R.string.app_name);
         APP_PNAME = mContext.getPackageName();
+
         SharedPreferences prefs = mContext.getSharedPreferences("apprater", 0);
+        //uncomment the following code ONLY for debugging NOT for production
+        //prefs.edit().clear().commit();
         Log.d("vestibio", "dontshowagain"+ prefs.getBoolean("dontshowagain", false) );
 
         if (prefs.getBoolean("dontshowagain", false)) { return ; }
@@ -154,6 +157,8 @@ public class AppRater {
             public void onClick(View v) {
                 if (editor != null) {
                 editor.putLong("launch_count", 0);
+                editor.putBoolean("dontshowagain", false);
+                editor.putLong("date_firstLaunch", System.currentTimeMillis());
                 editor.commit();
                 }
 

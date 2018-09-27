@@ -21,6 +21,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
@@ -29,6 +30,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,12 +51,12 @@ import com.amagesoftware.vestibio.tools.AppRater;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * Created by jkhinda on 22/06/18.
+ */
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    //    @BindView(R.id.slidingTabs)
-//    SlidingTabLayout mSlidingTabLayout;
-//    @BindView(R.id.viewPager)
-//    CustomViewPager mViewPager;
+
     @BindView(R.id.bottomNavigation)
     BottomNavigationView mBottomNavigationView;
     Toolbar toolbarTop;
@@ -77,7 +80,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
 
-//    private SectionsPagerAdapter mSectionsPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,8 +88,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 //must be called before setContentView(...)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window window = getWindow();
-            //window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
-            //window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
 
         }
@@ -100,9 +100,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }
 
 
-//        if (getIntent().getExtras() != null) {
-//            selectedTab = getIntent().getExtras().getString("TAB");
-//        }
+
 
             if(showRater){
                 AppRater.app_launched(this);
@@ -111,7 +109,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        //setTitle(getString(R.string.app_name_short));
+
 
         toolbarTop = (Toolbar) findViewById(R.id.toolbar);
         layout = (View) findViewById(R.id.rel);
@@ -131,10 +129,24 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         mTitle.setText(getText(R.string.app_name));
         mTitle.setTextColor(getResources().getColor(R.color.themeGradientLighter_background));
         mTitle.setTextSize(40);
-
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View header =LayoutInflater.from(MainActivity.this).inflate(R.layout.nav_header, navigationView);
 
         mBottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.bottomNavigation);
+
+        Button donate = (Button)header.findViewById(R.id.donateButton);
+        donate.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                //DO YOUR CODE
+                Log.d("Vestibio", " vrt donate");
+                mBottomNavigationView.setVisibility(View.GONE);
+                startActivity(new Intent(MainActivity.this, DonateFragment.class));
+            }
+        });
+
+
 
 
         mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -268,29 +280,22 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 fragment = new DisclaimerFragment();
                 invalidateOptionsMenu();
                 break;
-            case R.id.nav_resources:
-                Log.d("Vestibio", " vrt resources");
-                bottomNavigationView.setVisibility(View.GONE);
-                fragment = new ResourcesFragment();
-                invalidateOptionsMenu();
-
-                break;
-            case R.id.nav_donate:
-                Log.d("Vestibio", " vrt donate");
-                bottomNavigationView.setVisibility(View.GONE);
-                startActivity(new Intent(this, DonateFragment.class));
-                break;
+//            case R.id.nav_donate:
+//                Log.d("Vestibio", " vrt donate");
+//                bottomNavigationView.setVisibility(View.GONE);
+//                startActivity(new Intent(this, DonateFragment.class));
+//                break;
             case R.id.nav_about:
                 Log.d("Vestibio", " vrt about");
                 bottomNavigationView.setVisibility(View.GONE);
                 fragment = new AboutVestibioFragment();
                 invalidateOptionsMenu();
                 break;
-            case R.id.nav_rate:
-                Log.d("Vestibio", " vrt rate");
-                bottomNavigationView.setVisibility(View.GONE);
-                launchMarket();
-                break;
+//            case R.id.nav_rate:
+//                Log.d("Vestibio", " vrt rate");
+//                bottomNavigationView.setVisibility(View.GONE);
+//                launchMarket();
+//                break;
             case R.id.nav_backup:
                 Log.d("Vestibio", " vrt donate");
                 bottomNavigationView.setVisibility(View.GONE);
@@ -384,9 +389,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         } else if (fragment.getClass().equals(DisclaimerFragment.class)) {
             Log.d("Vestibio", "voo 3");
             displaySelectedScreen(R.id.nav_disclaimer);
-        } else if (fragment.getClass().equals(ResourcesFragment.class)) {
-            Log.d("Vestibio", "voo 4");
-            displaySelectedScreen(R.id.nav_resources);
         } else if (fragment.getClass().equals(AboutVestibioFragment.class)) {
             Log.d("Vestibio", "voo 5");
             displaySelectedScreen(R.id.nav_about);
