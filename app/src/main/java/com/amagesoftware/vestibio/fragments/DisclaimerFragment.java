@@ -35,8 +35,8 @@ public class DisclaimerFragment extends Fragment {
     TextView disclaimer;
     @BindView(R.id.privacyId)
     TextView privacy;
-    @BindView(R.id.note)
-    TextView note;
+//    @BindView(R.id.note)
+//    TextView note;
 
     public DisclaimerFragment() {
         // Required empty public constructor

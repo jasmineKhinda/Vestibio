@@ -176,7 +176,12 @@ public class SessionActivity extends BaseActivity {
             removeSong();
             return true;
         } else if (id == android.R.id.home) {
-            onBackPressed();
+            if(edtTitle.getText().toString().isEmpty()){
+                edtTitle.setError(getString(R.string.empty_field));
+            }else{
+                onBackPressed();
+            }
+
 
             return true;
         }
