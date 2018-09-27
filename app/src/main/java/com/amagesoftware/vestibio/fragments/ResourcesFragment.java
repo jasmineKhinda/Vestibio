@@ -78,7 +78,7 @@ public class ResourcesFragment extends Fragment {
 
         TextView res = (TextView) view.findViewById(R.id.resourceslink);
         res.setText(resources);
-        res.setMovementMethod(LinkMovementMethod.getInstance()); // enable clicking on url span
+        res.setMovementMethod(LinkMovementMethod.getInstance()); // enable clicking on a url span
 
         return view;
 

@@ -1,8 +1,8 @@
 # MetroSong
 
-Android Vestibular Metronome.
+Android Vestibular Rehabilitation Therapy Metronome App.
 
-Forked progragrammable Metronome: (https://github.com/acinonyxjubatus/MetroSong)
+Forked programmable Metronome: (https://github.com/acinonyxjubatus/MetroSong)\n
 Original metronome by: [felixdollack/BeatKeeper](https://github.com/felixdollack/BeatKeeper)
 
 Download it from Google Play:
