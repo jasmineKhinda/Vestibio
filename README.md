@@ -2,7 +2,7 @@
 
 Android Vestibular Rehabilitation Therapy Metronome App.
 
-Forked programmable Metronome: (https://github.com/acinonyxjubatus/MetroSong)\n
+Forked programmable Metronome: (https://github.com/acinonyxjubatus/MetroSong) <br />
 Original metronome by: [felixdollack/BeatKeeper](https://github.com/felixdollack/BeatKeeper)
 
 Download it from Google Play:
